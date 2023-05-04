@@ -5,3 +5,5 @@ define('FM_PATH', dirname(__FILE__));
 define('FM_FILE', FM_PATH . '/functions.php');
 
 require_once(FM_PATH . '/inc/bootstrap.php');
+
+new FM\App();
