@@ -1,0 +1,3 @@
+[submodule "wp-content/themes/themewp"]
+	path = wp-content/themes/themewp
+	url = git@github.com:przemekhernik/theme.wp.git

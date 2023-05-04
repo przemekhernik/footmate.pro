@@ -1,0 +1,16 @@
+.env
+.vscode
+.DS_Store
+
+*.log
+db.sql.gz
+db.sql
+
+!wp-content
+wp-content/*
+!wp-content/mu-plugins/
+!wp-content/plugins/
+!wp-content/themes/
+!wp-content/index.php
+
+node_modules
