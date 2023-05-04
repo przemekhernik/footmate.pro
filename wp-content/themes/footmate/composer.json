@@ -1,0 +1,19 @@
+{
+    "name": "tentypdev/footmate",
+    "description": "FootMATE Theme",
+    "license": "GPLv3",
+    "autoload": {
+        "psr-4": {
+            "FM\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tentyp.dev",
+            "email": "tentypdev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    }
+}
