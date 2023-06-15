@@ -11,19 +11,21 @@ class Posts
 
     public function addLinks(string $content): string
     {
-        $teams = get_posts([
-            'post_type' => 'team',
-            'posts_per_page' => 5,
-        ]);
+        if (! is_singular('post')) {
+            return $content;
+        }
 
-        if (! empty($teams)) {
+        $espn = new \FM\Integrations\ESPN();
+        $items = $espn->get();
+
+        if (! empty($items)) {
             $links = [];
 
-            foreach ($teams as $team) {
-                $links[] = sprintf('<a href="%s">%s</a>', get_permalink($team), get_the_title($team));
+            foreach ($items as $item) {
+                $links[] = sprintf('<a href="%s">%s</a>', $item['url'], $item['title']);
             }
 
-            $content .= sprintf(__('Latest Teams: %s', 'fm'), join(', ', $links));
+            $content .= sprintf(__('Latest News: %s', 'fm'), join(', ', $links));
         }
 
         return $content;
