@@ -9,7 +9,7 @@ class Teams
         add_action('init', [$this, 'initCPT']);
     }
 
-    public function initCPT()
+    public function initCPT(): void
     {
         register_post_type('team', [
             'labels' => [

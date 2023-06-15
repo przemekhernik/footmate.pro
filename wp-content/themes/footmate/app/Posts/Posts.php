@@ -9,7 +9,7 @@ class Posts
         add_filter('the_content', [$this, 'addLinks']);
     }
 
-    public function addLinks($content)
+    public function addLinks(string $content): string
     {
         $teams = get_posts([
             'post_type' => 'team',
