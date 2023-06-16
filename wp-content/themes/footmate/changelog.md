@@ -24,3 +24,4 @@ All notable changes to this project will be documented in this file. The format 
 - Posts: Module facade
 - Teams: CPT
 - Core: Module facade
+- Core: Widgets module

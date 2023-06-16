@@ -16,18 +16,17 @@ class Posts
         }
 
         $espn = new \FM\Integrations\ESPN();
-        $items = $espn->get();
 
-        if (! empty($items)) {
-            $links = [];
-
-            foreach ($items as $item) {
-                $links[] = sprintf('<a href="%s">%s</a>', $item['url'], $item['title']);
-            }
-
-            $content .= sprintf(__('Latest News: %s', 'fm'), join(', ', $links));
+        if (empty($items = $espn->get())) {
+            return $content;
         }
 
-        return $content;
+        $html = '';
+
+        foreach ($items as $item) {
+            $html .= "<li><a href=\"{$item['url']}\">{$item['title']}</a></li>";
+        }
+
+        return $content .= "<ul>{$html}</ul>";
     }
 }
