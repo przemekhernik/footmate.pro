@@ -11,9 +11,7 @@ class Widgets
 
     public function addLinks(): void
     {
-        $espn = new \FM\Integrations\ESPN();
-
-        if (empty($items = $espn->get())) {
+        if (empty($items = fm()->integrations()->espn()->get())) {
             return;
         }
 

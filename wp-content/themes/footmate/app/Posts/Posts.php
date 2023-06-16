@@ -15,9 +15,7 @@ class Posts
             return $content;
         }
 
-        $espn = new \FM\Integrations\ESPN();
-
-        if (empty($items = $espn->get())) {
+        if (empty($items = fm()->integrations()->espn()->get())) {
             return $content;
         }
 
