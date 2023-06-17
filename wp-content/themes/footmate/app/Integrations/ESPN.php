@@ -7,6 +7,8 @@ use SimpleXMLElement;
 
 class ESPN
 {
+    private ?array $data = null;
+
     public function get(): array
     {
         if (empty($data = $this->read())) {
@@ -22,9 +24,13 @@ class ESPN
 
     private function read(): array
     {
-        $data = [];
-        $reader = new XMLReader();
+        if (! empty($this->data)) {
+            return $this->data;
+        }
 
+        $this->data = [];
+
+        $reader = new XMLReader();
         $reader->open('https://www.espn.co.uk/espn/rss/football/news');
 
         while ($reader->read()) {
@@ -32,7 +38,7 @@ class ESPN
                 $item = new SimpleXMLElement($reader->readOuterXML(), LIBXML_NOCDATA);
 
                 if (! empty($item->title) && ! empty($item->link)) {
-                    $data[] = [
+                    $this->data[] = [
                         'title' => (string) $item->title,
                         'url' => (string) $item->link,
                         'description' => ! empty($item->description) ? (string) $item->description : '',
@@ -43,6 +49,6 @@ class ESPN
 
         $reader->close();
 
-        return $data;
+        return $this->data;
     }
 }
