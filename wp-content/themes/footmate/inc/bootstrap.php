@@ -5,3 +5,10 @@ if (! file_exists($composer = FM_PATH . '/vendor/autoload.php')) {
 }
 
 require $composer;
+
+if (! function_exists('fm')) {
+    function fm(): FM\App
+    {
+        return FM\App::get();
+    }
+}

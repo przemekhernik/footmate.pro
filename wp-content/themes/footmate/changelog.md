@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Unreleased]
 
+## [0.1.1] 27.06.2023
+### Added
+- Core: Widgets module
+- Code: Singleton to app facade
 ## [0.1.0] 09.06.2023
 ### Added
 - Teams: Module facade
