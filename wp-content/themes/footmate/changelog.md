@@ -19,9 +19,12 @@ All notable changes to this project will be documented in this file. The format 
 - `BVM Changes` for changes in BVM theme/plugin.
 
 ## [Unreleased]
+
+## [0.1.0] 27.06.2023
 ### Added
 - Teams: Module facade
 - Posts: Module facade
 - Teams: CPT
 - Core: Module facade
 - Core: Widgets module
+- Code: Singleton to app facade
