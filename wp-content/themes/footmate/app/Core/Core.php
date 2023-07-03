@@ -8,6 +8,6 @@ class Core
 {
     public function __construct()
     {
-        new Widgets();
+        fmInit(Widgets::class);
     }
 }

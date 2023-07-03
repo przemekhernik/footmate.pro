@@ -4,11 +4,9 @@ namespace FM\Core;
 
 class Widgets
 {
-    public function __construct()
-    {
-        add_action('get_sidebar', [$this, 'addLinks']);
-    }
-
+    /**
+     * @action get_sidebar
+     */
     public function addLinks(): void
     {
         if (empty($items = fm()->integrations()->espn()->get())) {
