@@ -8,6 +8,6 @@ class Core
 {
     public function __construct()
     {
-        fmInit(Widgets::class);
+        \FM\App::init(new Widgets());
     }
 }

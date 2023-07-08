@@ -64,4 +64,9 @@ class App
 
         return self::$instance;
     }
+
+    public static function init(object $module): object
+    {
+        return \FM\Core\Hooks::init($module);
+    }
 }
