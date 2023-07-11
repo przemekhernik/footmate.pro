@@ -10,7 +10,7 @@ class Integrations
 
     public function __construct()
     {
-        $this->espn = new ESPN();
+        $this->espn = \FM\App::init(new ESPN());
     }
 
     public function espn(): ESPN

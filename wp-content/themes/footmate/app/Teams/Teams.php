@@ -4,11 +4,9 @@ namespace FM\Teams;
 
 class Teams
 {
-    public function __construct()
-    {
-        add_action('init', [$this, 'initCPT']);
-    }
-
+    /**
+     * @action init
+     */
     public function initCPT(): void
     {
         register_post_type('team', [

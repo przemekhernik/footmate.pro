@@ -21,10 +21,10 @@ class App
 
     private function __construct()
     {
-        $this->core = new Core();
-        $this->integrations = new Integrations();
-        $this->posts = new Posts();
-        $this->teams = new Teams();
+        $this->core = self::init(new Core());
+        $this->integrations = self::init(new Integrations());
+        $this->posts = self::init(new Posts());
+        $this->teams = self::init(new Teams());
     }
     
     public function core(): Core
@@ -63,5 +63,10 @@ class App
         }
 
         return self::$instance;
+    }
+
+    public static function init(object $module): object
+    {
+        return \FM\Core\Hooks::init($module);
     }
 }
