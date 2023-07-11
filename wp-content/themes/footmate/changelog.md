@@ -19,6 +19,10 @@ All notable changes to this project will be documented in this file. The format 
 - `BVM Changes` for changes in BVM theme/plugin.
 
 ## [Unreleased]
+### Added
+- Core: `DocHooks` module.
+### Changed
+- App: Use `DocHooks` for handling hooks in the modules.
 
 ## [0.1.1] 27.06.2023
 ### Added
