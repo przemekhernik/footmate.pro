@@ -4,11 +4,9 @@ namespace FM\Posts;
 
 class Posts
 {
-    public function __construct()
-    {
-        add_filter('the_content', [$this, 'addLinks']);
-    }
-
+    /**
+     * @filter the_content
+     */
     public function addLinks(string $content): string
     {
         if (! is_singular('post')) {
