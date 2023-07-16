@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file. The format 
 ## [Unreleased]
 ### Added
 - Core: `DocHooks` module.
+- Core: Add `Config` facade with default values.
 ### Changed
 - App: Use `DocHooks` for handling hooks in the modules.
 
