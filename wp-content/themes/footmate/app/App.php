@@ -3,6 +3,7 @@
 namespace FM;
 
 use FM\Core\Core;
+use FM\Core\Config;
 use FM\Integrations\Integrations;
 use FM\Posts\Posts;
 use FM\Teams\Teams;
@@ -30,6 +31,11 @@ class App
     public function core(): Core
     {
         return $this->core;
+    }
+
+    public function config(): Config
+    {
+        return $this->core->config();
     }
 
     public function integrations(): Integrations
