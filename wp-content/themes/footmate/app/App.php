@@ -9,6 +9,7 @@ use FM\Core\Widgets;
 use FM\Integrations\Integrations;
 use FM\Posts\Posts;
 use FM\Teams\Teams;
+use FM\Templates\Templates;
 use Illuminate\Filesystem\Filesystem;
 
 class App
@@ -25,6 +26,8 @@ class App
 
     private Teams $teams;
 
+    private Templates $templates;
+
     private Widgets $widgets;
 
     private static ?App $instance = null;
@@ -37,6 +40,7 @@ class App
         $this->posts = self::init(new Posts());
         $this->setup = self::init(new Setup());
         $this->teams = self::init(new Teams());
+        $this->templates = self ::init(new Templates());
         $this->widgets = self::init(new Widgets());
     }
 
@@ -68,6 +72,11 @@ class App
     public function teams(): Teams
     {
         return $this->teams;
+    }
+
+    public function templates(): Templates
+    {
+        return $this->templates;
     }
 
     public function widgets(): Widgets
