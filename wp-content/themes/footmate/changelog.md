@@ -22,8 +22,11 @@ All notable changes to this project will be documented in this file. The format 
 ### Added
 - Core: `DocHooks` module.
 - Core: Add `Config` facade with default values.
+- App: Add `Filesystem` object to app facade.
+- Setup: Add simple setup submodule.
 ### Changed
 - App: Use `DocHooks` for handling hooks in the modules.
+- App: Remove `Core` facade for separated objects for core submodules.
 
 ## [0.1.1] 27.06.2023
 ### Added
