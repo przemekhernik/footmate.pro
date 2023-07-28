@@ -51,4 +51,14 @@ class Config
 
         return $value;
     }
+
+    public function isTheme(): bool
+    {
+        return 'theme' === $this->get('env.mode');
+    }
+
+    public function isPlugin(): bool
+    {
+        return 'plugin' === $this->get('env.mode');
+    }
 }
