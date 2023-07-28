@@ -2,6 +2,7 @@
 
 namespace FM;
 
+use FM\Core\Config;
 use FM\Core\Hooks;
 use FM\Core\Setup;
 use FM\Core\Widgets;
@@ -12,6 +13,8 @@ use Illuminate\Filesystem\Filesystem;
 
 class App
 {
+    private Config $config;
+
     private Filesystem $filesystem;
 
     private Integrations $integrations;
@@ -22,19 +25,24 @@ class App
 
     private Teams $teams;
 
-
     private Widgets $widgets;
 
     private static ?App $instance = null;
 
     private function __construct()
     {
+        $this->config = self::init(new Config());
         $this->filesystem = new Filesystem();
         $this->integrations = self::init(new Integrations());
         $this->posts = self::init(new Posts());
         $this->setup = self::init(new Setup());
         $this->teams = self::init(new Teams());
         $this->widgets = self::init(new Widgets());
+    }
+
+    public function config(): Config
+    {
+        return $this->config;
     }
 
     public function filesystem(): Filesystem
