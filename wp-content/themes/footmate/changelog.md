@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file. The format 
 - Core: Add `Config` facade with default values.
 - App: Add `Filesystem` object to app facade.
 - Setup: Add simple setup submodule.
+- Templates: Add Blade templating engine.
 ### Changed
 - App: Use `DocHooks` for handling hooks in the modules.
 - App: Remove `Core` facade for separated objects for core submodules.

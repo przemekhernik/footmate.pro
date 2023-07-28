@@ -5,20 +5,6 @@ namespace FM\Templates;
 class Resolver
 {
     /**
-     * @filter template_include
-     */
-    public function render(string $template): string
-    {
-        if (! fm()->config()->isTheme()) {
-            return $template;
-        }
-        
-        fm()->templates()->render($template, []);
-
-        return fm()->config()->get('path') . '/index.php';
-    }
-
-    /**
      * @filter 404_template_hierarchy
      * @filter archive_template_hierarchy
      * @filter attachment_template_hierarchy
@@ -50,5 +36,19 @@ class Resolver
         $templates = array_map(fn($template) => str_replace('.php', '.blade.php', "{$relpath}/{$template}"), $templates);
 
         return $templates;
+    }
+
+    /**
+     * @filter template_include
+     */
+    public function render(string $template): string
+    {
+        if (! fm()->config()->isTheme()) {
+            return $template;
+        }
+        
+        fm()->templates()->render($template, []);
+
+        return fm()->config()->get('path') . '/index.php';
     }
 }
