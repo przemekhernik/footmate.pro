@@ -33,4 +33,19 @@ class Config
             ],
         ];
     }
+
+    public function get(string $key): mixed
+    {
+        $value = $this->config;
+
+        foreach (explode('.', $key) as $key) {
+            if (isset($value[$key])) {
+                $value = $value[$key];
+            } else {
+                return null;
+            }
+        }
+
+        return $value;
+    }
 }
