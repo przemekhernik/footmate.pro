@@ -11,7 +11,7 @@ class Config
         $this->config = [
             'version' => FM_VERSION,
             'path' => FM_PATH,
-            'uri' => home_url(str_replace(ABSPATH, '', FM_PATH)),
+            'uri' => FM_URI,
             'cache' => [
                 'path' => wp_upload_dir()['basedir'] . '/cache/fm',
             ],
@@ -21,12 +21,15 @@ class Config
             ],
             'images' => [
                 'path' => FM_PATH . '/resources/images',
+                'uri' => FM_URI . '/resources/images',
             ],
             'styles' => [
                 'path' => FM_PATH . '/resources/styles',
+                'uri' => FM_URI . '/resources/images',
             ],
             'scripts' => [
                 'path' => FM_PATH . '/resources/scripts',
+                'uri' => FM_URI . '/resources/images',
             ],
             'views' => [
                 'path' => FM_PATH . '/resources/views',
