@@ -21,4 +21,9 @@ class Templates
     {
         $this->provider->render($template, $data);
     }
+
+    public function generate(string $template, array $data = []): string
+    {
+        return $this->provider->generate($template, $data);
+    }
 }
