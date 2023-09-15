@@ -16,6 +16,12 @@ class Config
                 'type' => wp_get_environment_type(),
                 'mode' => false === strpos(FM_PATH, ABSPATH . 'wp-content/plugins') ? 'theme' : 'plugin',
             ],
+            'hmr' => [
+                'host' => FM_HMR_HOST,
+                'client' => FM_HMR_HOST . '/@vite/client',
+                'base' => str_replace(home_url(), FM_HMR_HOST, FM_RESOURCES_URI),
+                'active' => wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_HOST)),
+            ],
             'manifest' => [
                 'path' => FM_ASSETS_PATH . '/manifest.json',
             ],
