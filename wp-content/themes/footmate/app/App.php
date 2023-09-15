@@ -2,9 +2,9 @@
 
 namespace FM;
 
+use FM\Assets\Assets;
 use FM\Core\Config;
 use FM\Core\Hooks;
-use FM\Core\Setup;
 use FM\Core\Widgets;
 use FM\Integrations\Integrations;
 use FM\Posts\Posts;
@@ -14,6 +14,8 @@ use Illuminate\Filesystem\Filesystem;
 
 class App
 {
+    private Assets $assets;
+
     private Config $config;
 
     private Filesystem $filesystem;
@@ -21,8 +23,6 @@ class App
     private Integrations $integrations;
 
     private Posts $posts;
-
-    private Setup $setup;
 
     private Teams $teams;
 
@@ -34,14 +34,19 @@ class App
 
     private function __construct()
     {
+        $this->assets = self::init(new Assets());
         $this->config = self::init(new Config());
         $this->filesystem = new Filesystem();
         $this->integrations = self::init(new Integrations());
         $this->posts = self::init(new Posts());
-        $this->setup = self::init(new Setup());
         $this->teams = self::init(new Teams());
         $this->templates = self ::init(new Templates());
         $this->widgets = self::init(new Widgets());
+    }
+
+    public function assets(): Assets
+    {
+        return $this->assets;
     }
 
     public function config(): Config
@@ -57,11 +62,6 @@ class App
     public function integrations(): Integrations
     {
         return $this->integrations;
-    }
-
-    public function setup(): Setup
-    {
-        return $this->setup;
     }
 
     public function posts(): Posts
