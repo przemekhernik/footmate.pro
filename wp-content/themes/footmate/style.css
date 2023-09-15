@@ -10,12 +10,3 @@
  * Requires PHP: 8.1
  * Requires at least: 6.2
  */
- 
-body { max-width: 1024px; margin: auto; }
-body * { box-sizing: border-box; }
-p { margin: 0 0 1.375rem 0; }
-ul { padding: 0 0 0 20px }
-.app { display: flex; flex-wrap: wrap; justify-content: center; }
-.app__header { flex-basis: 100%; max-width: 100%; padding: 0 20px; }
-.app__content { flex-basis: 75%; max-width: 75%; padding: 0 20px; }
-.app__sidebar { flex-basis: 25%; max-width: 25%; padding: 0 20px; }
