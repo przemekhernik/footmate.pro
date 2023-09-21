@@ -12,7 +12,7 @@ class Integrations
     /**
      * @action init
      */
-    public function action(): void
+    public function init(): void
     {
         $this->espn = \FM\App::init(new ESPN());
 

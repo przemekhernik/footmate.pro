@@ -2,8 +2,6 @@
 
 namespace FM\Integrations;
 
-use Illuminate\Support\Str;
-
 class Vite
 {
     /**
@@ -21,7 +19,7 @@ class Vite
      */
     public function module(string $tag, string $handle, string $url): string
     {
-        if (in_array($handle, ['vite', 'theme'])) {
+        if (false !== strpos($url, FM_ASSETS_URI) || false !== strpos($url, FM_HMR_HOST)) {
             $tag = str_replace('<script ', '<script type="module" ', $tag);
         }
 
@@ -29,15 +27,14 @@ class Vite
     }
     
     /**
-     * @filter fm/assets/enqueue/script 10 3
+     * @filter fm/assets/resolver/url 1 2
      */
-    public function url(array $data, string $path, string $handle): array
+    public function url(string $url, string $path): string
     {
-        if (! Str::isUrl($path)) {
-            $data['url'] = fm()->config()->get('hmr.base') . "/{$path}";
-            $data['deps'][] = 'vite';
+        if (false !== strpos($path, '.css')) {
+            return '';
         }
 
-        return $data;
+        return fm()->config()->get('hmr.base') . "/{$path}";
     }
 }
