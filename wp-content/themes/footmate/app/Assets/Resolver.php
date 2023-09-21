@@ -6,32 +6,6 @@ trait Resolver
 {
     private array $manifest = [];
 
-    // public function style(string $path, string $handle, array $config = []): void
-    // {
-    //     $asset = apply_filters('fm/assets/enqueue/style', wp_parse_args($config, [
-    //         'handle' => $handle,
-    //         'url' => $this->resolve($path),
-    //         'deps' => [],
-    //         'version' => fm()->config()->get('version'),
-    //         'media' => 'all'
-    //     ]), $path, $handle);
-
-    //     wp_enqueue_style($asset['handle'], $asset['url'], $asset['deps'], $asset['version'], $asset['media']);
-    // }
-
-    // public function script(string $handle, string $path, array $config = []): void
-    // {
-    //     $asset = apply_filters('fm/assets/enqueue/script', wp_parse_args($config, [
-    //         'handle' => $handle,
-    //         'url' => $this->resolve($path),
-    //         'deps' => [],
-    //         'version' => fm()->config()->get('version'),
-    //         'args' => ['strategy' => 'defer']
-    //     ]), $path, $handle);
-
-    //     wp_enqueue_script($asset['handle'], $asset['url'], $asset['deps'], $asset['version'], $asset['args']);
-    // }
-
     /**
      * @action wp_enqueue_scripts 1
      */
