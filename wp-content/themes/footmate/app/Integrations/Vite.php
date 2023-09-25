@@ -13,7 +13,7 @@ class Vite
     }
 
     /**
-     * @action script_loader_tag 1 3
+     * @filter script_loader_tag 1 3
      */
     public function module(string $tag, string $handle, string $url): string
     {
