@@ -1,4 +1,5 @@
 import path from 'path';
+import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 
 const ROOT = path.resolve('../../../')
@@ -21,6 +22,11 @@ export default defineConfig({
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
       },
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [autoprefixer],
     },
   },
   plugins: [

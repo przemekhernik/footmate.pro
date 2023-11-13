@@ -23,11 +23,11 @@ export function setState(val) {
 create()
 
 if (import.meta.hot) {
-    import.meta.hot.accept((module) => {
-      module.setState(import.meta.hot.data.count)
-    })
-    import.meta.hot.dispose(() => {
-      import.meta.hot.data.count = count;
-      destroy();
-    })
-  }
+  import.meta.hot.accept((module) => {
+    module.setState(import.meta.hot.data.count)
+  })
+  import.meta.hot.dispose(() => {
+    import.meta.hot.data.count = count;
+    destroy();
+  })
+}
