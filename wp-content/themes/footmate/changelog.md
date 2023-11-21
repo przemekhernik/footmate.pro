@@ -20,13 +20,13 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Unreleased]
 ### Added
-- Core: `DocHooks` module.
+- Core: `DocHooks` module - https://tentyp.dev/blog/wordpress/dochooks-sugar-syntax-for-hooking-system/
 - Core: Add `Config` facade with default values.
-- App: Add `Filesystem` object to app facade.
-- Setup: Add simple setup submodule.
-- Templates: Add Blade templating engine.
+- App: Add `Filesystem` object to app facade - https://tentyp.dev/blog/wordpress/introducing-laravel-blade/
+- Templates: Add Blade templating engine - https://tentyp.dev/blog/wordpress/introducing-laravel-blade/
+- Integrations: Vite for the development process - https://tentyp.dev/blog/wordpress/vite/
 ### Changed
-- App: Use `DocHooks` for handling hooks in the modules.
+- App: Use `DocHooks` for handling hooks in the modules - https://tentyp.dev/blog/wordpress/dochooks-sugar-syntax-for-hooking-system/
 - App: Remove `Core` facade for separated objects for core submodules.
 
 ## [0.1.1] 27.06.2023

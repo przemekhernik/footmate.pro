@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "sass": "^1.68.0",
+    "vite": "^4.4.9"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ]
+}

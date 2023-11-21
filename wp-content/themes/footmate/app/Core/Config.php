@@ -9,27 +9,24 @@ class Config
     public function __construct()
     {
         $this->config = [
-            'version' => FM_VERSION,
+            'version' => wp_get_environment_type() === 'development' ? time() : FM_VERSION,
             'path' => FM_PATH,
             'uri' => FM_URI,
-            'cache' => [
-                'path' => wp_upload_dir()['basedir'] . '/cache/fm',
-            ],
             'env' => [
                 'type' => wp_get_environment_type(),
                 'mode' => false === strpos(FM_PATH, ABSPATH . 'wp-content/plugins') ? 'theme' : 'plugin',
             ],
-            'images' => [
-                'path' => FM_PATH . '/resources/images',
-                'uri' => FM_URI . '/resources/images',
+            'hmr' => [
+                'host' => FM_HMR_HOST,
+                'client' => FM_HMR_HOST . '/@vite/client',
+                'base' => str_replace(home_url(), FM_HMR_HOST, FM_RESOURCES_URI),
+                'active' => wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_HOST)),
             ],
-            'styles' => [
-                'path' => FM_PATH . '/resources/styles',
-                'uri' => FM_URI . '/resources/images',
+            'manifest' => [
+                'path' => FM_ASSETS_PATH . '/manifest.json',
             ],
-            'scripts' => [
-                'path' => FM_PATH . '/resources/scripts',
-                'uri' => FM_URI . '/resources/images',
+            'cache' => [
+                'path' => wp_upload_dir()['basedir'] . '/cache/fm',
             ],
             'views' => [
                 'path' => FM_PATH . '/resources/views',
