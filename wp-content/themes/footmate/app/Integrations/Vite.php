@@ -11,18 +11,6 @@ class Vite
     {
         echo '<script type="module" src="' . fm()->config()->get('hmr.client') . '"></script>';
     }
-
-    /**
-     * @filter script_loader_tag 1 3
-     */
-    public function module(string $tag, string $handle, string $url): string
-    {
-        if (false !== strpos($url, FM_HMR_HOST)) {
-            $tag = str_replace('<script ', '<script type="module" ', $tag);
-        }
-
-        return $tag;
-    }
     
     /**
      * @filter fm/assets/resolver/url 1 2
