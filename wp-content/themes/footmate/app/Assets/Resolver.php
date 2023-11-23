@@ -20,6 +20,18 @@ trait Resolver
         $this->manifest = json_decode(file_get_contents($path), true);
     }
 
+    /**
+     * @filter script_loader_tag 1 3
+     */
+    public function module(string $tag, string $handle, string $url): string
+    {
+        if ((false !== strpos($url, FM_HMR_HOST)) || (false !== strpos($url, FM_ASSETS_URI))) {
+            $tag = str_replace('<script ', '<script type="module" ', $tag);
+        }
+
+        return $tag;
+    }
+
     private function resolve(string $path): string
     {
         $url = '';
