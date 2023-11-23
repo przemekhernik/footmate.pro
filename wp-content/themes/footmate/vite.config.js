@@ -17,6 +17,7 @@ export default defineConfig({
       input: [
         'resources/scripts/scripts.js',
         'resources/styles/styles.scss',
+        'resources/scripts/blocks.js',
       ],
       output: {
         entryFileNames: '[hash].js',
