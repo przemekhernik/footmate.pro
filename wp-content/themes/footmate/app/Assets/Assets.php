@@ -13,7 +13,7 @@ class Assets
      */
     public function front(): void
     {
-        wp_enqueue_style('theme', $this->resolve('styles/styles.scss'), [], fm()->config()->get('version'), 'all');
-        wp_enqueue_script('theme', $this->resolve('scripts/scripts.js'), [], fm()->config()->get('version'), ['strategy' => 'defer']);
+        wp_enqueue_style('theme', $this->resolve('styles/styles.scss'), [], fm()->config()->get('version'));
+        wp_enqueue_script('theme', $this->resolve('scripts/scripts.js'), [], fm()->config()->get('version'));
     }
 }
