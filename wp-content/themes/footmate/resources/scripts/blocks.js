@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 class Test {
     log() {
-        console.log('scripts');
+        console.log('blocks');
     }
 }
 

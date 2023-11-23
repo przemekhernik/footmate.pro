@@ -1,6 +1,7 @@
 import path from 'path';
 import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
+import { babel } from '@rollup/plugin-babel';
 
 const ROOT = path.resolve('../../../')
 const BASE = __dirname.replace(ROOT, '');
@@ -17,11 +18,27 @@ export default defineConfig({
       input: [
         'resources/scripts/scripts.js',
         'resources/styles/styles.scss',
+        'resources/scripts/blocks.js',
       ],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
       },
+      plugins: [
+        babel({
+          babelHelpers: 'bundled',
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: {
+                  browsers: ['ie >= 11'],
+                },
+              },
+            ],
+          ],
+        }),
+      ],
     },
   },
   css: {
