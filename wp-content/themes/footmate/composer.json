@@ -17,5 +17,8 @@
         "php": "^8.1",
         "illuminate/view": "^10.15",
         "illuminate/support": "^10.15"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7"
     }
 }
