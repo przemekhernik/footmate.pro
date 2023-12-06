@@ -1,0 +1,13 @@
+{
+  "*.php": [
+    "vendor/bin/phpcbf"
+  ],
+  "*.js": [
+    "prettier --write",
+    "eslint --fix"
+  ],
+  "*.scss": [
+    "prettier --write",
+    "stylelint --fix"
+  ]
+}
