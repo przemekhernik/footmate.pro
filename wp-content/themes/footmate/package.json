@@ -3,7 +3,8 @@
     "build": "vite build",
     "dev": "vite",
     "lint": "vendor/bin/phpcs app && prettier resources --check && stylelint resources/**/*.scss && eslint resources/**/*.js",
-    "lint:fix": "vendor/bin/phpcbf app && prettier resources --write && stylelint resources/**/*.scss && eslint resources/**/*.js --fix"
+    "lint:fix": "vendor/bin/phpcbf app && prettier resources --write && stylelint resources/**/*.scss && eslint resources/**/*.js --fix",
+    "prepare": "cd ../../.. && husky install wp-content/themes/footmate/.husky"
   },
   "browserslist": [
     "last 2 versions",
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.54.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
     "prettier": "3.1.0",
     "sass": "^1.68.0",
     "stylelint": "^15.11.0",
