@@ -3,7 +3,7 @@ import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 import { babel } from '@rollup/plugin-babel';
 
-const ROOT = path.resolve('../../../')
+const ROOT = path.resolve('../../../');
 const BASE = __dirname.replace(ROOT, '');
 
 export default defineConfig({
@@ -15,11 +15,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      input: [
-        'resources/scripts/scripts.js',
-        'resources/styles/styles.scss',
-        'resources/scripts/blocks.js',
-      ],
+      input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss', 'resources/scripts/blocks.js'],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
