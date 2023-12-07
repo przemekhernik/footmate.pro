@@ -2,8 +2,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "vendor/bin/phpcs app && prettier resources --check && stylelint resources/**/*.scss && eslint resources/**/*.js",
-    "lint:fix": "vendor/bin/phpcbf app && prettier resources --write && stylelint resources/**/*.scss --fix && eslint resources/**/*.js --fix",
+    "lint": "composer lint && prettier resources --check && stylelint resources/**/*.scss && eslint resources/**/*.js",
+    "lint:fix": "composer lint:fix && prettier resources --write && stylelint resources/**/*.scss --fix && eslint resources/**/*.js --fix",
     "prepare": "cd ../../.. && husky install wp-content/themes/footmate/.husky"
   },
   "browserslist": [

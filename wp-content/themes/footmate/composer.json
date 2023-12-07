@@ -20,5 +20,9 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7"
+    },
+    "scripts": {
+      "lint": "phpcs app",
+      "lint:fix": "phpcbf app"
     }
 }
