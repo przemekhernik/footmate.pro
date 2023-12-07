@@ -4,7 +4,18 @@
   <arg name="colors"/>
 
   <file>app</file>
-  <file>resources/views</file>
+  <file>functions.php</file>
 
   <rule ref="PSR12" />
+
+  <!-- 2.1 Basic Coding Standard -->
+  <rule ref="PSR12">
+    <!-- 5.2 switch, case - disable due to problems wuth 2 spaces indentation -->
+    <exclude name="PSR2.ControlStructures.SwitchDeclaration.BreakIndent" />
+  </rule>
+
+  <!-- Custom Rules -->
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+  <rule ref="Generic.Formatting.SpaceAfterCast" />
+  <rule ref="Generic.Formatting.SpaceAfterNot" />
 </ruleset>
