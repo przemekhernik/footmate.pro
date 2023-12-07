@@ -23,6 +23,6 @@
     },
     "scripts": {
       "lint": "phpcs app",
-      "lint:fix": "phpcbf app"
+      "format": "phpcbf app"
     }
 }
