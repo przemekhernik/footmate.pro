@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace FM\Templates;
 
@@ -23,7 +23,7 @@ class Resolver
      * @filter singular_template_hierarchy
      * @filter tag_template_hierarchy
      * @filter taxonomy_template_hierarchy
-     *
+     * 
      * @see https://github.com/WordPress/WordPress/blob/master/wp-includes/template.php#L30-L62
      */
     public function relocate(array $templates): array
@@ -33,8 +33,7 @@ class Resolver
         }
 
         $relpath = str_replace(fm()->config()->get('path') . '/', '', fm()->config()->get('views.path'));
-        $templates =
-            array_map(fn($template) => str_replace('.php', '.blade.php', "{$relpath}/{$template}"), $templates);
+        $templates = array_map(fn($template) => str_replace('.php', '.blade.php', "{$relpath}/{$template}"), $templates);
 
         return $templates;
     }
@@ -47,7 +46,7 @@ class Resolver
         if (! fm()->config()->isTheme()) {
             return $template;
         }
-
+        
         fm()->templates()->render($template, []);
 
         return fm()->config()->get('path') . '/index.php';

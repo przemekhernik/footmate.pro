@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace FM\Integrations;
 
@@ -11,7 +11,7 @@ class Vite
     {
         echo '<script type="module" src="' . fm()->config()->get('hmr.client') . '"></script>';
     }
-
+    
     /**
      * @filter fm/assets/resolver/url 1 2
      */

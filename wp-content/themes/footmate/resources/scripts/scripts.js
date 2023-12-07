@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
 class Test {
-  log() {
-    console.log('scripts');
-  }
+    log() {
+        console.log('scripts');
+    }
 }
 
 const test = new Test();
