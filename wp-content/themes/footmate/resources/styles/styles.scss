@@ -1,34 +1,37 @@
 @font-face {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../fonts/Montserrat-Light.woff2') format('woff2'),
-  url('../fonts/Montserrat-Light.woff') format('woff');
+  src:
+    url('../fonts/Montserrat-Light.woff2') format('woff2'),
+    url('../fonts/Montserrat-Light.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/Montserrat-Regular.woff2') format('woff2'),
-  url('../fonts/Montserrat-Regular.woff') format('woff');
+  src:
+    url('../fonts/Montserrat-Regular.woff2') format('woff2'),
+    url('../fonts/Montserrat-Regular.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../fonts/Montserrat-Bold.woff2') format('woff2'),
-  url('../fonts/Montserrat-Bold.woff') format('woff');
+  src:
+    url('../fonts/Montserrat-Bold.woff2') format('woff2'),
+    url('../fonts/Montserrat-Bold.woff') format('woff');
 }
 
 body {
   max-width: 1024px;
   margin: auto;
-  font-family: 'Montserrat';
+  font-family: Montserrat, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   background: white url('../images/logo.svg') no-repeat center center;
@@ -39,7 +42,7 @@ body {
 }
 
 p {
-  margin: 0 0 1.375rem 0;
+  margin: 0 0 1.375rem;
 }
 
 ul {
