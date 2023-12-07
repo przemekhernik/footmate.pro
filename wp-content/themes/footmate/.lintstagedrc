@@ -1,6 +1,6 @@
 {
   "*.php": [
-    "vendor/bin/phpcbf"
+    "composer lint"
   ],
   "*.js": [
     "prettier --write",
