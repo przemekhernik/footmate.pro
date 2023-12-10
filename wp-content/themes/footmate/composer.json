@@ -18,11 +18,11 @@
         "illuminate/view": "^10.15",
         "illuminate/support": "^10.15"
     },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.7"
-    },
     "scripts": {
       "lint": "phpcs app",
       "format": "phpcbf app"
+    },
+    "require-dev": {
+        "phpcsstandards/php_codesniffer": "^3.8"
     }
 }
