@@ -25,6 +25,10 @@
   url('../fonts/Montserrat-Bold.woff') format('woff');
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   max-width: 1024px;
   margin: auto;
@@ -32,6 +36,7 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   background: white url('../images/logo.svg') no-repeat center center;
+  font-size: 1.6rem;
 
   * {
     box-sizing: border-box;
@@ -52,9 +57,22 @@ ul {
   flex-wrap: wrap;
 
   &__header {
+    display: flex;
+    align-items: center;
     flex-basis: 100%;
     max-width: 100%;
-    padding: 0 20px;
+    padding: 1rem 2rem;
+
+    h3 {
+      margin: 0;
+    }
+
+    img {
+      max-width: 2.5rem;
+      max-height: 2.5rem;
+      object-fit: contain;
+      margin-right: 1rem;
+    }
   }
 
   &__content {
