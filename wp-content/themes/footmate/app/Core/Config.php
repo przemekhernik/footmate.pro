@@ -10,7 +10,6 @@ class Config
     {
         $this->config = [
             'version' => wp_get_environment_type() === 'development' ? time() : FM_VERSION,
-            'root' => FM_ROOT,
             'path' => FM_PATH,
             'uri' => FM_URI,
             'env' => [
@@ -18,10 +17,10 @@ class Config
                 'mode' => false === strpos(FM_PATH, ABSPATH . 'wp-content/plugins') ? 'theme' : 'plugin',
             ],
             'hmr' => [
-                'uri' => FM_HMR_HOST . FM_ROOT,
-                'client' => FM_HMR_HOST . FM_ROOT . '/@vite/client',
-                'sources' => FM_HMR_HOST . FM_ROOT . '/resources',
-                'active' => wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_HOST)),
+                'uri' => FM_HMR_HOST,
+                'client' => FM_HMR_URI . '/@vite/client',
+                'sources' => FM_HMR_URI . '/resources',
+                'active' => wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_URI)),
             ],
             'manifest' => [
                 'path' => FM_ASSETS_PATH . '/manifest.json',
