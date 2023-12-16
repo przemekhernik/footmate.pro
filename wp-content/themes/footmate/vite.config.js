@@ -1,5 +1,4 @@
 import path from 'path';
-import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 import assets from './.vite/assets';
 
@@ -9,7 +8,7 @@ const BASE = __dirname.replace(ROOT, '');
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? `${BASE}/dist/` : BASE,
   build: {
-    manifest: true,
+    manifest: 'manifest.json',
     assetsDir: '.',
     outDir: `dist`,
     emptyOutDir: true,
@@ -24,11 +23,6 @@ export default defineConfig({
         assetFileNames: '[hash].[ext]',
         chunkFileNames: '[hash].js',
       },
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [autoprefixer],
     },
   },
   plugins: [

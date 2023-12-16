@@ -17,6 +17,6 @@ class Vite
      */
     public function url(string $url, string $path): string
     {
-        return fm()->config()->get('hmr.base') . "/{$path}";
+        return fm()->config()->get('hmr.sources') . "/{$path}";
     }
 }

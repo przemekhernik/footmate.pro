@@ -32,7 +32,7 @@ trait Resolver
         return $tag;
     }
 
-    public function resolve(string $path): string
+    private function resolve(string $path): string
     {
         $url = '';
 
