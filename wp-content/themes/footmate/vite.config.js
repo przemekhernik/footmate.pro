@@ -1,6 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'vite';
-import assets from './.vite/assets';
+import copy from './.vite/copy';
 
 const ROOT = path.resolve('../../../')
 const BASE = __dirname.replace(ROOT, '');
@@ -26,13 +26,11 @@ export default defineConfig({
     },
   },
   plugins: [
-    assets({
+    copy({
       targets: [
         {
           src: `resources/images/**/*.{png,jpg,jpeg,svg,webp}`,
-          dest: 'dist',
-          rename: '[hash].[ext]',
-        }
+        },
       ],
     }),
     {
