@@ -1,3 +1,7 @@
+import path from 'path';
+import crypto from 'crypto';
+import{ globSync } from 'glob';
+
 class Plugin {
   constructor() {
     this.targets = [];
@@ -31,7 +35,21 @@ class Plugin {
   }
 
   resolve() {
-    console.log('resolve targets');
+    for (const target of this.targets) {
+      for (const file of globSync([target.src])) {
+        const info = path.parse(file);
+        const name = target.rename
+          .replace('[name]', info.name)
+          .replace('[hash]', crypto.randomBytes(4).toString('hex'))
+          .replace('[ext]', info.ext.substring(1));
+
+        target.files.push({
+          src: file,
+          dest: `${this.dest}/${name}`,
+          name,
+        });
+      }
+    }
   }
 
   copy() {
