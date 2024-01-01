@@ -26,7 +26,13 @@ export default defineConfig({
     },
   },
   plugins: [
-    copy(),
+    copy({
+      targets: [
+        {
+          src: `resources/images/**/*.{png,jpg,jpeg,svg,webp}`,
+        },
+      ],
+    }),
     {
       name: 'php',
       handleHotUpdate({ file, server }) {
