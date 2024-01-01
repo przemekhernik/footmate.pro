@@ -7,7 +7,7 @@ const BASE = __dirname.replace(ROOT, '');
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? `${BASE}/dist/` : BASE,
   build: {
-    manifest: true,
+    manifest: 'manifest.json',
     assetsDir: '.',
     outDir: `dist`,
     emptyOutDir: true,
