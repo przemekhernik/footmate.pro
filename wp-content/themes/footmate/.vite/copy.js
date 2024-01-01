@@ -73,7 +73,19 @@ class Plugin {
   }
 
   write() {
-    console.log('write manifest');
+    if (! this.manifest || ! this.entries.length) {
+      return;
+    }
+
+    const manifest = JSON.parse(fs.readFileSync(this.manifest, 'utf-8'));
+
+    for (const entry of this.entries) {
+      if (! manifest[entry.source]) {
+        manifest[entry.source] = entry;
+      }
+    }
+
+    fs.writeFileSync(this.manifest, JSON.stringify(manifest, null, 2));
   }
 }
 
