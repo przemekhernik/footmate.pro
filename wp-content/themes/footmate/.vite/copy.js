@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import{ globSync } from 'glob';
@@ -53,7 +54,22 @@ class Plugin {
   }
 
   copy() {
-    console.log('copy files');
+    for (const target of this.targets) {
+      for (const file of target.files) {
+        try {
+          fs.copyFile(file.src, file.dest, () => {
+            if (target.manifest) {
+              this.entries.push({
+                source: file.src,
+                file: file.name,
+              });
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
   }
 
   write() {
