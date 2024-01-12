@@ -1,5 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'vite';
+import copy from './.vite/copy';
 
 const ROOT = path.resolve('../../../')
 const BASE = __dirname.replace(ROOT, '');
@@ -11,7 +12,6 @@ export default defineConfig({
     assetsDir: '.',
     outDir: `dist`,
     emptyOutDir: true,
-    sourcemap: true,
     rollupOptions: {
       input: [
         'resources/scripts/scripts.js',
@@ -21,10 +21,18 @@ export default defineConfig({
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
+        chunkFileNames: '[hash].js',
       },
     },
   },
   plugins: [
+    copy({
+      targets: [
+        {
+          src: `resources/images/**/*.{png,jpg,jpeg,svg,webp}`,
+        },
+      ],
+    }),
     {
       name: 'php',
       handleHotUpdate({ file, server }) {
