@@ -1,7 +1,6 @@
 import path from 'path';
-import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
-import { babel } from '@rollup/plugin-babel';
+import copy from './.vite/copy';
 
 const ROOT = path.resolve('../../../');
 const BASE = __dirname.replace(ROOT, '');
@@ -9,40 +8,27 @@ const BASE = __dirname.replace(ROOT, '');
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? `${BASE}/dist/` : BASE,
   build: {
-    manifest: true,
+    manifest: 'manifest.json',
     assetsDir: '.',
     outDir: `dist`,
     emptyOutDir: true,
-    sourcemap: true,
     rollupOptions: {
       input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss', 'resources/scripts/blocks.js'],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
+        chunkFileNames: '[hash].js',
       },
-      plugins: [
-        babel({
-          babelHelpers: 'bundled',
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: {
-                  browsers: ['ie >= 11'],
-                },
-              },
-            ],
-          ],
-        }),
-      ],
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [autoprefixer],
     },
   },
   plugins: [
+    copy({
+      targets: [
+        {
+          src: `resources/images/**/*.{png,jpg,jpeg,svg,webp}`,
+        },
+      ],
+    }),
     {
       name: 'php',
       handleHotUpdate({ file, server }) {
