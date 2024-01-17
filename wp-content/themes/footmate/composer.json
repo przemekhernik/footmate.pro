@@ -23,6 +23,6 @@
       "format": "phpcbf app"
     },
     "require-dev": {
-        "phpcsstandards/php_codesniffer": "^3.8"
+        "squizlabs/php_codesniffer": "*"
     }
 }
