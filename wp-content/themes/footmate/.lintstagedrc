@@ -3,11 +3,11 @@
     "composer lint"
   ],
   "*.js": [
-    "prettier --write",
-    "eslint --fix"
+    "prettier --check",
+    "eslint"
   ],
   "*.scss": [
-    "prettier --write",
-    "stylelint --fix"
+    "prettier --check",
+    "stylelint"
   ]
 }
