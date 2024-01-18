@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -20,6 +23,7 @@
     "glob": "^10.3.10",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "postcss": "^8.4.29",
     "prettier": "^3.2.4",
     "sass": "^1.68.0",
     "stylelint": "^16.1.0",
