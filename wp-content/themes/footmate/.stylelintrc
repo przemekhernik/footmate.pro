@@ -1,8 +1,12 @@
 {
   "extends": [
-    "stylelint-config-standard-scss"
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order"
   ],
-  "plugins": ["stylelint-prettier"],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-prettier"
+  ],
   "rules": {
     "prettier/prettier": true
   }
