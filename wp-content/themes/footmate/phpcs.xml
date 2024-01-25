@@ -2,8 +2,8 @@
 
 <ruleset name="tentypdev">
   <arg name="colors" />
-  <!-- <arg name="show_progress" value="1" />
-  <arg name="standard" value="PSR2"/> -->
+  <arg value="n" />
+  <arg value="s" />
 
   <file>app</file>
   <file>functions.php</file>
