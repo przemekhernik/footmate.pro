@@ -8,4 +8,13 @@
   <file>functions.php</file>
 
   <rule ref="PSR12" />
+
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+  <rule ref="Generic.PHP.DisallowShortOpenTag" />
+  <rule ref="Generic.Formatting.SpaceAfterCast" />
+  <rule ref="Generic.Formatting.SpaceAfterNot" />
+  <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+
+  <rule ref="PEAR.Commenting.InlineComment" />
+  <rule ref="Squiz.Commenting.DocCommentAlignment" />
 </ruleset>
