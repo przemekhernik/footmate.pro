@@ -2,7 +2,6 @@
 
 <ruleset name="tentypdev">
   <arg name="colors" />
-  <arg value="n" />
   <arg value="s" />
 
   <file>app</file>
