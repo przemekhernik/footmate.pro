@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file. The format 
 - Templates: Add Blade templating engine - https://tentyp.dev/blog/wordpress/introducing-laravel-blade/
 - Integrations: Vite for the development process - https://tentyp.dev/blog/wordpress/vite/
 - Integrations: Static assets handling in the backend code - https://tentyp.dev/blog/wordpress/vite-2/
+- Development: Add .editorconfig - https://tentyp.dev/blog/environment/editorconfig/
 ### Changed
 - App: Use `DocHooks` for handling hooks in the modules - https://tentyp.dev/blog/wordpress/dochooks-sugar-syntax-for-hooking-system/
 - App: Remove `Core` facade for separated objects for core submodules.
