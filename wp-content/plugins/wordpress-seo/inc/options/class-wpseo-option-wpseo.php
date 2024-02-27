@@ -58,7 +58,8 @@ class WPSEO_Option_Wpseo extends WPSEO_Option {
 		'enable_xml_sitemap'                       => true,
 		'enable_text_link_counter'                 => true,
 		'enable_index_now'                         => true,
-		'enable_ai_generator'                      => false,
+		'enable_ai_generator'                      => true,
+		'ai_enabled_pre_default'                   => false,
 		'show_onboarding_notice'                   => false,
 		'first_activated_on'                       => false,
 		'myyoast-oauth'                            => [
@@ -218,7 +219,7 @@ class WPSEO_Option_Wpseo extends WPSEO_Option {
 		/**
 		 * Filter: 'wpseo_enable_tracking' - Enables the data tracking of Yoast SEO Premium.
 		 *
-		 * @api string $is_enabled The enabled state. Default is false.
+		 * @param string $is_enabled The enabled state. Default is false.
 		 */
 		$this->defaults['tracking'] = apply_filters( 'wpseo_enable_tracking', false );
 
@@ -468,7 +469,7 @@ class WPSEO_Option_Wpseo extends WPSEO_Option {
 
 						if ( is_array( $items ) ) {
 							foreach ( $items as $item_key => $item ) {
-								if ( ! \is_string( $item_key ) || ! \is_numeric( $item ) ) {
+								if ( ! is_string( $item_key ) || ! is_numeric( $item ) ) {
 									unset( $items[ $item_key ] );
 								}
 							}

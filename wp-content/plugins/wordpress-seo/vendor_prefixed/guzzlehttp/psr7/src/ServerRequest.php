@@ -51,7 +51,7 @@ class ServerRequest extends \YoastSEO_Vendor\GuzzleHttp\Psr7\Request implements 
     /**
      * @param string                               $method       HTTP method
      * @param string|UriInterface                  $uri          URI
-     * @param array<string, string|string[]>       $headers      Request headers
+     * @param (string|string[])[]                  $headers      Request headers
      * @param string|resource|StreamInterface|null $body         Request body
      * @param string                               $version      Protocol version
      * @param array                                $serverParams Typically the $_SERVER superglobal

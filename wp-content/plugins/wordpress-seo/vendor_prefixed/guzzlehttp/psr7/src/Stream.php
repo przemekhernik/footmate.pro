@@ -10,8 +10,8 @@ use YoastSEO_Vendor\Psr\Http\Message\StreamInterface;
 class Stream implements \YoastSEO_Vendor\Psr\Http\Message\StreamInterface
 {
     /**
-     * @see http://php.net/manual/function.fopen.php
-     * @see http://php.net/manual/en/function.gzopen.php
+     * @see https://www.php.net/manual/en/function.fopen.php
+     * @see https://www.php.net/manual/en/function.gzopen.php
      */
     private const READABLE_MODES = '/r|a\\+|ab\\+|w\\+|wb\\+|x\\+|xb\\+|c\\+|cb\\+/';
     private const WRITABLE_MODES = '/a|w|r\\+|rb\\+|rw|x|c/';

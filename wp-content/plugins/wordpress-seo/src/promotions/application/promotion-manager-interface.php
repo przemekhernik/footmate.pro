@@ -4,8 +4,6 @@ namespace Yoast\WP\SEO\Promotions\Application;
 
 /**
  * Interface for the promotion manager.
- *
- * @makePublic
  */
 interface Promotion_Manager_Interface {
 
@@ -16,12 +14,12 @@ interface Promotion_Manager_Interface {
 	 *
 	 * @return bool Whether the promotion is effective.
 	 */
-	public function is( string $promotion_name ) : bool;
+	public function is( string $promotion_name ): bool;
 
 	/**
 	 * Get the list of promotions.
 	 *
 	 * @return array The list of promotions.
 	 */
-	public function get_promotions_list() : array;
+	public function get_promotions_list(): array;
 }

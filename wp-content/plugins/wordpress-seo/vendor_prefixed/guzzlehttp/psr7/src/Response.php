@@ -19,7 +19,7 @@ class Response implements \YoastSEO_Vendor\Psr\Http\Message\ResponseInterface
     private $statusCode;
     /**
      * @param int                                  $status  Status code
-     * @param array<string, string|string[]>       $headers Response headers
+     * @param (string|string[])[]                  $headers Response headers
      * @param string|resource|StreamInterface|null $body    Response body
      * @param string                               $version Protocol version
      * @param string|null                          $reason  Reason phrase (when empty a default will be used based on the status code)
