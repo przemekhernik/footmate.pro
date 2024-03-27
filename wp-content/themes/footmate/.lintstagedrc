@@ -1,0 +1,13 @@
+{
+  "*.php": [
+    "composer lint"
+  ],
+  "*.js": [
+    "prettier --check",
+    "eslint"
+  ],
+  "*.scss": [
+    "prettier --check",
+    "stylelint"
+  ]
+}
