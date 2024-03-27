@@ -24,5 +24,10 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

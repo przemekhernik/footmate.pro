@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. The format 
 - Integrations: Vite for the development process - https://tentyp.dev/blog/wordpress/vite/
 - Integrations: Static assets handling in the backend code - https://tentyp.dev/blog/wordpress/vite-2/
 - Development: Add .editorconfig - https://tentyp.dev/blog/environment/editorconfig/
+- Development: Add php-code-sniffer - https://tentyp.dev/blog/php/phpcodesniffer/
 ### Changed
 - App: Use `DocHooks` for handling hooks in the modules - https://tentyp.dev/blog/wordpress/dochooks-sugar-syntax-for-hooking-system/
 - App: Remove `Core` facade for separated objects for core submodules.
