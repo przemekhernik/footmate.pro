@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import{ globSync } from 'glob';
+import { globSync } from 'glob';
 
 class Plugin {
   constructor() {
@@ -23,8 +23,8 @@ class Plugin {
 
     if (config.targets) {
       this.targets = config.targets
-        .filter(item => item.src)
-        .map(item => {
+        .filter((item) => item.src)
+        .map((item) => {
           return {
             src: item.src,
             rename: item.rename || this.rename,
@@ -73,14 +73,14 @@ class Plugin {
   }
 
   write() {
-    if (! this.manifest || ! this.entries.length) {
+    if (!this.manifest || !this.entries.length) {
       return;
     }
 
     const manifest = JSON.parse(fs.readFileSync(this.manifest, 'utf-8'));
 
     for (const entry of this.entries) {
-      if (! manifest[entry.source]) {
+      if (!manifest[entry.source]) {
         manifest[entry.source] = entry;
       }
     }
@@ -89,7 +89,7 @@ class Plugin {
   }
 }
 
-export default function(params) {
+export default function (params) {
   const plugin = new Plugin();
 
   return {
@@ -101,11 +101,8 @@ export default function(params) {
         dest: build.outDir || 'dist',
         rename: build.rollupOptions.output.assetFileNames || '[name]-[hash].[ext]',
         targets: params.targets || [],
-        manifest: typeof build.manifest === 'string'
-          ? build.manifest
-          : build.manifest === true
-            ? '.vite/manifest.json'
-            : '',
+        manifest:
+          typeof build.manifest === 'string' ? build.manifest : build.manifest === true ? '.vite/manifest.json' : '',
       });
     },
 
@@ -120,5 +117,5 @@ export default function(params) {
     closeBundle() {
       plugin.write();
     },
-  }
+  };
 }

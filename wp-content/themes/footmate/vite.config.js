@@ -2,7 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import copy from './.vite/copy';
 
-const ROOT = path.resolve('../../../')
+const ROOT = path.resolve('../../../');
 const BASE = __dirname.replace(ROOT, '');
 
 export default defineConfig({
@@ -13,11 +13,7 @@ export default defineConfig({
     outDir: `dist`,
     emptyOutDir: true,
     rollupOptions: {
-      input: [
-        'resources/scripts/scripts.js',
-        'resources/styles/styles.scss',
-        'resources/scripts/blocks.js',
-      ],
+      input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss', 'resources/scripts/blocks.js'],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
