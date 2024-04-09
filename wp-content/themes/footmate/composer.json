@@ -1,28 +1,28 @@
 {
-    "name": "tentypdev/footmate",
-    "description": "FootMATE Theme",
-    "license": "GPLv3",
-    "autoload": {
-        "psr-4": {
-            "FM\\": "app/"
-        }
-    },
-    "authors": [
-        {
-            "name": "tentyp.dev",
-            "email": "tentypdev@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "illuminate/view": "^10.15",
-        "illuminate/support": "^10.15"
-    },
-    "scripts": {
-      "lint": "phpcs app",
-      "format": "phpcbf app"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "*"
+  "name": "tentypdev/footmate",
+  "description": "FootMATE Theme",
+  "license": "GPLv3",
+  "autoload": {
+    "psr-4": {
+      "FM\\": "app/"
     }
+  },
+  "authors": [
+    {
+      "name": "tentyp.dev",
+      "email": "tentypdev@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "illuminate/view": "^10.15",
+    "illuminate/support": "^10.15"
+  },
+  "scripts": {
+    "lint": "phpcs app",
+    "format": "phpcbf app"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*"
+  }
 }
