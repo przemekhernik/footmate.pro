@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "glob": "^10.3.10",
+    "prettier": "3.2.5",
     "sass": "^1.68.0",
     "vite": "^5.0.11"
   },
