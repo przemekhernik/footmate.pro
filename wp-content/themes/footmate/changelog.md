@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file. The format 
 - Integrations: Static assets handling in the backend code - https://tentyp.dev/blog/wordpress/vite-2/
 - Development: Add .editorconfig - https://tentyp.dev/blog/environment/editorconfig/
 - Development: Add php-code-sniffer - https://tentyp.dev/blog/php/phpcodesniffer/
+- Development: Prettier - https://tentyp.test/blog/environment/prettier/
 
 ### Changed
 
