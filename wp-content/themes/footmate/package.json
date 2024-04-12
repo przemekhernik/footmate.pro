@@ -6,8 +6,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "prettier . --check",
-    "format": "prettier . --write"
+    "lint": "prettier . --check; stylelint resources/**/*.scss",
+    "format": "prettier . --write; stylelint resources/**/*.scss --fix"
   },
   "browserslist": [
     "last 2 versions",
