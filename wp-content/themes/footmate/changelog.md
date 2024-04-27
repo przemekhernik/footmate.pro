@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file. The format 
 - Development: Add .editorconfig - https://tentyp.dev/blog/environment/editorconfig/
 - Development: Add php-code-sniffer - https://tentyp.dev/blog/php/phpcodesniffer/
 - Development: Prettier - https://tentyp.test/blog/environment/prettier/
+- Development: Stylelint - https://tentyp.dev/blog/css/stylelint/
 
 ### Changed
 
