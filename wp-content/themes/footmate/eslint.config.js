@@ -1,12 +1,11 @@
-import globals from "globals";
-import standard from "@eslint/js";
-
+import globals from 'globals';
+import standard from 'eslint-config-standard';
 
 export default [
-  standard.configs.recommended,
+  standard,
   {
     languageOptions: {
-      globals: globals.browser
-    }
+      globals: globals.browser,
+    },
   },
 ];
