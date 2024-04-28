@@ -17,8 +17,12 @@
     "js-cookie": "^3.0.5"
   },
   "devDependencies": {
-    "eslint": "^9.1.1",
-    "eslint-config-standard": "^17.1.0",
+    "eslint": "^8.13.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "glob": "^10.3.10",
     "globals": "^15.0.0",
     "prettier": "3.2.5",
