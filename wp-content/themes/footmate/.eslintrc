@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["semistandard"],
+  "extends": ["semistandard", "prettier"],
   "rules": {
     "space-before-function-paren": ["error", "never"],
     "curly": ["error", "all"],
