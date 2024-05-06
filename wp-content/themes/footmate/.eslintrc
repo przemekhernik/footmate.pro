@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "extends": ["semistandard", "prettier"],
+  "rules": {
+    "space-before-function-paren": ["error", "never"],
+    "curly": ["error", "all"],
+    "comma-dangle": ["error", "always-multiline"],
+    "padding-line-between-statements": ["error", {
+      "blankLine": "always",
+      "prev": "*",
+      "next": "return"
+    }]
+  }
+}
