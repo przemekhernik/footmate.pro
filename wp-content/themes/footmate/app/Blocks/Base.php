@@ -4,14 +4,14 @@ namespace FM\Blocks;
 
 class Base
 {
-    public function render(): void
+    public function render(array $data = []): void
     {
-        fm()->templates()->render($this->getTemplate());
+        fm()->templates()->render($this->getTemplate(), $data);
     }
 
-    public function generate(): string
+    public function generate(array $data = []): string
     {
-        return fm()->templates()->generate($this->getTemplate());
+        return fm()->templates()->generate($this->getTemplate(), $data);
     }
 
     private function getTemplate(): string

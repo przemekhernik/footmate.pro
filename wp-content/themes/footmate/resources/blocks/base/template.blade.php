@@ -1,3 +1,3 @@
 <div>
-    BLOCK
+    {{ $title }}
 </div>

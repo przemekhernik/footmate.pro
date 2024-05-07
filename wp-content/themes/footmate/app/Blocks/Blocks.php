@@ -26,6 +26,6 @@ class Blocks
      */
     public function action(): void
     {
-        block('base')->render();
+        block('base')->render(['title' => 'hello']);
     }
 }
