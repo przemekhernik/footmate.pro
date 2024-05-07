@@ -15,4 +15,9 @@ class Blocks
     {
         $this->blocks['base'] = \FM\App::init(new Base('base'));
     }
+
+    public function get(string $key)
+    {
+        return ! empty($this->blocks[$key]) ? $this->blocks[$key] : null;
+    }
 }
