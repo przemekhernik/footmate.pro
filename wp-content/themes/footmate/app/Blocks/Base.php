@@ -13,6 +13,11 @@ class Base
 
     public function render(): void
     {
-        echo '<div>BASE</div>';
+        fm()->templates()->render($this->getTemplate());
+    }
+
+    private function getTemplate(): string
+    {
+        return sprintf('%s/%s/template.blade.php', fm()->config()->get('blocks.path'), $this->id);
     }
 }
