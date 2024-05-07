@@ -10,7 +10,7 @@ class Base extends Block
     {
         $this->setId('base');
         $this->setSchema([
-            'title' => 'default',
+            'title' => '',
         ]);
     }
 }
