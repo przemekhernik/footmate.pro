@@ -8,14 +8,19 @@ abstract class Block
 
     private array $schema = [];
 
-    public function render(array $data = []): void
+    final public function render(array $data = []): void
     {
-        fm()->templates()->render($this->getTemplate(), $data);
+        fm()->templates()->render($this->getTemplate(), $this->parse($data));
     }
 
-    public function generate(array $data = []): string
+    final public function generate(array $data = []): string
     {
-        return fm()->templates()->generate($this->getTemplate(), $data);
+        return fm()->templates()->generate($this->getTemplate(), $this->parse($data));
+    }
+
+    public function parse(array $data = []): array
+    {
+        return array_replace_recursive($this->getSchema(), $data);
     }
 
     final protected function getId(): string

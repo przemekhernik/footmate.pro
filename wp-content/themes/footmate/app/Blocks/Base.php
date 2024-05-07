@@ -9,6 +9,8 @@ class Base extends Block
     public function __construct()
     {
         $this->setId('base');
-        $this->setSchema([]);
+        $this->setSchema([
+            'title' => 'default',
+        ]);
     }
 }
