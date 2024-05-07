@@ -4,20 +4,18 @@ namespace FM\Blocks;
 
 class Base
 {
-    private string $id;
-
-    public function __construct(string $id)
-    {
-        $this->id = $id;
-    }
-
     public function render(): void
     {
         fm()->templates()->render($this->getTemplate());
     }
 
+    public function generate(): string
+    {
+        return fm()->templates()->generate($this->getTemplate());
+    }
+
     private function getTemplate(): string
     {
-        return sprintf('%s/%s/template.blade.php', fm()->config()->get('blocks.path'), $this->id);
+        return sprintf('%s/base/template.blade.php', fm()->config()->get('blocks.path'));
     }
 }
