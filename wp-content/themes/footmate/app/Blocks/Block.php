@@ -16,7 +16,7 @@ abstract class Block
         return fm()->templates()->generate($this->getTemplate(), $data);
     }
 
-    protected function getId(): string
+    final protected function getId(): string
     {
         if (empty($this->id)) {
             throw new \Exception('Block ID is missing.');
@@ -25,12 +25,12 @@ abstract class Block
         return $this->id;
     }
 
-    protected function setId(string $id): void
+    final protected function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    protected function getTemplate(): string
+    final protected function getTemplate(): string
     {
         return sprintf('%s/%s/template.blade.php', fm()->config()->get('blocks.path'), $this->getId());
     }
