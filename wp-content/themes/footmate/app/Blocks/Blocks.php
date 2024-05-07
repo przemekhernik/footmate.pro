@@ -3,6 +3,7 @@
 namespace FM\Blocks;
 
 use FM\Blocks\Base;
+use FM\Blocks\Block;
 
 class Blocks
 {
@@ -16,7 +17,7 @@ class Blocks
         $this->blocks['base'] = \FM\App::init(new Base());
     }
 
-    public function get(string $key)
+    public function get(string $key): ?Block
     {
         return ! empty($this->blocks[$key]) ? $this->blocks[$key] : null;
     }
