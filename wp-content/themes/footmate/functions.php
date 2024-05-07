@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore PSR1.Files.SideEffects.FoundWithSymbols
 
 define('FM_VERSION', '0.1.1');
 define('FM_ROOT', str_replace(ABSPATH, '/', dirname(__FILE__)));
@@ -10,5 +10,3 @@ define('FM_ASSETS_PATH', FM_PATH . '/dist');
 define('FM_ASSETS_URI', FM_URI . '/dist');
 
 require_once(FM_PATH . '/inc/bootstrap.php');
-
-fm();
