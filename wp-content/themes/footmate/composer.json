@@ -19,8 +19,8 @@
     "illuminate/support": "^10.15"
   },
   "scripts": {
-    "lint": "phpcs app",
-    "format": "phpcbf app"
+    "lint": "phpcs",
+    "format": "phpcbf"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*"
