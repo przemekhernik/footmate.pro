@@ -12,3 +12,10 @@ if (! function_exists('fm')) {
         return FM\App::get();
     }
 }
+
+if (! function_exists('block')) {
+    function block(string $key): FM\Blocks\Block
+    {
+        return FM\App::get()->blocks()->get($key);
+    }
+}

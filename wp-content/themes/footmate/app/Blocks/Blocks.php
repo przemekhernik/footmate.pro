@@ -27,6 +27,6 @@ class Blocks
      */
     public function action(): void
     {
-        fm()->blocks()->get('base')->render(['title' => 'custom']);
+        block('base')->render(['title' => 'custom']);
     }
 }
