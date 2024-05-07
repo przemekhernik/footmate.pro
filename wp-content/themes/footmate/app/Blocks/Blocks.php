@@ -13,7 +13,7 @@ class Blocks
      */
     public function init(): void
     {
-        $this->blocks['base'] = \FM\App::init(new Base('base'));
+        $this->blocks['base'] = \FM\App::init(new Base());
     }
 
     public function get(string $key)
