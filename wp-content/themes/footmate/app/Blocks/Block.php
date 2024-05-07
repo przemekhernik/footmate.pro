@@ -6,6 +6,8 @@ abstract class Block
 {
     private string $id = '';
 
+    private array $schema = [];
+
     public function render(array $data = []): void
     {
         fm()->templates()->render($this->getTemplate(), $data);
@@ -28,6 +30,16 @@ abstract class Block
     final protected function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    final protected function getSchema(): array
+    {
+        return $this->schema;
+    }
+
+    final protected function setSchema(array $schema): void
+    {
+        $this->schema = $schema;
     }
 
     final protected function getTemplate(): string
