@@ -20,4 +20,12 @@ class Blocks
     {
         return ! empty($this->blocks[$key]) ? $this->blocks[$key] : null;
     }
+
+    /**
+     * @action template_redirect
+     */
+    public function action(): void
+    {
+        block('base')->render();
+    }
 }
