@@ -10,8 +10,6 @@ class Config
     {
         $this->config = [
             'version' => wp_get_environment_type() === 'development' ? time() : FM_VERSION,
-            'path' => FM_PATH,
-            'uri' => FM_URI,
             'env' => [
                 'type' => wp_get_environment_type(),
                 'mode' => false === strpos(FM_PATH, ABSPATH . 'wp-content/plugins') ? 'theme' : 'plugin',
@@ -27,6 +25,9 @@ class Config
             ],
             'cache' => [
                 'path' => wp_upload_dir()['basedir'] . '/cache/fm',
+            ],
+            'resources' => [
+                'path' => FM_PATH . '/resources',
             ],
             'views' => [
                 'path' => FM_PATH . '/resources/views',

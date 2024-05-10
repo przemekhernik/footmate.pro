@@ -32,9 +32,9 @@ class Resolver
             return $templates;
         }
 
-        $relpath = str_replace(fm()->config()->get('path') . '/', '', fm()->config()->get('views.path'));
-        $templates = array_map(fn($template) =>
-            str_replace('.php', '.blade.php', "{$relpath}/{$template}"), $templates);
+        $templates = array_map(fn($item) => preg_replace('/^[^\/]+\/|(\.blade)?\.php$/', '', $item), $templates);
+        $templates = array_map(fn($item) => fm()->config()->get('views.path') . '/' . $item . '.blade.php', $templates);
+        $templates = array_map(fn($item) => str_replace(fm()->config()->get('resources.path') . '/', '', $item), $templates);
 
         return $templates;
     }
@@ -50,6 +50,6 @@ class Resolver
 
         fm()->templates()->render($template, []);
 
-        return fm()->config()->get('path') . '/index.php';
+        return fm()->config()->get('resources.path') . '/index.php';
     }
 }
