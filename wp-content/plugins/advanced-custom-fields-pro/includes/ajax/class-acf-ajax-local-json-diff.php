@@ -18,7 +18,7 @@ if ( ! class_exists( 'ACF_Ajax_Local_JSON_Diff' ) ) :
 		/**
 		 * Prevents access for non-logged in users.
 		 *
-		 * @var bool
+		 * @var boolean
 		 */
 		public $public = false;
 
@@ -95,5 +95,4 @@ if ( ! class_exists( 'ACF_Ajax_Local_JSON_Diff' ) ) :
 	}
 
 	acf_new_instance( 'ACF_Ajax_Local_JSON_Diff' );
-
 endif; // class_exists check
