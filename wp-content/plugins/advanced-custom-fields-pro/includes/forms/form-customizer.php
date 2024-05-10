@@ -5,23 +5,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'acf_form_customizer' ) ) :
-
 	#[AllowDynamicProperties]
 	class acf_form_customizer {
 
 
-		/*
-		*  __construct
-		*
-		*  This function will setup the class functionality
-		*
-		*  @type    function
-		*  @date    5/03/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
+		/**
+		 * This function will setup the class functionality
+		 *
+		 * @type    function
+		 * @date    5/03/2014
+		 * @since   5.0.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 
 		function __construct() {
 
@@ -37,23 +34,20 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 			// save
 			add_filter( 'widget_update_callback', array( $this, 'save_widget' ), 10, 4 );
-
 		}
 
 
-		/*
-		*  admin_enqueue_scripts
-		*
-		*  This action is run after post query but before any admin script / head actions.
-		*  It is a good place to register all actions.
-		*
-		*  @type    action (admin_enqueue_scripts)
-		*  @date    26/01/13
-		*  @since   3.6.0
-		*
-		*  @param   N/A
-		*  @return  N/A
-		*/
+		/**
+		 * This action is run after post query but before any admin script / head actions.
+		 * It is a good place to register all actions.
+		 *
+		 * @type    action (admin_enqueue_scripts)
+		 * @date    26/01/13
+		 * @since   3.6.0
+		 *
+		 * @param   N/A
+		 * @return  N/A
+		 */
 
 		function customize_controls_init() {
 
@@ -66,25 +60,22 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 			// actions
 			add_action( 'acf/input/admin_footer', array( $this, 'admin_footer' ), 1 );
-
 		}
 
 
-		/*
-		*  save_widget
-		*
-		*  This function will hook into the widget update filter and save ACF data
-		*
-		*  @type    function
-		*  @date    27/05/2015
-		*  @since   5.2.3
-		*
-		*  @param   $instance (array) widget settings
-		*  @param   $new_instance (array) widget settings
-		*  @param   $old_instance (array) widget settings
-		*  @param   $widget (object) widget info
-		*  @return  $instance
-		*/
+		/**
+		 * This function will hook into the widget update filter and save ACF data
+		 *
+		 * @type    function
+		 * @date    27/05/2015
+		 * @since   5.2.3
+		 *
+		 * @param   $instance (array) widget settings
+		 * @param   $new_instance (array) widget settings
+		 * @param   $old_instance (array) widget settings
+		 * @param   $widget (object) widget info
+		 * @return  $instance
+		 */
 
 		function save_widget( $instance, $new_instance, $old_instance, $widget ) {
 
@@ -116,7 +107,6 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 				// update
 				$data['fields'][ $field['name'] ] = $field['key'];
-
 			}
 
 			// append data to instance
@@ -124,23 +114,20 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 			// return
 			return $instance;
-
 		}
 
 
-		/*
-		*  settings
-		*
-		*  This function will return an array of cutomizer settings that include ACF data
-		*  similar to `$customizer->settings();`
-		*
-		*  @type    function
-		*  @date    22/03/2016
-		*  @since   5.3.2
-		*
-		*  @param   $customizer (object)
-		*  @return  $value (mixed)
-		*/
+		/**
+		 * This function will return an array of cutomizer settings that include ACF data
+		 * similar to `$customizer->settings();`
+		 *
+		 * @type    function
+		 * @date    22/03/2016
+		 * @since   5.3.2
+		 *
+		 * @param   $customizer (object)
+		 * @return  $value (mixed)
+		 */
 
 		function settings( $customizer ) {
 
@@ -179,7 +166,6 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 				// append
 				$data[] = $setting;
-
 			}
 
 			// bail early if no settings
@@ -189,22 +175,19 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 			// return
 			return $data;
-
 		}
 
 
-		/*
-		*  customize_preview_init
-		*
-		*  This function is called when customizer preview is initialized
-		*
-		*  @type    function
-		*  @date    22/03/2016
-		*  @since   5.3.2
-		*
-		*  @param   $customizer (object)
-		*  @return  n/a
-		*/
+		/**
+		 * This function is called when customizer preview is initialized
+		 *
+		 * @type    function
+		 * @date    22/03/2016
+		 * @since   5.3.2
+		 *
+		 * @param   $customizer (object)
+		 * @return  n/a
+		 */
 
 		function customize_preview_init( $customizer ) {
 
@@ -225,7 +208,6 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 				// append acf_value to preview_values
 				$this->preview_values[ $data['post_id'] ] = $data['values'];
 				$this->preview_fields[ $data['post_id'] ] = $data['fields'];
-
 			}
 
 			// bail early if no preview_values
@@ -236,19 +218,18 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 			// add filters
 			add_filter( 'acf/pre_load_value', array( $this, 'pre_load_value' ), 10, 3 );
 			add_filter( 'acf/pre_load_reference', array( $this, 'pre_load_reference' ), 10, 3 );
-
 		}
 
 		/**
-		 *  pre_load_value
+		 * pre_load_value
 		 *
-		 *  Used to inject preview value
+		 * Used to inject preview value
 		 *
-		 *  @date    2/2/18
-		 *  @since   5.6.5
+		 * @date    2/2/18
+		 * @since   5.6.5
 		 *
-		 *  @param   type $var Description. Default.
-		 *  @return  type Description.
+		 * @param   type $var Description. Default.
+		 * @return  type Description.
 		 */
 
 		function pre_load_value( $value, $post_id, $field ) {
@@ -263,15 +244,15 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 		}
 
 		/**
-		 *  pre_load_reference
+		 * pre_load_reference
 		 *
-		 *  Used to inject preview value
+		 * Used to inject preview value
 		 *
-		 *  @date    2/2/18
-		 *  @since   5.6.5
+		 * @date    2/2/18
+		 * @since   5.6.5
 		 *
-		 *  @param   type $var Description. Default.
-		 *  @return  type Description.
+		 * @param   type $var Description. Default.
+		 * @return  type Description.
 		 */
 
 		function pre_load_reference( $field_key, $field_name, $post_id ) {
@@ -286,20 +267,18 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 		}
 
 
-		/*
-		*  customize_save
-		*
-		*  This function is called when customizer saves a widget.
-		*  Normally, the widget_update_callback filter would be used, but the customizer disables this and runs a custom action
-		*  class-customizer-settings.php will save the widget data via the function set_root_value which uses update_option
-		*
-		*  @type    function
-		*  @date    22/03/2016
-		*  @since   5.3.2
-		*
-		*  @param   $customizer (object)
-		*  @return  n/a
-		*/
+		/**
+		 * This function is called when customizer saves a widget.
+		 * Normally, the widget_update_callback filter would be used, but the customizer disables this and runs a custom action
+		 * class-customizer-settings.php will save the widget data via the function set_root_value which uses update_option
+		 *
+		 * @type    function
+		 * @date    22/03/2016
+		 * @since   5.3.2
+		 *
+		 * @param   $customizer (object)
+		 * @return  n/a
+		 */
 
 		function customize_save( $customizer ) {
 
@@ -323,24 +302,20 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 				// remove [acf] data from saved widget array
 				$id_data = $setting->id_data();
 				add_filter( 'pre_update_option_' . $id_data['base'], array( $this, 'pre_update_option' ), 10, 3 );
-
 			}
-
 		}
 
 
-		/*
-		*  pre_update_option
-		*
-		*  this function will remove the [acf] data from widget insance
-		*
-		*  @type    function
-		*  @date    22/03/2016
-		*  @since   5.3.2
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
+		/**
+		 * This function will remove the [acf] data from widget insance
+		 *
+		 * @type    function
+		 * @date    22/03/2016
+		 * @since   5.3.2
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 
 		function pre_update_option( $value, $option, $old_value ) {
 
@@ -360,27 +335,23 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 
 				// remove widget
 				unset( $value[ $i ]['acf'] );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
-		/*
-		*  admin_footer
-		*
-		*  This function will add some custom HTML to the footer of the edit page
-		*
-		*  @type    function
-		*  @date    11/06/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
+		/**
+		 * This function will add some custom HTML to the footer of the edit page
+		 *
+		 * @type    function
+		 * @date    11/06/2014
+		 * @since   5.0.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 
 		function admin_footer() {
 
@@ -459,13 +430,10 @@ if ( ! class_exists( 'acf_form_customizer' ) ) :
 })(jQuery);	
 </script>
 			<?php
-
 		}
-
 	}
 
 	new acf_form_customizer();
-
 endif;
 
 ?>
