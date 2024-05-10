@@ -4,7 +4,7 @@
 $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . ']';
 
 ?>
-<tr data-id="<?php echo esc_attr( $rule['id'] ); ?>">
+<tr data-id="<?php echo $rule['id']; ?>">
 	<td class="param">
 		<?php
 
@@ -13,6 +13,7 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 
 		// array
 		if ( is_array( $choices ) ) {
+
 			acf_render_field(
 				array(
 					'type'    => 'select',
@@ -23,6 +24,7 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 					'class'   => 'refresh-location-rule',
 				)
 			);
+
 		}
 
 		?>
@@ -36,6 +38,7 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 
 		// array
 		if ( is_array( $choices ) ) {
+
 			acf_render_field(
 				array(
 					'type'    => 'select',
@@ -48,7 +51,9 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 
 			// custom
 		} else {
-			echo acf_esc_html( $choices );
+
+			echo $choices;
+
 		}
 
 		?>
@@ -62,6 +67,7 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 
 		// array
 		if ( is_array( $choices ) ) {
+
 			acf_render_field(
 				array(
 					'type'    => 'select',
@@ -75,13 +81,15 @@ $prefix = 'acf_field_group[location][' . $rule['group'] . '][' . $rule['id'] . '
 
 			// custom
 		} else {
-			echo acf_esc_html( $choices );
+
+			echo $choices;
+
 		}
 
 		?>
 	</td>
 	<td class="add">
-		<a href="#" class="button add-location-rule"><?php esc_html_e( 'and', 'acf' ); ?></a>
+		<a href="#" class="button add-location-rule"><?php _e( 'and', 'acf' ); ?></a>
 	</td>
 	<td class="remove">
 		<a href="#" class="acf-icon -minus remove-location-rule"></a>

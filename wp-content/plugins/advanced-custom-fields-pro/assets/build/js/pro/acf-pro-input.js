@@ -53,7 +53,14 @@
     getPopupHTML: function () {
       var html = this.$popup().html();
       var $html = $(html);
-      var self = this;
+
+      // count layouts
+      var $layouts = this.$layouts();
+      var countLayouts = function (name) {
+        return $layouts.filter(function () {
+          return $(this).data('layout') === name;
+        }).length;
+      };
 
       // modify popup
       $html.find('[data-layout]').each(function () {
@@ -61,7 +68,7 @@
         var min = $a.data('min') || 0;
         var max = $a.data('max') || 0;
         var name = $a.data('layout') || '';
-        var count = self.countLayouts(name);
+        var count = countLayouts(name);
 
         // max
         if (max && count >= max) {
@@ -192,33 +199,6 @@
       // - this is just for fields like google_map to render itself
       acf.doAction('show_fields', fields);
     },
-    countLayouts: function (name) {
-      return this.$layouts().filter(function () {
-        return $(this).data('layout') === name;
-      }).length;
-    },
-    countLayoutsByName: function (currentLayout) {
-      const layoutMax = currentLayout.data('max');
-      if (!layoutMax) {
-        return true;
-      }
-      const name = currentLayout.data('layout') || '';
-      const count = this.countLayouts(name);
-      if (count >= layoutMax) {
-        let text = acf.__('This field has a limit of {max} {label} {identifier}');
-        const identifier = acf._n('layout', 'layouts', layoutMax);
-        const layoutLabel = '"' + currentLayout.data('label') + '"';
-        text = text.replace('{max}', layoutMax);
-        text = text.replace('{label}', layoutLabel);
-        text = text.replace('{identifier}', identifier);
-        this.showNotice({
-          text: text,
-          type: 'warning'
-        });
-        return false;
-      }
-      return true;
-    },
     validateAdd: function () {
       // return true if allowed
       if (this.allowAdd()) {
@@ -227,9 +207,13 @@
       var max = this.get('max');
       var text = acf.__('This field has a limit of {max} {label} {identifier}');
       var identifier = acf._n('layout', 'layouts', max);
+
+      // replace
       text = text.replace('{max}', max);
       text = text.replace('{label}', '');
       text = text.replace('{identifier}', identifier);
+
+      // add notice
       this.showNotice({
         text: text,
         type: 'warning'
@@ -313,18 +297,13 @@
       return $el;
     },
     onClickDuplicate: function (e, $el) {
-      var $layout = $el.closest('.layout');
-      // Validate each layout's max count.
-      if (!this.countLayoutsByName($layout.first())) {
-        return false;
-      }
-
       // Validate with warning.
       if (!this.validateAdd()) {
         return false;
       }
 
       // get layout and duplicate it.
+      var $layout = $el.closest('.layout');
       this.duplicateLayout($layout);
     },
     duplicateLayout: function ($layout) {
@@ -1387,8 +1366,9 @@
       //	$control.removeClass('-min');
       //}
     },
+
     listenForSavedMetaBoxes: function () {
-      if (!acf.isGutenbergPostEditor() || !this.get('pagination')) {
+      if (!acf.isGutenberg() || !this.get('pagination')) {
         return;
       }
       let checkedMetaBoxes = true;
@@ -1721,6 +1701,7 @@
         }
       });
     },
+
     isCollapsed: function ($row) {
       return $row.hasClass('-collapsed');
     },

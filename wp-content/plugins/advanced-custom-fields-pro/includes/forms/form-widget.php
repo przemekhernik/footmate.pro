@@ -1,29 +1,33 @@
 <?php
 
-/**
- * ACF Widget Form Class
- *
- * All the logic for adding fields to widgets
- *
- * @class       acf_form_widget
- * @package     ACF
- * @subpackage  Forms
- */
+/*
+*  ACF Widget Form Class
+*
+*  All the logic for adding fields to widgets
+*
+*  @class       acf_form_widget
+*  @package     ACF
+*  @subpackage  Forms
+*/
+
 if ( ! class_exists( 'acf_form_widget' ) ) :
+
 	#[AllowDynamicProperties]
 	class acf_form_widget {
 
 
-		/**
-		 * This function will setup the class functionality
-		 *
-		 * @type    function
-		 * @date    5/03/2014
-		 * @since   5.0.0
-		 *
-		 * @param   n/a
-		 * @return  n/a
-		 */
+		/*
+		*  __construct
+		*
+		*  This function will setup the class functionality
+		*
+		*  @type    function
+		*  @date    5/03/2014
+		*  @since   5.0.0
+		*
+		*  @param   n/a
+		*  @return  n/a
+		*/
 
 		function __construct() {
 
@@ -39,20 +43,23 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 
 			// filters
 			add_filter( 'widget_update_callback', array( $this, 'save_widget' ), 10, 4 );
+
 		}
 
 
-		/**
-		 * This action is run after post query but before any admin script / head actions.
-		 * It is a good place to register all actions.
-		 *
-		 * @type    action (admin_enqueue_scripts)
-		 * @date    26/01/13
-		 * @since   3.6.0
-		 *
-		 * @param   N/A
-		 * @return  N/A
-		 */
+		/*
+		*  admin_enqueue_scripts
+		*
+		*  This action is run after post query but before any admin script / head actions.
+		*  It is a good place to register all actions.
+		*
+		*  @type    action (admin_enqueue_scripts)
+		*  @date    26/01/13
+		*  @since   3.6.0
+		*
+		*  @param   N/A
+		*  @return  N/A
+		*/
 
 		function admin_enqueue_scripts() {
 
@@ -60,8 +67,11 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 			if ( acf_is_screen( 'widgets' ) || acf_is_screen( 'customize' ) ) {
 
 				// valid
+
 			} else {
+
 				return;
+
 			}
 
 			// load acf scripts
@@ -69,16 +79,25 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 
 			// actions
 			add_action( 'acf/input/admin_footer', array( $this, 'admin_footer' ), 1 );
+
 		}
 
 
-		/**
-		 * This function will loop over $_POST data and validate
-		 *
-		 * @type  action 'acf/validate_save_post' 5
-		 * @since 5.4.0
-		 */
-		public function acf_validate_save_post() {
+		/*
+		*  acf_validate_save_post
+		*
+		*  This function will loop over $_POST data and validate
+		*
+		*  @type    action 'acf/validate_save_post' 5
+		*  @date    7/09/2016
+		*  @since   5.4.0
+		*
+		*  @param   n/a
+		*  @return  n/a
+		*/
+
+		function acf_validate_save_post() {
+
 			// phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
 			// bail early if not widget
 			if ( ! isset( $_POST['_acf_widget_id'] ) ) {
@@ -86,10 +105,10 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 			}
 
 			// vars
-			$id     = sanitize_text_field( wp_unslash( $_POST['_acf_widget_id'] ) );
-			$number = acf_maybe_get_POST( '_acf_widget_number' );
-			$prefix = acf_maybe_get_POST( '_acf_widget_prefix' );
-			$values = ! empty( $_POST[ $id ][ $number ]['acf'] ) ? acf_sanitize_request_args( $_POST[ $id ][ $number ]['acf'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- unslash not required.
+			$id     = sanitize_text_field( $_POST['_acf_widget_id'] );
+			$number = sanitize_text_field( $_POST['_acf_widget_number'] );
+			$prefix = sanitize_text_field( $_POST['_acf_widget_prefix'] );
+			$values = acf_sanitize_request_args( $_POST[ $id ][ $number ]['acf'] );
 
 			// validate
 			acf_validate_values( $values, $prefix );
@@ -97,18 +116,20 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 		}
 
 
-		/**
-		 * This function will render the fields for a widget form
-		 *
-		 * @type    function
-		 * @date    11/06/2014
-		 * @since   5.0.0
-		 *
-		 * @param   $widget (object)
-		 * @param   $return (null)
-		 * @param   $instance (object)
-		 * @return  $post_id (int)
-		 */
+		/*
+		*  edit_widget
+		*
+		*  This function will render the fields for a widget form
+		*
+		*  @type    function
+		*  @date    11/06/2014
+		*  @since   5.0.0
+		*
+		*  @param   $widget (object)
+		*  @param   $return (null)
+		*  @param   $instance (object)
+		*  @return  $post_id (int)
+		*/
 
 		function edit_widget( $widget, $return, $instance ) {
 
@@ -118,7 +139,9 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 
 			// get id
 			if ( $widget->number !== '__i__' ) {
+
 				$post_id = "widget_{$widget->id}";
+
 			}
 
 			// get field groups
@@ -161,6 +184,7 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 
 						// render
 						acf_render_fields( $fields, $post_id, 'div', $field_group['instruction_placement'] );
+
 				}
 
 				// wrap
@@ -172,29 +196,33 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 			<script type="text/javascript">
 			(function($) {
 				
-				acf.doAction('append', $('[id^="widget"][id$="<?php echo esc_attr( $widget->id ); ?>"]') );
+				acf.doAction('append', $('[id^="widget"][id$="<?php echo $widget->id; ?>"]') );
 				
 			})(jQuery);	
 			</script>
 					<?php
 			endif;
+
 			}
+
 		}
 
 
-		/**
-		 * This function will hook into the widget update filter and save ACF data
-		 *
-		 * @type    function
-		 * @date    27/05/2015
-		 * @since   5.2.3
-		 *
-		 * @param   $instance (array) widget settings
-		 * @param   $new_instance (array) widget settings
-		 * @param   $old_instance (array) widget settings
-		 * @param   $widget (object) widget info
-		 * @return  $instance
-		 */
+		/*
+		*  save_widget
+		*
+		*  This function will hook into the widget update filter and save ACF data
+		*
+		*  @type    function
+		*  @date    27/05/2015
+		*  @since   5.2.3
+		*
+		*  @param   $instance (array) widget settings
+		*  @param   $new_instance (array) widget settings
+		*  @param   $old_instance (array) widget settings
+		*  @param   $widget (object) widget info
+		*  @return  $instance
+		*/
 
 		function save_widget( $instance, $new_instance, $old_instance, $widget ) {
 
@@ -216,19 +244,22 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 
 			// return
 			return $instance;
+
 		}
 
 
-		/**
-		 * This function will add some custom HTML to the footer of the edit page
-		 *
-		 * @type    function
-		 * @date    11/06/2014
-		 * @since   5.0.0
-		 *
-		 * @param   n/a
-		 * @return  n/a
-		 */
+		/*
+		*  admin_footer
+		*
+		*  This function will add some custom HTML to the footer of the edit page
+		*
+		*  @type    function
+		*  @date    11/06/2014
+		*  @since   5.0.0
+		*
+		*  @param   n/a
+		*  @return  n/a
+		*/
 
 		function admin_footer() {
 			?>
@@ -293,10 +324,12 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 })(jQuery);	
 </script>
 			<?php
+
 		}
 	}
 
 	new acf_form_widget();
+
 endif;
 
 ?>

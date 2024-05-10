@@ -87,6 +87,7 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 			if ( isset( $args['users_per_page'] ) ) {
 				$this->per_page = intval( $args['users_per_page'] );
 				unset( $args['users_per_page'] );
+
 			} elseif ( isset( $args['number'] ) ) {
 				$this->per_page = intval( $args['number'] );
 			}
@@ -160,6 +161,7 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 					// acf_log( $args );
 					// acf_log( '- ', count($users) );
 					// acf_log( '- ', $total_users );
+
 					// If users were found for this query...
 					if ( $users ) {
 
@@ -246,8 +248,8 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 		 * @date    9/3/20
 		 * @since   5.8.8
 		 *
-		 * @param   array         $columns       An array of column names to be searched.
-		 * @param   string        $search        The search term.
+		 * @param   array         $columns An array of column names to be searched.
+		 * @param   string        $search The search term.
 		 * @param   WP_User_Query $WP_User_Query The WP_User_Query instance.
 		 * @return  array
 		 */
@@ -269,4 +271,5 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 	}
 
 	acf_new_instance( 'ACF_Ajax_Query_Users' );
+
 endif; // class_exists check

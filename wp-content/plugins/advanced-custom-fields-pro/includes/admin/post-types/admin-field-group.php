@@ -2,18 +2,18 @@
 /**
  * ACF Admin Field Group Class
  *
- * @class       acf_admin_field_group
+ *  @class       acf_admin_field_group
  *
- * @package     ACF
- * @subpackage  Admin
+ *  @package     ACF
+ *  @subpackage  Admin
  */
 
 if ( ! class_exists( 'acf_admin_field_group' ) ) :
 
 	/**
-	 * ACF Admin Field Group Class
+	 *  ACF Admin Field Group Class
 	 *
-	 * All the logic for editing a field group
+	 *  All the logic for editing a field group
 	 */
 	class acf_admin_field_group extends ACF_Admin_Internal_Post_Type {
 
@@ -36,7 +36,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * Constructs the class.
 		 *
-		 * @since 5.0.0
+		 * @since   5.0.0
+		 *
+		 * @return  void
 		 */
 		public function __construct() {
 			parent::__construct();
@@ -47,12 +49,12 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		}
 
 		/**
-		 * Customizes the messages shown when editing a field group.
+		 *  This function will customize the message shown when editing a field group
 		 *
-		 * @since 5.0.0
+		 *  @since   5.0.0
 		 *
-		 * @param array $messages Post type messages.
-		 * @return array
+		 *  @param array $messages Post type messages.
+		 *  @return array
 		 */
 		public function post_updated_messages( $messages ) {
 			$messages['acf-field-group'] = array(
@@ -76,45 +78,47 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * Enqueues any scripts necessary for internal post type.
 		 *
 		 * @since 5.0.0
+		 *
+		 * @return void
 		 */
 		public function admin_enqueue_scripts() {
 			parent::admin_enqueue_scripts();
 
 			acf_localize_text(
 				array(
-					'The string "field_" may not be used at the start of a field name' => esc_html__( 'The string "field_" may not be used at the start of a field name', 'acf' ),
-					'This field cannot be moved until its changes have been saved' => esc_html__( 'This field cannot be moved until its changes have been saved', 'acf' ),
-					'Field group title is required'     => esc_html__( 'Field group title is required', 'acf' ),
-					'Move field group to trash?'        => esc_html__( 'Move field group to trash?', 'acf' ),
-					'No toggle fields available'        => esc_html__( 'No toggle fields available', 'acf' ),
-					'Move Custom Field'                 => esc_html__( 'Move Custom Field', 'acf' ),
-					'Close modal'                       => esc_html__( 'Close modal', 'acf' ),
-					'Field moved to other group'        => esc_html__( 'Field moved to other group', 'acf' ),
-					'Field groups linked successfully.' => esc_html__( 'Field groups linked successfully.', 'acf' ),
-					'Checked'                           => esc_html__( 'Checked', 'acf' ),
-					'(no label)'                        => esc_html__( '(no label)', 'acf' ),
-					'(this field)'                      => esc_html__( '(this field)', 'acf' ),
-					'copy'                              => esc_html__( 'copy', 'acf' ),
-					'or'                                => esc_html__( 'or', 'acf' ),
-					'Show this field group if'          => esc_html__( 'Show this field group if', 'acf' ),
-					'Null'                              => esc_html__( 'Null', 'acf' ),
-					'PRO Only'                          => esc_html__( 'PRO Only', 'acf' ),
+					'The string "field_" may not be used at the start of a field name' => __( 'The string "field_" may not be used at the start of a field name', 'acf' ),
+					'This field cannot be moved until its changes have been saved' => __( 'This field cannot be moved until its changes have been saved', 'acf' ),
+					'Field group title is required'     => __( 'Field group title is required', 'acf' ),
+					'Move field group to trash?'        => __( 'Move field group to trash?', 'acf' ),
+					'No toggle fields available'        => __( 'No toggle fields available', 'acf' ),
+					'Move Custom Field'                 => __( 'Move Custom Field', 'acf' ),
+					'Close modal'                       => __( 'Close modal', 'acf' ),
+					'Field moved to other group'        => __( 'Field moved to other group', 'acf' ),
+					'Field groups linked successfully.' => __( 'Field groups linked successfully.', 'acf' ),
+					'Checked'                           => __( 'Checked', 'acf' ),
+					'(no label)'                        => __( '(no label)', 'acf' ),
+					'(this field)'                      => __( '(this field)', 'acf' ),
+					'copy'                              => __( 'copy', 'acf' ),
+					'or'                                => __( 'or', 'acf' ),
+					'Show this field group if'          => __( 'Show this field group if', 'acf' ),
+					'Null'                              => __( 'Null', 'acf' ),
+					'PRO Only'                          => __( 'PRO Only', 'acf' ),
 
 					// Conditions.
-					'Has any value'                     => esc_html__( 'Has any value', 'acf' ),
-					'Has no value'                      => esc_html__( 'Has no value', 'acf' ),
-					'Value is equal to'                 => esc_html__( 'Value is equal to', 'acf' ),
-					'Value is not equal to'             => esc_html__( 'Value is not equal to', 'acf' ),
-					'Value matches pattern'             => esc_html__( 'Value matches pattern', 'acf' ),
-					'Value contains'                    => esc_html__( 'Value contains', 'acf' ),
-					'Value is greater than'             => esc_html__( 'Value is greater than', 'acf' ),
-					'Value is less than'                => esc_html__( 'Value is less than', 'acf' ),
-					'Selection is greater than'         => esc_html__( 'Selection is greater than', 'acf' ),
-					'Selection is less than'            => esc_html__( 'Selection is less than', 'acf' ),
+					'Has any value'                     => __( 'Has any value', 'acf' ),
+					'Has no value'                      => __( 'Has no value', 'acf' ),
+					'Value is equal to'                 => __( 'Value is equal to', 'acf' ),
+					'Value is not equal to'             => __( 'Value is not equal to', 'acf' ),
+					'Value matches pattern'             => __( 'Value matches pattern', 'acf' ),
+					'Value contains'                    => __( 'Value contains', 'acf' ),
+					'Value is greater than'             => __( 'Value is greater than', 'acf' ),
+					'Value is less than'                => __( 'Value is less than', 'acf' ),
+					'Selection is greater than'         => __( 'Selection is greater than', 'acf' ),
+					'Selection is less than'            => __( 'Selection is less than', 'acf' ),
 
 					// Custom Select2 templates.
-					'Type to search...'                 => esc_html__( 'Type to search...', 'acf' ),
-					'This Field'                        => esc_html__( 'This Field', 'acf' ),
+					'Type to search...'                 => __( 'Type to search...', 'acf' ),
+					'This Field'                        => __( 'This Field', 'acf' ),
 				)
 			);
 
@@ -125,8 +129,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 					'PROUpgradeURL'       => acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/pro/', 'ACF upgrade', 'field-type-selection' ),
 					'PROFieldTypes'       => acf_get_pro_field_types(),
 					'PROLocationTypes'    => array(
-						'block'        => esc_html__( 'Block', 'acf' ),
-						'options_page' => esc_html__( 'Options Page', 'acf' ),
+						'block'        => __( 'Block', 'acf' ),
+						'options_page' => __( 'Options Page', 'acf' ),
 					),
 				)
 			);
@@ -138,6 +142,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * Set up functionality for the field group edit page.
 		 *
 		 * @since 3.1.8
+		 *
+		 * @return void
 		 */
 		public function admin_head() {
 			global $post, $field_group;
@@ -163,6 +169,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 
 		/**
 		 * This action will allow ACF to render metaboxes after the title.
+		 *
+		 * @return void
 		 */
 		public function edit_form_after_title() {
 			global $post;
@@ -205,7 +213,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * Admin footer third party hook support
 		 *
-		 * @since 5.3.2
+		 * @since   5.3.2
+		 *
+		 * @return void
 		 */
 		public function admin_footer() {
 			$this->include_pro_features();
@@ -214,10 +224,12 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 
 		/**
 		 * Renders HTML for the ACF PRO features upgrade notice.
+		 *
+		 * @return void
 		 */
 		public function include_pro_features() {
 			// Bail if on PRO.
-			if ( acf_is_pro() && acf_pro_is_license_active() ) {
+			if ( acf_is_pro() ) {
 				return;
 			}
 
@@ -257,8 +269,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * Sets the "Edit Field Group" screen to use a one-column layout.
 		 *
-		 * @param  integer $columns Number of columns for layout.
-		 * @return integer
+		 * @param int $columns Number of columns for layout.
+		 *
+		 * @return int
 		 */
 		public function screen_layout( $columns = 0 ) {
 			return 1;
@@ -268,6 +281,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * This function will customize the publish metabox
 		 *
 		 * @since   5.2.9
+		 *
+		 * @return void
 		 */
 		public function post_submitbox_misc_actions() {
 			global $field_group;
@@ -287,9 +302,10 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param integer $post_id The post ID.
+		 * @param int     $post_id The post ID.
 		 * @param WP_Post $post    The post object.
-		 * @return integer $post_id
+		 *
+		 * @return int $post_id
 		 */
 		public function save_post( $post_id, $post ) {
 			if ( ! $this->verify_save_post( $post_id, $post ) ) {
@@ -333,10 +349,10 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 			}
 
 			// delete fields.
-			if ( acf_maybe_get_POST( '_acf_delete_fields', false ) ) { // phpcs:ignore -- Sanitized below, unslash not needed
+			if ( $_POST['_acf_delete_fields'] ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized below.
 
 				// clean.
-				$ids = explode( '|', $_POST['_acf_delete_fields'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized below, unslash not required.
+				$ids = explode( '|', $_POST['_acf_delete_fields'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized below.
 				$ids = array_map( 'intval', $ids );
 
 				// loop.
@@ -353,12 +369,12 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 			}
 
 			$_POST['acf_field_group']['ID'] = $post_id;
-			// phpcs:disable WordPress.Security.ValidatedSanitizedInput
-			$_POST['acf_field_group']['title'] = isset( $_POST['post_title'] ) ? $_POST['post_title'] : ''; // Post title is stored unsafe like WordPress, escaped on output.
+			// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized when saved.
+			$_POST['acf_field_group']['title'] = $_POST['post_title'];
 
 			// save field group.
 			acf_update_field_group( $_POST['acf_field_group'] );
-			// phpcs:enable WordPress.Security.ValidatedSanitizedInput
+			// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 			return $post_id;
@@ -367,7 +383,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * This function will render the HTML for the metabox 'acf-field-group-fields'
 		 *
-		 * @since  5.0.0
+		 * @since   5.0.0
+		 *
+		 * @return  void
 		 */
 		public function mb_fields() {
 			global $field_group;
@@ -384,6 +402,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * This function will render the HTML for the metabox 'acf-field-group-pro-features'
 		 *
 		 * @since 6.0.0
+		 *
+		 * @return void
 		 */
 		public function mb_pro_features() {
 			acf_get_view( $this->post_type . '/pro-features' );
@@ -393,6 +413,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * This function will render the HTML for the metabox 'acf-field-group-options'
 		 *
 		 * @since 5.0.0
+		 *
+		 * @return void
 		 */
 		public function mb_options() {
 			global $field_group;
@@ -408,7 +430,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * This function can be accessed via an AJAX action and will return the result from the render_location_value function
 		 *
-		 * @since 5.0.0
+		 * @since   5.0.0
+		 *
+		 * @return void
 		 */
 		public function ajax_render_location_rule() {
 			// validate.
@@ -421,12 +445,8 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 				die();
 			}
 
-			if ( empty( $_POST['rule'] ) ) {
-				die();
-			}
-
 			// validate rule.
-			$rule = acf_validate_location_rule( acf_sanitize_request_args( $_POST['rule'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- values not saved.
+			$rule = acf_validate_location_rule( acf_sanitize_request_args( $_POST['rule'] ) );
 
 			acf_get_view(
 				'acf-field-group/location-rule',
@@ -441,7 +461,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * This function will return HTML containing the field's settings based on it's new type
 		 *
-		 * @since 5.0.0
+		 * @since   5.0.0
+		 *
+		 * @return void
 		 */
 		public function ajax_render_field_settings() {
 			// Verify the current request.
@@ -481,7 +503,9 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		/**
 		 * Move field AJAX function
 		 *
-		 * @since 5.0.0
+		 * @since   5.0.0
+		 *
+		 * @return void No return, HTML output for AJAX consumption.
 		 */
 		public function ajax_move_field() {
 			// disable filters to ensure ACF loads raw data from DB.
@@ -529,14 +553,14 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 				$link = '<a href="' . admin_url( 'post.php?post=' . $field_group['ID'] . '&action=edit' ) . '" target="_blank">' . esc_html( $field_group['title'] ) . '</a>';
 
 				echo '' .
-					'<p><strong>' . esc_html__( 'Move Complete.', 'acf' ) . '</strong></p>' .
+					'<p><strong>' . __( 'Move Complete.', 'acf' ) . '</strong></p>' .
 					'<p>' . sprintf(
 						/* translators: Confirmation message once a field has been moved to a different field group. */
 						acf_punctify( __( 'The %1$s field can now be found in the %2$s field group', 'acf' ) ),
 						esc_html( $field['label'] ),
 						$link  //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					) . '</p>' .
-					'<a href="#" class="button button-primary acf-close-popup">' . esc_html__( 'Close Modal', 'acf' ) . '</a>';
+					'<a href="#" class="button button-primary acf-close-popup">' . __( 'Close Modal', 'acf' ) . '</a>';
 				die();
 			}
 
@@ -574,19 +598,20 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 				)
 			);
 
-			echo '<p>' . esc_html__( 'Please select the destination for this field', 'acf' ) . '</p>';
+			echo '<p>' . __( 'Please select the destination for this field', 'acf' ) . '</p>';
 
 			echo '<form id="acf-move-field-form">';
 
 				// render.
 				acf_render_field_wrap( $field );
 
-				echo '<button type="submit" class="acf-btn">' . esc_html__( 'Move Field', 'acf' ) . '</button>';
+				echo '<button type="submit" class="acf-btn">' . __( 'Move Field', 'acf' ) . '</button>';
 
 			echo '</form>';
 
 			die();
 		}
+
 	}
 
 	// initialize.

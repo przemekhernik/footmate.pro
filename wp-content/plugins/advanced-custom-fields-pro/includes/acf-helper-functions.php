@@ -1,32 +1,38 @@
 <?php
 
-/**
+/*
+ * acf_is_empty
+ *
  * Returns true if the value provided is considered "empty". Allows numbers such as 0.
  *
  * @date    6/7/16
  * @since   5.4.0
  *
  * @param   mixed $var The value to check.
- * @return  boolean
+ * @return  bool
  */
 function acf_is_empty( $var ) {
 	return ( ! $var && ! is_numeric( $var ) );
 }
 
 /**
+ * acf_not_empty
+ *
  * Returns true if the value provided is considered "not empty". Allows numbers such as 0.
  *
  * @date    15/7/19
  * @since   5.8.1
  *
  * @param   mixed $var The value to check.
- * @return  boolean
+ * @return  bool
  */
 function acf_not_empty( $var ) {
 	return ( $var || is_numeric( $var ) );
 }
 
 /**
+ * acf_uniqid
+ *
  * Returns a unique numeric based id.
  *
  * @date    9/1/19
@@ -48,6 +54,8 @@ function acf_uniqid( $prefix = 'acf' ) {
 }
 
 /**
+ * acf_merge_attributes
+ *
  * Merges together two arrays but with extra functionality to append class names.
  *
  * @date    22/1/19
@@ -122,7 +130,7 @@ function acf_request_args( $args = array() ) {
  * @date    23/10/20
  * @since   5.9.2
  *
- * @param   string $key     The property name.
+ * @param   string $key The property name.
  * @param   mixed  $default The default value to fallback to.
  * @return  mixed
  */
@@ -269,7 +277,7 @@ function acf_enable_filters( $filters = array() ) {
  * @since   5.7.14
  *
  * @param   mixed $value A value to parse.
- * @return  integer
+ * @return  int
  */
 function acf_idval( $value ) {
 
@@ -364,7 +372,7 @@ function acf_idify( $str = '' ) {
  * @date    24/12/17
  * @since   5.6.5
  *
- * @param   string $str  The string to convert.
+ * @param   string $str The string to convert.
  * @param   string $glue The glue between each slug piece.
  * @return  string
  */
@@ -410,7 +418,7 @@ function acf_punctify( $str = '' ) {
  * @since   5.8.1
  *
  * @param   string $name The name of the event.
- * @return  boolean
+ * @return  bool
  */
 function acf_did( $name ) {
 
@@ -438,7 +446,7 @@ function acf_did( $name ) {
  * @since   5.9.0
  *
  * @param   string $str The string to review.
- * @return  integer
+ * @return  int
  */
 function acf_strlen( $str ) {
 	return mb_strlen( str_replace( "\r\n", "\n", wp_specialchars_decode( wp_unslash( $str ) ) ) );
@@ -450,7 +458,7 @@ function acf_strlen( $str ) {
  * @date    6/4/20
  * @since   5.9.0
  *
- * @param   mixed $value         The value.
+ * @param   mixed $value The value.
  * @param   mixed $default_value The default value.
  * @return  mixed
  */
@@ -465,7 +473,7 @@ function acf_with_default( $value, $default_value ) {
  * @since   5.9.0
  *
  * @param   string $action The action name.
- * @return  integer|boolean
+ * @return  int|bool
  */
 function acf_doing_action( $action ) {
 	global $wp_filter;
@@ -497,12 +505,12 @@ function acf_get_current_url() {
  *
  * @since 6.0.0
  *
- * @param string  $url      The URL to be tagged.
- * @param string  $campaign The campaign tag.
- * @param string  $content  The UTM content tag.
- * @param boolean $anchor   An optional anchor ID.
- * @param string  $source   An optional UTM source tag.
- * @param string  $medium   An optional UTM medium tag.
+ * @param string $url      The URL to be tagged.
+ * @param string $campaign The campaign tag.
+ * @param string $content  The UTM content tag.
+ * @param bool   $anchor   An optional anchor ID.
+ * @param string $source   An optional UTM source tag.
+ * @param string $medium   An optional UTM medium tag.
  * @return string
  */
 function acf_add_url_utm_tags( $url, $campaign, $content, $anchor = false, $source = '', $medium = '' ) {
@@ -541,7 +549,7 @@ function acf_add_url_utm_tags( $url, $campaign, $content, $anchor = false, $sour
  *
  * @param mixed $args The data to sanitize.
  *
- * @return array|boolean|float|integer|mixed|string
+ * @return array|bool|float|int|mixed|string
  */
 function acf_sanitize_request_args( $args = array() ) {
 	switch ( gettype( $args ) ) {
@@ -617,7 +625,7 @@ function acf_sanitize_files_array( array $args = array() ) {
  *
  * @since 6.0.5
  *
- * @param array  $array             The file upload array.
+ * @param array  $array The file upload array.
  * @param string $sanitize_function Callback used to sanitize array value.
  * @return array
  */
@@ -651,7 +659,11 @@ function acf_sanitize_files_value_array( $array, $sanitize_function ) {
  */
 function acf_maybe_unserialize( $data ) {
 	if ( is_serialized( $data ) ) { // Don't attempt to unserialize data that wasn't serialized going in.
-		return @unserialize( trim( $data ), array( 'allowed_classes' => false ) ); //phpcs:ignore -- allowed classes is false.
+		if ( PHP_VERSION_ID >= 70000 ) {
+			return @unserialize( trim( $data ), array( 'allowed_classes' => false ) ); //phpcs:ignore -- code only runs on PHP7+
+		} else {
+			return @\ACF\Brumann\Polyfill\unserialize::unserialize( trim( $data ), array( 'allowed_classes' => false ) );
+		}
 	}
 
 	return $data;

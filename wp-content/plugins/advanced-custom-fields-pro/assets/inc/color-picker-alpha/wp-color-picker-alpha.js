@@ -4,14 +4,14 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 3.0.3
+ * Version: 3.0.0
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license or later.
  */
 
 ( function ( $, undef ) {
 	var wpColorPickerAlpha = {
-		'version': 302,
+		version: 300,
 	};
 
 	// Always try to use the last version of this script.
@@ -32,7 +32,7 @@
 
 	// Create new method to replace the `Color.toString()` inside the scripts.
 	Color.fn.to_s = function ( type ) {
-		type = ( type || 'hex' );
+		type = type || 'hex';
 		// Change hex to rgba to return the correct color.
 		if ( 'hex' === type && this._alpha < 1 ) {
 			type = 'rgba';
@@ -117,8 +117,6 @@
 				alphaReset: false,
 				alphaColorType: 'hex',
 				alphaColorWithSpace: false,
-				alphaSkipDebounce: false,
-				alphaDebounceTimeout: 100,
 			} );
 
 			this._super();
@@ -133,6 +131,7 @@
 		 */
 		_addInputListeners: function ( input ) {
 			var self = this,
+				debounceTimeout = 100,
 				callback = function ( event ) {
 					var val = input.val(),
 						color = new Color( val ),
@@ -166,11 +165,9 @@
 					}
 				};
 
-			input.on( 'change', callback );
-
-			if( ! self.alphaOptions.alphaSkipDebounce ) {
-				input.on( 'keyup', self._debounce( callback, self.alphaOptions.alphaDebounceTimeout ) );
-			}
+			input
+				.on( 'change', callback )
+				.on( 'keyup', self._debounce( callback, debounceTimeout ) );
 
 			// If we initialized hidden, show on first focus. The rest is up to you.
 			if ( self.options.hide ) {
@@ -270,13 +267,17 @@
 				// The margin for the sliders
 				stripMargin = Math.round( stripWidth / 2 );
 				// The total width of the elements.
-				totalWidth = Math.round(squareWidth + ( stripWidth * 2 ) + ( stripMargin * 2 ) );
+				totalWidth = Math.round(
+					squareWidth + stripWidth * 2 + stripMargin * 2
+				);
 
 				// Check and change if necessary.
 				while ( totalWidth > innerWidth ) {
 					stripWidth = Math.round( stripWidth - 2 );
 					stripMargin = Math.round( stripMargin - 1 );
-					totalWidth = Math.round( squareWidth + ( stripWidth * 2 ) + ( stripMargin * 2 ) );
+					totalWidth = Math.round(
+						squareWidth + stripWidth * 2 + stripMargin * 2
+					);
 				}
 
 				square.css( 'margin', '0' );
@@ -300,12 +301,24 @@
 			self._super();
 
 			if ( self.alphaOptions.alphaEnabled ) {
-				var	controls = self.controls,
+				var controls = self.controls,
 					alpha = parseInt( self._color._alpha * 100 ),
 					color = self._color.toRgb(),
 					gradient = [
-						'rgb(' + color.r + ',' + color.g + ',' + color.b + ') 0%',
-						'rgba(' + color.r + ',' + color.g + ',' + color.b + ', 0) 100%'
+						'rgb(' +
+							color.r +
+							',' +
+							color.g +
+							',' +
+							color.b +
+							') 0%',
+						'rgba(' +
+							color.r +
+							',' +
+							color.g +
+							',' +
+							color.b +
+							', 0) 100%',
 					],
 					target = self.picker
 						.closest( '.wp-picker-container' )
@@ -313,14 +326,23 @@
 
 				self.options.color = self._getColor();
 				// Generate background slider alpha, only for CSS3.
-				controls.stripAlpha.css( {'background' : 'linear-gradient(to bottom, ' + gradient.join( ', ' ) + '), url(' + backgroundImage + ')' } );
+				controls.stripAlpha.css( {
+					background:
+						'linear-gradient(to bottom, ' +
+						gradient.join( ', ' ) +
+						'), url(' +
+						backgroundImage +
+						')',
+				} );
 				// Update alpha value
 				if ( active ) {
 					controls.stripAlphaSlider.slider( 'value', alpha );
 				}
 
 				if ( ! self._color.error ) {
-					self.element.removeClass( 'iris-error' ).val( self.options.color );
+					self.element
+						.removeClass( 'iris-error' )
+						.val( self.options.color );
 				}
 
 				self.picker
@@ -438,33 +460,32 @@
 		 */
 		_getAlphaOptions: function () {
 			var el = this.element,
-				type = ( el.data( 'type' ) || this.options.type ),
-				color = ( el.data( 'defaultColor' ) || el.val() ),
+				type = el.data( 'type' ) || this.options.type,
+				color = el.data( 'defaultColor' ) || el.val(),
 				options = {
-					alphaEnabled: ( el.data( 'alphaEnabled' ) || false ),
+					alphaEnabled: el.data( 'alphaEnabled' ) || false,
 					alphaCustomWidth: 130,
 					alphaReset: false,
 					alphaColorType: 'rgb',
 					alphaColorWithSpace: false,
-					alphaSkipDebounce: ( !!el.data( 'alphaSkipDebounce' ) || false ),
 				};
 
 			if ( options.alphaEnabled ) {
-				options.alphaEnabled = ( el.is( 'input' ) && 'full' === type );
+				options.alphaEnabled = el.is( 'input' ) && 'full' === type;
 			}
 
 			if ( ! options.alphaEnabled ) {
 				return options;
 			}
 
-			options.alphaColorWithSpace = ( color && color.match( /\s/ ) );
+			options.alphaColorWithSpace = color && color.match( /\s/ );
 
 			$.each( options, function ( name, defaultValue ) {
-				var value = ( el.data( name ) || defaultValue );
+				var value = el.data( name ) || defaultValue;
 				switch ( name ) {
 					case 'alphaCustomWidth':
-						value = ( value ? parseInt( value, 10 ) : 0 );
-						value = ( isNaN( value ) ? defaultValue : value );
+						value = value ? parseInt( value, 10 ) : 0;
+						value = isNaN( value ) ? defaultValue : value;
 						break;
 					case 'alphaColorType':
 						if ( ! value.match( /^(hex|(rgb|hsl)a?)$/ ) ) {
@@ -535,7 +556,7 @@
 			}
 
 			self.toggler.css( {
-				'position': 'relative',
+				position: 'relative',
 				'background-image': 'url(' + backgroundImage + ')',
 			} );
 
@@ -546,10 +567,10 @@
 			}
 
 			self.colorAlpha = self.toggler.find( 'span.color-alpha' ).css( {
-				'width': '30px',
-				'height': '100%',
-				'position': 'absolute',
-				'top': 0,
+				width: '30px',
+				height: '100%',
+				position: 'absolute',
+				top: 0,
 				'background-color': el.val(),
 			} );
 
@@ -558,13 +579,13 @@
 				self.colorAlpha.css( {
 					'border-bottom-left-radius': '2px',
 					'border-top-left-radius': '2px',
-					'left': 0,
+					left: 0,
 				} );
 			} else {
 				self.colorAlpha.css( {
 					'border-bottom-right-radius': '2px',
 					'border-top-right-radius': '2px',
-					'right': 0,
+					right: 0,
 				} );
 			}
 
@@ -590,7 +611,7 @@
 					} );
 
 					// fire change callback if we have one
-					if ( typeof self.options.change === 'function' ) {
+					if ( $.isFunction( self.options.change ) ) {
 						self.options.change.call( this, event, ui );
 					}
 				},
@@ -614,7 +635,7 @@
 			 *
 			 * @since 3.0.0
 			 */
-			self.toggler.on( 'click', function () {
+			self.toggler.click( function () {
 				if ( self.toggler.hasClass( 'wp-picker-open' ) ) {
 					self.close();
 				} else {
@@ -632,7 +653,7 @@
 			 *
 			 * @return {void}
 			 */
-			el.on( 'change', function ( event ) {
+			el.change( function ( event ) {
 				var val = $( this ).val();
 
 				if (
@@ -647,7 +668,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( typeof self.options.clear === 'function' ) {
+					if ( $.isFunction( self.options.clear ) ) {
 						self.options.clear.call( this, event );
 					}
 				}
@@ -662,7 +683,7 @@
 			 *
 			 * @return {void}
 			 */
-			self.button.on( 'click', function ( event ) {
+			self.button.click( function ( event ) {
 				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
 					el.val( self.options.defaultColor ).change();
 				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
@@ -674,7 +695,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( typeof self.options.clear === 'function' ) {
+					if ( $.isFunction( self.options.clear ) ) {
 						self.options.clear.call( this, event );
 					}
 

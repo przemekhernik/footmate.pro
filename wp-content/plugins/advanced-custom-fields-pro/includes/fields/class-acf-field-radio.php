@@ -5,16 +5,18 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 	class acf_field_radio extends acf_field {
 
 
-		/**
-		 * This function will setup the field type data
-		 *
-		 * @type    function
-		 * @date    5/03/2014
-		 * @since   5.0.0
-		 *
-		 * @param   n/a
-		 * @return  n/a
-		 */
+		/*
+		*  __construct
+		*
+		*  This function will setup the field type data
+		*
+		*  @type    function
+		*  @date    5/03/2014
+		*  @since   5.0.0
+		*
+		*  @param   n/a
+		*  @return  n/a
+		*/
 
 		function initialize() {
 
@@ -34,21 +36,24 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 				'allow_null'        => 0,
 				'return_format'     => 'value',
 			);
+
 		}
 
 
-		/**
-		 * Create the HTML interface for your field
-		 *
-		 * @param   $field (array) the $field being rendered
-		 *
-		 * @type    action
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $field (array) the $field being edited
-		 * @return  n/a
-		 */
+		/*
+		*  render_field()
+		*
+		*  Create the HTML interface for your field
+		*
+		*  @param   $field (array) the $field being rendered
+		*
+		*  @type    action
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $field (array) the $field being edited
+		*  @return  n/a
+		*/
 
 		function render_field( $field ) {
 
@@ -118,7 +123,7 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 			$e .= acf_get_hidden_input( array( 'name' => $field['name'] ) );
 
 			// Open <ul>.
-			$e .= '<ul ' . acf_esc_attrs( $ul ) . '>';
+			$e .= '<ul ' . acf_esc_attr( $ul ) . '>';
 
 			// Loop through choices.
 			foreach ( $field['choices'] as $value => $label ) {
@@ -153,27 +158,29 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 				}
 
 				// append
-				$e .= '<li><label' . ( $is_selected ? ' class="selected"' : '' ) . '><input ' . acf_esc_attrs( $attrs ) . '/>' . acf_esc_html( $label ) . '</label>' . $additional_html . '</li>';
+				$e .= '<li><label' . ( $is_selected ? ' class="selected"' : '' ) . '><input ' . acf_esc_attr( $attrs ) . '/>' . acf_esc_html( $label ) . '</label>' . $additional_html . '</li>';
 			}
 
 			// Close <ul>.
 			$e .= '</ul>';
 
 			// Output HTML.
-			echo $e; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped per attribute above.
+			echo $e;
 		}
 
 
-		/**
-		 * Create extra options for your field. This is rendered when editing a field.
-		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		 *
-		 * @type    action
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $field  - an array holding all the field's data
-		 */
+		/*
+		*  render_field_settings()
+		*
+		*  Create extra options for your field. This is rendered when editing a field.
+		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		*
+		*  @type    action
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $field  - an array holding all the field's data
+		*/
 
 		function render_field_settings( $field ) {
 			// Encode choices (convert from array).
@@ -289,18 +296,20 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 			);
 		}
 
-		/**
-		 * This filter is appied to the $field before it is saved to the database
-		 *
-		 * @type    filter
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $field - the field array holding all the field options
-		 * @param   $post_id - the field group ID (post_type = acf)
-		 *
-		 * @return  $field - the modified field
-		 */
+		/*
+		*  update_field()
+		*
+		*  This filter is appied to the $field before it is saved to the database
+		*
+		*  @type    filter
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $field - the field array holding all the field options
+		*  @param   $post_id - the field group ID (post_type = acf)
+		*
+		*  @return  $field - the modified field
+		*/
 
 		function update_field( $field ) {
 
@@ -312,20 +321,22 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 		}
 
 
-		/**
-		 * This filter is appied to the $value before it is updated in the db
-		 *
-		 * @type    filter
-		 * @since   3.6
-		 * @date    23/01/13
-		 * @todo    Fix bug where $field was found via json and has no ID
-		 *
-		 * @param   $value - the value which will be saved in the database
-		 * @param   $post_id - the post_id of which the value will be saved
-		 * @param   $field - the field array holding all the field options
-		 *
-		 * @return  $value - the modified value
-		 */
+		/*
+		*  update_value()
+		*
+		*  This filter is appied to the $value before it is updated in the db
+		*
+		*  @type    filter
+		*  @since   3.6
+		*  @date    23/01/13
+		*  @todo    Fix bug where $field was found via json and has no ID
+		*
+		*  @param   $value - the value which will be saved in the database
+		*  @param   $post_id - the $post_id of which the value will be saved
+		*  @param   $field - the field array holding all the field options
+		*
+		*  @return  $value - the modified value
+		*/
 
 		function update_value( $value, $post_id, $field ) {
 
@@ -361,6 +372,7 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 
 					// save
 					acf_update_field( $field );
+
 				}
 			}
 
@@ -369,66 +381,77 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 		}
 
 
-		/**
-		 * This filter is appied to the $value after it is loaded from the db
-		 *
-		 * @type    filter
-		 * @since   5.2.9
-		 * @date    23/01/13
-		 *
-		 * @param   $value - the value found in the database
-		 * @param   $post_id - the post_id from which the value was loaded from
-		 * @param   $field - the field array holding all the field options
-		 *
-		 * @return  $value - the value to be saved in te database
-		 */
+		/*
+		*  load_value()
+		*
+		*  This filter is appied to the $value after it is loaded from the db
+		*
+		*  @type    filter
+		*  @since   5.2.9
+		*  @date    23/01/13
+		*
+		*  @param   $value - the value found in the database
+		*  @param   $post_id - the $post_id from which the value was loaded from
+		*  @param   $field - the field array holding all the field options
+		*
+		*  @return  $value - the value to be saved in te database
+		*/
 
 		function load_value( $value, $post_id, $field ) {
 
 			// must be single value
 			if ( is_array( $value ) ) {
+
 				$value = array_pop( $value );
+
 			}
 
 			// return
 			return $value;
+
 		}
 
 
-		/**
-		 * This function will translate field settings
-		 *
-		 * @type    function
-		 * @date    8/03/2016
-		 * @since   5.3.2
-		 *
-		 * @param   $field (array)
-		 * @return  $field
-		 */
+		/*
+		*  translate_field
+		*
+		*  This function will translate field settings
+		*
+		*  @type    function
+		*  @date    8/03/2016
+		*  @since   5.3.2
+		*
+		*  @param   $field (array)
+		*  @return  $field
+		*/
 
 		function translate_field( $field ) {
 
 			return acf_get_field_type( 'select' )->translate_field( $field );
+
 		}
 
 
-		/**
-		 * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-		 *
-		 * @type    filter
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $value (mixed) the value which was loaded from the database
-		 * @param   $post_id (mixed) the post_id from which the value was loaded
-		 * @param   $field (array) the field array holding all the field options
-		 *
-		 * @return  $value (mixed) the modified value
-		 */
+		/*
+		*  format_value()
+		*
+		*  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
+		*
+		*  @type    filter
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $value (mixed) the value which was loaded from the database
+		*  @param   $post_id (mixed) the $post_id from which the value was loaded
+		*  @param   $field (array) the field array holding all the field options
+		*
+		*  @return  $value (mixed) the modified value
+		*/
 
 		function format_value( $value, $post_id, $field ) {
 
 			return acf_get_field_type( 'select' )->format_value( $value, $post_id, $field );
+
 		}
 
 		/**
@@ -457,9 +480,13 @@ if ( ! class_exists( 'acf_field_radio' ) ) :
 
 			return $schema;
 		}
+
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_radio' );
+
 endif; // class_exists check
+
+

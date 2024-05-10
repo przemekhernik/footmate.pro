@@ -5,16 +5,18 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 	class acf_field_link extends acf_field {
 
 
-		/**
-		 * This function will setup the field type data
-		 *
-		 * @type    function
-		 * @date    5/03/2014
-		 * @since   5.0.0
-		 *
-		 * @param   n/a
-		 * @return  n/a
-		 */
+		/*
+		*  __construct
+		*
+		*  This function will setup the field type data
+		*
+		*  @type    function
+		*  @date    5/03/2014
+		*  @since   5.0.0
+		*
+		*  @param   n/a
+		*  @return  n/a
+		*/
 
 		function initialize() {
 
@@ -28,19 +30,22 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 			$this->defaults      = array(
 				'return_format' => 'array',
 			);
+
 		}
 
 
-		/**
-		 * description
-		 *
-		 * @type    function
-		 * @date    16/5/17
-		 * @since   5.5.13
-		 *
-		 * @param   $post_id (int)
-		 * @return  $post_id (int)
-		 */
+		/*
+		*  get_link
+		*
+		*  description
+		*
+		*  @type    function
+		*  @date    16/5/17
+		*  @since   5.5.13
+		*
+		*  @param   $post_id (int)
+		*  @return  $post_id (int)
+		*/
 
 		function get_link( $value = '' ) {
 
@@ -53,32 +58,41 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// array (ACF 5.6.0)
 			if ( is_array( $value ) ) {
+
 				$link = array_merge( $link, $value );
 
 				// post id (ACF < 5.6.0)
 			} elseif ( is_numeric( $value ) ) {
+
 				$link['title'] = get_the_title( $value );
 				$link['url']   = get_permalink( $value );
 
 				// string (ACF < 5.6.0)
 			} elseif ( is_string( $value ) ) {
+
 				$link['url'] = $value;
+
 			}
 
 			// return
 			return $link;
+
 		}
 
 
-		/**
-		 * Create the HTML interface for your field
-		 *
-		 * @param   $field - an array holding all the field's data
-		 *
-		 * @type    action
-		 * @since   3.6
-		 */
-		public function render_field( $field ) {
+		/*
+		*  render_field()
+		*
+		*  Create the HTML interface for your field
+		*
+		*  @param   $field - an array holding all the field's data
+		*
+		*  @type    action
+		*  @since   3.6
+		*  @date    23/01/13
+		*/
+
+		function render_field( $field ) {
 
 			// vars
 			$div = array(
@@ -100,6 +114,11 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 			if ( $link['target'] === '_blank' ) {
 				$div['class'] .= ' -external';
 			}
+
+			/*
+			<textarea id="<?php echo esc_attr($field['id']); ?>-textarea"><?php
+			echo esc_textarea('<a href="'.$link['url'].'" target="'.$link['target'].'">'.$link['title'].'</a>');
+			?></textarea>*/
 			?>
 <div <?php echo acf_esc_attrs( $div ); ?>>
 	
@@ -118,29 +137,32 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 		<?php endforeach; ?>
 	</div>
 	
-	<a href="#" class="button" data-name="add" target=""><?php esc_html_e( 'Select Link', 'acf' ); ?></a>
+	<a href="#" class="button" data-name="add" target=""><?php _e( 'Select Link', 'acf' ); ?></a>
 	
 	<div class="link-wrap">
 		<span class="link-title"><?php echo esc_html( $link['title'] ); ?></span>
 		<a class="link-url" href="<?php echo esc_url( $link['url'] ); ?>" target="_blank"><?php echo esc_html( $link['url'] ); ?></a>
-		<i class="acf-icon -link-ext acf-js-tooltip" title="<?php esc_attr_e( 'Opens in a new window/tab', 'acf' ); ?>"></i><a class="acf-icon -pencil -clear acf-js-tooltip" data-name="edit" href="#" title="<?php esc_attr_e( 'Edit', 'acf' ); ?>"></a><a class="acf-icon -cancel -clear acf-js-tooltip" data-name="remove" href="#" title="<?php esc_attr_e( 'Remove', 'acf' ); ?>"></a>
+		<i class="acf-icon -link-ext acf-js-tooltip" title="<?php _e( 'Opens in a new window/tab', 'acf' ); ?>"></i><a class="acf-icon -pencil -clear acf-js-tooltip" data-name="edit" href="#" title="<?php _e( 'Edit', 'acf' ); ?>"></a><a class="acf-icon -cancel -clear acf-js-tooltip" data-name="remove" href="#" title="<?php _e( 'Remove', 'acf' ); ?>"></a>
 	</div>
 	
 </div>
 			<?php
+
 		}
 
 
-		/**
-		 * Create extra options for your field. This is rendered when editing a field.
-		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		 *
-		 * @type    action
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $field  - an array holding all the field's data
-		 */
+		/*
+		*  render_field_settings()
+		*
+		*  Create extra options for your field. This is rendered when editing a field.
+		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		*
+		*  @type    action
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $field  - an array holding all the field's data
+		*/
 		function render_field_settings( $field ) {
 			acf_render_field_setting(
 				$field,
@@ -156,21 +178,24 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 					),
 				)
 			);
+
 		}
 
-		/**
-		 * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-		 *
-		 * @type    filter
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $value (mixed) the value which was loaded from the database
-		 * @param   $post_id (mixed) the post_id from which the value was loaded
-		 * @param   $field (array) the field array holding all the field options
-		 *
-		 * @return  $value (mixed) the modified value
-		 */
+		/*
+		*  format_value()
+		*
+		*  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
+		*
+		*  @type    filter
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $value (mixed) the value which was loaded from the database
+		*  @param   $post_id (mixed) the $post_id from which the value was loaded
+		*  @param   $field (array) the field array holding all the field options
+		*
+		*  @return  $value (mixed) the modified value
+		*/
 
 		function format_value( $value, $post_id, $field ) {
 
@@ -184,24 +209,29 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// format value
 			if ( $field['return_format'] == 'url' ) {
+
 				return $link['url'];
+
 			}
 
 			// return link
 			return $link;
+
 		}
 
 
-		/**
-		 * description
-		 *
-		 * @type    function
-		 * @date    11/02/2014
-		 * @since   5.0.0
-		 *
-		 * @param   $post_id (int)
-		 * @return  $post_id (int)
-		 */
+		/*
+		*  validate_value
+		*
+		*  description
+		*
+		*  @type    function
+		*  @date    11/02/2014
+		*  @since   5.0.0
+		*
+		*  @param   $post_id (int)
+		*  @return  $post_id (int)
+		*/
 
 		function validate_value( $valid, $value, $field, $input ) {
 
@@ -212,27 +242,32 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// URL is required
 			if ( empty( $value ) || empty( $value['url'] ) ) {
+
 				return false;
+
 			}
 
 			// return
 			return $valid;
+
 		}
 
 
-		/**
-		 * This filter is appied to the $value before it is updated in the db
-		 *
-		 * @type    filter
-		 * @since   3.6
-		 * @date    23/01/13
-		 *
-		 * @param   $value - the value which will be saved in the database
-		 * @param   $post_id - the post_id of which the value will be saved
-		 * @param   $field - the field array holding all the field options
-		 *
-		 * @return  $value - the modified value
-		 */
+		/*
+		*  update_value()
+		*
+		*  This filter is appied to the $value before it is updated in the db
+		*
+		*  @type    filter
+		*  @since   3.6
+		*  @date    23/01/13
+		*
+		*  @param   $value - the value which will be saved in the database
+		*  @param   $post_id - the $post_id of which the value will be saved
+		*  @param   $field - the field array holding all the field options
+		*
+		*  @return  $value - the modified value
+		*/
 
 		function update_value( $value, $post_id, $field ) {
 
@@ -275,6 +310,7 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_link' );
+
 endif; // class_exists check
 
 ?>

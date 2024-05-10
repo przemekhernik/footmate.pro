@@ -16,15 +16,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		public $network_upgrade_needed_transient;
 
 		/**
-		 * __construct
+		 *  __construct
 		 *
-		 * Sets up the class functionality.
+		 *  Sets up the class functionality.
 		 *
-		 * @date    31/7/18
-		 * @since   5.7.2
+		 *  @date    31/7/18
+		 *  @since   5.7.2
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function __construct() {
 
@@ -37,15 +37,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * admin_menu
+		 *  admin_menu
 		 *
-		 * Setus up logic if DB Upgrade is needed on a single site.
+		 *  Setus up logic if DB Upgrade is needed on a single site.
 		 *
-		 * @date    24/8/18
-		 * @since   5.7.4
+		 *  @date    24/8/18
+		 *  @since   5.7.4
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function admin_menu() {
 
@@ -68,12 +68,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 * the “Upgrade Database” submenu under the “Dashboard” network admin
 		 * menu item if an ACF upgrade needs to run on any network site.
 		 *
+		 * @date    24/8/18
 		 * @since   5.7.4
 		 * @since   6.0.0 Reduce memory usage, cache network upgrade checks.
+		 *
+		 * @return  void
 		 */
 		function network_admin_menu() {
 			$network_upgrade_needed = get_site_transient( $this->network_upgrade_needed_transient );
-
+			
 			// No transient value exists, so run the upgrade check.
 			if ( $network_upgrade_needed === false ) {
 				$network_upgrade_needed = $this->check_for_network_upgrades();
@@ -100,7 +103,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		/**
 		 * Checks if an ACF database upgrade is required on any site in the
 		 * multisite network.
-		 *
+		 * 
 		 * Stores the result in `$this->network_upgrade_needed_transient`,
 		 * which is version-linked to ACF_UPGRADE_VERSION: the highest ACF
 		 * version that requires an upgrade function to run. Bumping
@@ -109,14 +112,14 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 *
 		 * @since 6.0.0
 		 * @return string 'yes' if any site in the network requires an upgrade,
-		 *               otherwise 'no'. String instead of boolean so that
-		 *               `false` returned from a get_site_transient check can
-		 *               denote that an upgrade check is needed.
+		 *                otherwise 'no'. String instead of boolean so that
+		 *                `false` returned from a get_site_transient check can
+		 *                denote that an upgrade check is needed.
 		 */
 		public function check_for_network_upgrades() {
 			$network_upgrade_needed = 'no';
 
-			$sites = get_sites(
+			$sites = get_sites( 
 				array(
 					'number' => 0,
 					'fields' => 'ids', // Reduces PHP memory usage.
@@ -153,15 +156,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * admin_load
+		 *  admin_load
 		 *
-		 * Runs during the loading of the admin page.
+		 *  Runs during the loading of the admin page.
 		 *
-		 * @date    24/8/18
-		 * @since   5.7.4
+		 *  @date    24/8/18
+		 *  @since   5.7.4
 		 *
-		 * @param   type $var Description. Default.
-		 * @return  type Description.
+		 *  @param   type $var Description. Default.
+		 *  @return  type Description.
 		 */
 		function admin_load() {
 
@@ -175,15 +178,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * network_admin_load
+		 *  network_admin_load
 		 *
-		 * Runs during the loading of the network admin page.
+		 *  Runs during the loading of the network admin page.
 		 *
-		 * @date    24/8/18
-		 * @since   5.7.4
+		 *  @date    24/8/18
+		 *  @since   5.7.4
 		 *
-		 * @param   type $var Description. Default.
-		 * @return  type Description.
+		 *  @param   type $var Description. Default.
+		 *  @return  type Description.
 		 */
 		function network_admin_load() {
 
@@ -210,15 +213,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * admin_notices
+		 *  admin_notices
 		 *
-		 * Displays the DB Upgrade prompt.
+		 *  Displays the DB Upgrade prompt.
 		 *
-		 * @date    23/8/18
-		 * @since   5.7.3
+		 *  @date    23/8/18
+		 *  @since   5.7.3
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function admin_notices() {
 
@@ -234,15 +237,15 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * network_admin_notices
+		 *  network_admin_notices
 		 *
-		 * Displays the DB Upgrade prompt on a multi site.
+		 *  Displays the DB Upgrade prompt on a multi site.
 		 *
-		 * @date    23/8/18
-		 * @since   5.7.3
+		 *  @date    23/8/18
+		 *  @since   5.7.3
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function network_admin_notices() {
 
@@ -258,30 +261,30 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		}
 
 		/**
-		 * admin_html
+		 *  admin_html
 		 *
-		 * Displays the HTML for the admin page.
+		 *  Displays the HTML for the admin page.
 		 *
-		 * @date    24/8/18
-		 * @since   5.7.4
+		 *  @date    24/8/18
+		 *  @since   5.7.4
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function admin_html() {
 			acf_get_view( 'upgrade/upgrade' );
 		}
 
 		/**
-		 * network_admin_html
+		 *  network_admin_html
 		 *
-		 * Displays the HTML for the network upgrade admin page.
+		 *  Displays the HTML for the network upgrade admin page.
 		 *
-		 * @date    24/8/18
-		 * @since   5.7.4
+		 *  @date    24/8/18
+		 *  @since   5.7.4
 		 *
-		 * @param   void
-		 * @return  void
+		 *  @param   void
+		 *  @return  void
 		 */
 		function network_admin_html() {
 			acf_get_view( 'upgrade/network' );
@@ -290,4 +293,5 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 
 	// instantiate
 	acf_new_instance( 'ACF_Admin_Upgrade' );
+
 endif; // class_exists check

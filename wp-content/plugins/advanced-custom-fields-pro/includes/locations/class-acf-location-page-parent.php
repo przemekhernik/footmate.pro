@@ -31,10 +31,10 @@ if ( ! class_exists( 'ACF_Location_Page_Parent' ) ) :
 		 * @date    9/4/20
 		 * @since   5.9.0
 		 *
-		 * @param   array $rule        The location rule.
-		 * @param   array $screen      The screen args.
+		 * @param   array $rule The location rule.
+		 * @param   array $screen The screen args.
 		 * @param   array $field_group The field group settings.
-		 * @return  boolean
+		 * @return  bool
 		 */
 		public function match( $rule, $screen, $field_group ) {
 
@@ -68,4 +68,5 @@ if ( ! class_exists( 'ACF_Location_Page_Parent' ) ) :
 
 	// Register.
 	acf_register_location_type( 'ACF_Location_Page_Parent' );
+
 endif; // class_exists check

@@ -10,12 +10,12 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "./node_modules/react/index.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
 (($, undefined) => {
   // Dependencies.
@@ -199,7 +199,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
     // Handle svg HTML.
     if (typeof blockType.icon === 'string' && blockType.icon.substr(0, 4) === '<svg') {
       const iconHTML = blockType.icon;
-      blockType.icon = (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Div, null, iconHTML);
+      blockType.icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Div, null, iconHTML);
     }
 
     // Remove icon if empty to allow for default "block".
@@ -264,8 +264,8 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
     }
 
     // Set edit and save functions.
-    blockType.edit = props => (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(ThisBlockEdit, _objectSpread({}, props));
-    blockType.save = () => (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(ThisBlockSave, null);
+    blockType.edit = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ThisBlockEdit, _objectSpread({}, props));
+    blockType.save = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ThisBlockSave, null);
 
     // Add to storage.
     blockTypes[blockType.name] = blockType;
@@ -496,7 +496,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
       nodeAttrs[name] = value;
     });
     if ('ACFInnerBlocks' === nodeName) {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(ACFInnerBlocks, _objectSpread({}, nodeAttrs));
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ACFInnerBlocks, _objectSpread({}, nodeAttrs));
     }
 
     // Define args for React.createElement().
@@ -574,7 +574,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
     const innerBlockProps = useInnerBlocksProps({
       className: className
     }, props);
-    return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, innerBlockProps), innerBlockProps.children);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, innerBlockProps), innerBlockProps.children);
   }
 
   /**
@@ -589,10 +589,6 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
   function parseNodeAttr(nodeAttr) {
     let name = nodeAttr.name;
     let value = nodeAttr.value;
-
-    // Allow overrides for third party libraries who might use specific attributes.
-    let shortcut = acf.applyFilters('acf_blocks_parse_node_attr', false, nodeAttr);
-    if (shortcut) return shortcut;
     switch (name) {
       // Class.
       case 'class':
@@ -708,7 +704,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
       }
     }
     render() {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockListBlock, _objectSpread({}, this.props));
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockListBlock, _objectSpread({}, this.props));
     }
   }, 'withDefaultAttributes');
   wp.hooks.addFilter('editor.BlockListBlock', 'acf/with-default-attributes', withDefaultAttributes);
@@ -720,7 +716,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
    * @since	5.9.0
    */
   function BlockSave() {
-    return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(InnerBlocks.Content, null);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(InnerBlocks.Content, null);
   }
 
   /**
@@ -796,14 +792,14 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
       }
 
       // Return template.
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, null, showToggle && (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToolbarButton, {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, null, showToggle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToolbarButton, {
         className: "components-icon-button components-toolbar__control",
         label: toggleText,
         icon: toggleIcon,
         onClick: toggleMode
-      }))), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(InspectorControls, null, mode === 'preview' && (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(InspectorControls, null, mode === 'preview' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "acf-block-component acf-block-panel"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, this.props)))), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockBody, _objectSpread({}, this.props)));
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, this.props)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockBody, _objectSpread({}, this.props)));
     }
   }
 
@@ -829,13 +825,13 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
       showForm = false;
     }
     if (getBlockVersion(name) > 1) {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, useBlockProps({
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, useBlockProps({
         className: additionalClasses
-      })), showForm ? (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, props)) : (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockPreview, _objectSpread({}, props)));
+      })), showForm ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, props)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockPreview, _objectSpread({}, props)));
     } else {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, useBlockProps()), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _objectSpread({}, useBlockProps()), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "acf-block-component acf-block-body"
-      }, showForm ? (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, props)) : (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockPreview, _objectSpread({}, props))));
+      }, showForm ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockForm, _objectSpread({}, props)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockPreview, _objectSpread({}, props))));
     }
   }
 
@@ -863,7 +859,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
    */
   class Div extends Component {
     render() {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         dangerouslySetInnerHTML: {
           __html: this.props.children
         }
@@ -885,7 +881,7 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
    */
   class Script extends Component {
     render() {
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         ref: el => this.el = el
       });
     }
@@ -1009,16 +1005,16 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
           this.setRef(this.state.jsx);
           return this.state.jsx;
         } else {
-          return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             ref: this.setRef
           }, this.state.jsx);
         }
       }
 
       // Return HTML.
-      return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         ref: this.setRef
-      }, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Placeholder, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null)));
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null)));
     }
     shouldComponentUpdate({
       index
@@ -1471,13 +1467,13 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
             alignContent: validateAlignment(alignContent)
           });
         }
-        return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
           group: "block"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(AlignmentComponent, {
+        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(AlignmentComponent, {
           label: acf.__('Change content alignment'),
           value: validateAlignment(alignContent),
           onChange: onChangeAlignContent
-        })), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
       }
     };
   }
@@ -1513,12 +1509,12 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
             alignText: validateAlignment(alignText)
           });
         }
-        return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
           group: "block"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(AlignmentToolbar, {
+        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(AlignmentToolbar, {
           value: validateAlignment(alignText),
           onChange: onChangeAlignText
-        })), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
       }
     };
   }
@@ -1551,12 +1547,12 @@ const md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
             fullHeight
           });
         }
-        return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
           group: "block"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockFullHeightAlignmentControl, {
+        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockFullHeightAlignmentControl, {
           isActive: fullHeight,
           onToggle: onToggleFullHeight
-        })), (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(OriginalBlockEdit, _objectSpread({}, this.props)));
       }
     };
   }
@@ -5066,19 +5062,19 @@ function _defineProperty(obj, key, value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ toPrimitive)
+/* harmony export */   "default": () => (/* binding */ _toPrimitive)
 /* harmony export */ });
 /* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
 
-function toPrimitive(t, r) {
-  if ("object" != (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(t) || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(i)) return i;
+function _toPrimitive(input, hint) {
+  if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(res) !== "object") return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return ("string" === r ? String : Number)(t);
+  return (hint === "string" ? String : Number)(input);
 }
 
 /***/ }),
@@ -5092,15 +5088,15 @@ function toPrimitive(t, r) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ toPropertyKey)
+/* harmony export */   "default": () => (/* binding */ _toPropertyKey)
 /* harmony export */ });
 /* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
 /* harmony import */ var _toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toPrimitive.js */ "./node_modules/@babel/runtime/helpers/esm/toPrimitive.js");
 
 
-function toPropertyKey(t) {
-  var i = (0,_toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__["default"])(t, "string");
-  return "symbol" == (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(i) ? i : i + "";
+function _toPropertyKey(arg) {
+  var key = (0,_toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__["default"])(arg, "string");
+  return (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(key) === "symbol" ? key : String(key);
 }
 
 /***/ }),
@@ -5116,14 +5112,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ _typeof)
 /* harmony export */ });
-function _typeof(o) {
+function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, _typeof(o);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 /***/ })

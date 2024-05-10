@@ -11,10 +11,6 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 		)
 	);
 
-	$wrapper_class = str_replace( '_', '-', $tab_key );
-
-	echo '<div class="acf-post-type-advanced-settings acf-post-type-' . esc_attr( $wrapper_class ) . '-settings">';
-
 	switch ( $tab_key ) {
 		case 'general':
 			$acf_available_supports = array(
@@ -85,8 +81,8 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 			break;
 		case 'labels':
 			echo '<div class="acf-field acf-regenerate-labels-bar">';
-			echo '<span class="acf-btn acf-btn-sm acf-btn-clear acf-regenerate-labels"><i class="acf-icon acf-icon-regenerate"></i>' . esc_html__( 'Regenerate', 'acf' ) . '</span>';
-			echo '<span class="acf-btn acf-btn-sm acf-btn-clear acf-clear-labels"><i class="acf-icon acf-icon-trash"></i>' . esc_html__( 'Clear', 'acf' ) . '</span>';
+			echo '<span class="acf-btn acf-btn-sm acf-btn-clear acf-regenerate-labels"><i class="acf-icon acf-icon-regenerate"></i>' . __( 'Regenerate', 'acf' ) . '</span>';
+			echo '<span class="acf-btn acf-btn-sm acf-btn-clear acf-clear-labels"><i class="acf-icon acf-icon-trash"></i>' . __( 'Clear', 'acf' ) . '</span>';
 			echo '<span class="acf-tip acf-labels-tip"><i class="acf-icon acf-icon-help acf-js-tooltip" title="' . esc_attr__( 'Regenerate all labels using the Singular and Plural labels', 'acf' ) . '"></i></span>';
 			echo '</div>';
 
@@ -216,14 +212,9 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 					'key'          => 'add_new',
 					'prefix'       => 'acf_post_type[labels]',
 					'value'        => $acf_post_type['labels']['add_new'],
-					'data'         => array(
-						/* translators: %s Singular form of post type name */
-						'label'   => __( 'Add New %s', 'acf' ),
-						'replace' => 'singular',
-					),
 					'label'        => __( 'Add New', 'acf' ),
 					'instructions' => __( 'In the post type submenu in the admin dashboard.', 'acf' ),
-					'placeholder'  => __( 'Add New Post', 'acf' ),
+					'placeholder'  => __( 'Add New', 'acf' ),
 				),
 				'div',
 				'field'
@@ -696,22 +687,6 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 				'div',
 				'field'
 			);
-
-			acf_render_field_wrap(
-				array(
-					'type'         => 'text',
-					'name'         => 'enter_title_here',
-					'key'          => 'enter_title_here',
-					'prefix'       => 'acf_post_type',
-					'value'        => $acf_post_type['enter_title_here'],
-					'label'        => __( 'Title Placeholder', 'acf' ),
-					'instructions' => __( 'In the editor used as the placeholder of the title.', 'acf' ),
-					'placeholder'  => __( 'Add title', 'acf' ),
-				),
-				'div',
-				'field'
-			);
-
 			break;
 		case 'visibility':
 			acf_render_field_wrap(
@@ -1287,6 +1262,5 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 	}
 
 	do_action( "acf/post_type/render_settings_tab/{$tab_key}", $acf_post_type );
-
-	echo '</div>';
 }
+

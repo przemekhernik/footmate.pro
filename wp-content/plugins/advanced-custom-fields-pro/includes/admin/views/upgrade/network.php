@@ -1,10 +1,13 @@
 <?php
+
 /**
- * Network Admin Database Upgrade
+ *  Network Admin Database Upgrade
  *
- * Shows the databse upgrade process.
+ *  Shows the databse upgrade process.
  *
- * @package ACF
+ *  @date    24/8/18
+ *  @since   5.7.4
+ *  @param   void
  */
 
 ?>
@@ -18,11 +21,10 @@
 </style>
 <div id="acf-upgrade-wrap" class="wrap">
 	
-	<h1><?php esc_html_e( 'Upgrade Database', 'acf' ); ?></h1>
+	<h1><?php _e( 'Upgrade Database', 'acf' ); ?></h1>
 	
-	<?php // translators: %s The button label name, translated seperately ?>
-	<p><?php printf( esc_html__( 'The following sites require a DB upgrade. Check the ones you want to update and then click %s.', 'acf' ), '"' . esc_html__( 'Upgrade Sites', 'acf' ) . '"' ); ?></p>
-	<p><input type="submit" name="upgrade" value="<?php esc_attr_e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites"></p>
+	<p><?php echo sprintf( __( 'The following sites require a DB upgrade. Check the ones you want to update and then click %s.', 'acf' ), '"' . __( 'Upgrade Sites', 'acf' ) . '"' ); ?></p>
+	<p><input type="submit" name="upgrade" value="<?php _e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites"></p>
 	
 	<table class="wp-list-table widefat">
 		<thead>
@@ -31,9 +33,9 @@
 					<input type="checkbox" id="sites-select-all">
 				</td>
 				<th class="manage-column" scope="col" style="width:33%;">
-					<label for="sites-select-all"><?php esc_html_e( 'Site', 'acf' ); ?></label>
+					<label for="sites-select-all"><?php _e( 'Site', 'acf' ); ?></label>
 				</th>
-				<th><?php esc_html_e( 'Description', 'acf' ); ?></th>
+				<th><?php _e( 'Description', 'acf' ); ?></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -42,9 +44,9 @@
 					<input type="checkbox" id="sites-select-all-2">
 				</td>
 				<th class="manage-column" scope="col">
-					<label for="sites-select-all-2"><?php esc_html_e( 'Site', 'acf' ); ?></label>
+					<label for="sites-select-all-2"><?php _e( 'Site', 'acf' ); ?></label>
 				</th>
-				<th><?php esc_html_e( 'Description', 'acf' ); ?></th>
+				<th><?php _e( 'Description', 'acf' ); ?></th>
 			</tr>
 		</tfoot>
 		<tbody id="the-list">
@@ -62,21 +64,20 @@
 				<?php
 				if ( $i % 2 == 0 ) :
 					?>
-				class="alternate"<?php endif; ?>>
+				 class="alternate"<?php endif; ?>>
 				<th class="check-column" scope="row">
 				<?php if ( acf_has_upgrade() ) : ?>
-					<input type="checkbox" value="<?php echo esc_attr( $site['blog_id'] ); ?>" name="checked[]">
+					<input type="checkbox" value="<?php echo $site['blog_id']; ?>" name="checked[]">
 				<?php endif; ?>
 				</th>
 				<td>
-					<strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong><br /><?php echo esc_url( home_url() ); ?>
+					<strong><?php echo get_bloginfo( 'name' ); ?></strong><br /><?php echo home_url(); ?>
 				</td>
 				<td>
 				<?php if ( acf_has_upgrade() ) : ?>
-					<?php // translators: %1 current db version, %2 available db version ?>
-					<span class="response"><?php echo esc_html( printf( __( 'Site requires database upgrade from %1$s to %2$s', 'acf' ), acf_get_db_version(), ACF_VERSION ) ); ?></span>
+					<span class="response"><?php printf( __( 'Site requires database upgrade from %1$s to %2$s', 'acf' ), acf_get_db_version(), ACF_VERSION ); ?></span>
 				<?php else : ?>
-					<?php esc_html_e( 'Site is up to date', 'acf' ); ?>
+					<?php _e( 'Site is up to date', 'acf' ); ?>
 				<?php endif; ?>
 				</td>
 			</tr>
@@ -84,6 +85,7 @@
 
 				// restore
 				restore_current_blog();
+
 		endforeach;
 		endif;
 
@@ -91,9 +93,8 @@
 		</tbody>
 	</table>
 	
-	<p><input type="submit" name="upgrade" value="<?php esc_attr_e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites-2"></p>
-	<?php // translators: %s admin dashboard url page ?>
-	<p class="show-on-complete"><?php echo acf_esc_html( sprintf( __( 'Database Upgrade complete. <a href="%s">Return to network dashboard</a>', 'acf' ), esc_url( network_admin_url() ) ) ); ?></p>
+	<p><input type="submit" name="upgrade" value="<?php _e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites-2"></p>
+	<p class="show-on-complete"><?php echo sprintf( __( 'Database Upgrade complete. <a href="%s">Return to network dashboard</a>', 'acf' ), network_admin_url() ); ?></p>
 	
 	<script type="text/javascript">
 	(function($) {
@@ -113,11 +114,11 @@
 				
 				// bail early if no selection
 				if( !this.$inputs().length ) {
-					return alert('<?php esc_attr_e( 'Please select at least one site to upgrade.', 'acf' ); ?>');
+					return alert('<?php _e( 'Please select at least one site to upgrade.', 'acf' ); ?>');
 				}
 				
 				// confirm action
-				if( !confirm("<?php esc_attr_e( 'It is strongly recommended that you backup your database before proceeding. Are you sure you wish to run the updater now?', 'acf' ); ?>") ) {
+				if( !confirm("<?php _e( 'It is strongly recommended that you backup your database before proceeding. Are you sure you wish to run the updater now?', 'acf' ); ?>") ) {
 					return;
 				}
 				
@@ -144,8 +145,7 @@
 				var success = false;
 				
 				// show loading
-				<?php // translators: %s the version being upgraded to. ?>
-				$row.find('.response').html('<i class="acf-loading"></i></span> <?php printf( esc_attr__( 'Upgrading data to version %s', 'acf' ), esc_attr( ACF_VERSION ) ); ?>');
+				$row.find('.response').html('<i class="acf-loading"></i></span> <?php printf( __( 'Upgrading data to version %s', 'acf' ), ACF_VERSION ); ?>');
 				
 				// send ajax request to upgrade DB
 				$.ajax({
@@ -159,10 +159,10 @@
 					success: function( json ){
 						success = true;
 						$input.remove();
-						text = '<?php esc_attr_e( 'Upgrade complete.', 'acf' ); ?>';	
+						text = '<?php _e( 'Upgrade complete.', 'acf' ); ?>';	
 					},
 					error: function( jqXHR, textStatus, errorThrown ){
-						text = '<?php esc_attr_e( 'Upgrade failed.', 'acf' ); ?>';
+						text = '<?php _e( 'Upgrade failed.', 'acf' ); ?>';
 						if( error = acf.getXhrError(jqXHR) ) {
 							text += ' <code>' + error +  '</code>';
 						}

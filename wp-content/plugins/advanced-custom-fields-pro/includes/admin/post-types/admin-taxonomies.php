@@ -37,17 +37,43 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 
 		/**
 		 * Constructor.
-		 * @since 6.2
+		 *
+		 * @date    5/03/2014
+		 * @since   6.2
+		 *
+		 * @return  void
 		 */
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'admin_menu' ), 9 );
+			add_action( 'admin_footer', array( $this, 'include_pro_features' ) );
 			parent::__construct();
+		}
+
+		/**
+		 * Renders HTML for the ACF PRO features upgrade notice.
+		 *
+		 * @return void
+		 */
+		public function include_pro_features() {
+			// Bail if on PRO.
+			if ( acf_is_pro() ) {
+				return;
+			}
+
+			// Bail if not the edit taxonomies screen.
+			if ( ! acf_is_screen( 'edit-acf-taxonomy' ) ) {
+				return;
+			}
+
+			acf_get_view( 'acf-field-group/pro-features' );
 		}
 
 		/**
 		 * Current screen actions for the taxonomies list admin page.
 		 *
-		 * @since 6.1
+		 * @since   6.1
+		 *
+		 * @return  void
 		 */
 		public function current_screen() {
 			// Bail early if not post types admin page.
@@ -190,7 +216,7 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 			$text          = implode( ', ', $shown_labels );
 
 			if ( ! empty( $hidden_labels ) ) {
-				$text .= ', <span class="acf-more-items acf-js-tooltip" title="' . implode( ', ', $hidden_labels ) . '">+' . count( $hidden_labels ) . '</span>';
+				$text .= ', <span class="acf-more-items acf-tooltip-js" title="' . implode( ', ', $hidden_labels ) . '">+' . count( $hidden_labels ) . '</span>';
 			}
 
 			echo acf_esc_html( $text );
@@ -248,7 +274,7 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 			$text          = implode( ', ', $shown_labels );
 
 			if ( ! empty( $hidden_labels ) ) {
-				$text .= ', <span class="acf-more-items acf-js-tooltip" title="' . implode( ', ', $hidden_labels ) . '">+' . count( $hidden_labels ) . '</span>';
+				$text .= ', <span class="acf-more-items acf-tooltip-js" title="' . implode( ', ', $hidden_labels ) . '">+' . count( $hidden_labels ) . '</span>';
 			}
 
 			echo acf_esc_html( $text );
@@ -273,8 +299,8 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 			}
 
 			$num_terms = wp_count_terms(
+				$taxonomy['taxonomy'],
 				array(
-					'taxonomy'   => $taxonomy['taxonomy'],
 					'hide_empty' => false,
 					'parent'     => 0,
 				)
@@ -297,8 +323,8 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 		 *
 		 * @since 6.1
 		 *
-		 * @param string  $action The action being performed.
-		 * @param integer $count  The number of items the action was performed on.
+		 * @param string $action The action being performed.
+		 * @param int    $count  The number of items the action was performed on.
 		 * @return string
 		 */
 		public function get_action_notice_text( $action, $count = 1 ) {
@@ -342,17 +368,19 @@ if ( ! class_exists( 'ACF_Admin_Taxonomies' ) ) :
 		/**
 		 * Returns the registration error state.
 		 *
-		 * @since 6.1
+		 * @since   6.1
 		 *
-		 * @return string
+		 * @return  string
 		 */
 		public function get_registration_error_state() {
 			return '<span class="acf-js-tooltip dashicons dashicons-warning" title="' .
 			__( 'This taxonomy could not be registered because its key is in use by another taxonomy registered by another plugin or theme.', 'acf' ) .
 			'"></span> ' . _x( 'Registration Failed', 'post status', 'acf' );
 		}
+
 	}
 
 	// Instantiate.
 	acf_new_instance( 'ACF_Admin_Taxonomies' );
+
 endif; // Class exists check.

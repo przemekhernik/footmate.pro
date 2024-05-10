@@ -100,7 +100,7 @@ function acf_get_user_role_labels( $roles = array() ) {
  * @since   5.7.10
  *
  * @param   void
- * @return  boolean
+ * @return  bool
  */
 function acf_allow_unfiltered_html() {
 
