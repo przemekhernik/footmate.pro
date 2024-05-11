@@ -9,11 +9,11 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 
 		/**
-		 *  This function will setup the field type data
+		 * This function will setup the field type data
 		 *
-		 *  @type    function
-		 *  @date    5/03/2014
-		 *  @since   5.0.0
+		 * @type    function
+		 * @date    5/03/2014
+		 * @since   5.0.0
 		 */
 		public function initialize() {
 			$this->name          = 'taxonomy';
@@ -45,22 +45,19 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// actions
 			add_action( 'acf/save_post', array( $this, 'save_post' ), 15, 1 );
-
 		}
 
 
-		/*
-		*  ajax_query
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    24/10/13
-		*  @since   5.0.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    24/10/13
+		 * @since   5.0.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 
 		function ajax_query() {
 
@@ -74,22 +71,19 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// return
 			acf_send_ajax_results( $response );
-
 		}
 
 
-		/*
-		*  get_ajax_query
-		*
-		*  This function will return an array of data formatted for use in a select2 AJAX response
-		*
-		*  @type    function
-		*  @date    15/10/2014
-		*  @since   5.0.9
-		*
-		*  @param   $options (array)
-		*  @return  (array)
-		*/
+		/**
+		 * This function will return an array of data formatted for use in a select2 AJAX response
+		 *
+		 * @type    function
+		 * @date    15/10/2014
+		 * @since   5.0.9
+		 *
+		 * @param   $options (array)
+		 * @return  (array)
+		 */
 
 		function get_ajax_query( $options = array() ) {
 
@@ -132,10 +126,8 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			// pagination
 			// - don't bother for hierarchial terms, we will need to load all terms anyway
 			if ( $is_pagination && ! $is_hierarchical ) {
-
 				$args['number'] = $limit;
 				$args['offset'] = $offset;
-
 			}
 
 			// search
@@ -147,7 +139,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 				// update vars
 				$args['search'] = $s;
 				$is_search      = true;
-
 			}
 
 			// filters
@@ -175,17 +166,13 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 					// check for empty array (possible if parent did not exist within original data)
 					if ( ! empty( $ordered_terms ) ) {
-
 						$terms = $ordered_terms;
-
 					}
 				}
 
 				// fake pagination
 				if ( $is_pagination ) {
-
 					$terms = array_slice( $terms, $offset, $limit );
-
 				}
 			}
 
@@ -197,7 +184,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 					'id'   => $term->term_id,
 					'text' => $this->get_term_title( $term, $field, $options['post_id'] ),
 				);
-
 			}
 
 			// vars
@@ -208,7 +194,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// return
 			return $response;
-
 		}
 
 		/**
@@ -217,8 +202,8 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 		 * @date    1/11/2013
 		 * @since   5.0.0
 		 *
-		 * @param   WP_Term $term The term object.
-		 * @param   array   $field The field settings.
+		 * @param   WP_Term $term    The term object.
+		 * @param   array   $field   The field settings.
 		 * @param   mixed   $post_id The post_id being edited.
 		 * @return  string
 		 */
@@ -243,24 +228,21 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 		}
 
 
-		/*
-		*  get_terms
-		*
-		*  This function will return an array of terms for a given field value
-		*
-		*  @type    function
-		*  @date    13/06/2014
-		*  @since   5.0.0
-		*
-		*  @param   $value (array)
-		*  @return  $value
-		*/
+		/**
+		 * This function will return an array of terms for a given field value
+		 *
+		 * @type    function
+		 * @date    13/06/2014
+		 * @since   5.0.0
+		 *
+		 * @param   $value (array)
+		 * @return  $value
+		 */
 
 		function get_terms( $value, $taxonomy = 'category' ) {
 
 			// load terms in 1 query to save multiple DB calls from following code
 			if ( count( $value ) > 1 ) {
-
 				$terms = acf_get_terms(
 					array(
 						'taxonomy'   => $taxonomy,
@@ -268,14 +250,11 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'hide_empty' => false,
 					)
 				);
-
 			}
 
 			// update value to include $post
 			foreach ( array_keys( $value ) as $i ) {
-
 				$value[ $i ] = get_term( $value[ $i ], $taxonomy );
-
 			}
 
 			// filter out null values
@@ -286,21 +265,19 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 		}
 
 
-		/*
-		*  load_value()
-		*
-		*  This filter is appied to the $value after it is loaded from the db
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value - the value found in the database
-		*  @param   $post_id - the $post_id from which the value was loaded from
-		*  @param   $field - the field array holding all the field options
-		*
-		*  @return  $value - the value to be saved in te database
-		*/
+		/**
+		 * This filter is appied to the $value after it is loaded from the db
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value - the value found in the database
+		 * @param   $post_id - the post_id from which the value was loaded from
+		 * @param   $field - the field array holding all the field options
+		 *
+		 * @return  $value - the value to be saved in te database
+		 */
 
 		function load_value( $value, $post_id, $field ) {
 
@@ -336,34 +313,26 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// sort
 				if ( ! empty( $value ) ) {
-
 					$order = array();
 
 					foreach ( $term_ids as $i => $v ) {
-
 						$order[ $i ] = array_search( $v, $value );
-
 					}
 
 					array_multisort( $order, $term_ids );
-
 				}
 
 				// update value
 				$value = $term_ids;
-
 			}
 
 			// convert back from array if neccessary
 			if ( $field['field_type'] == 'select' || $field['field_type'] == 'radio' ) {
-
 				$value = array_shift( $value );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
@@ -372,10 +341,9 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 		 *
 		 * @since 3.6
 		 *
-		 * @param mixed $value The value which will be saved in the database.
-		 * @param int   $post_id The post_id of which the value will be saved.
-		 * @param array $field The field array holding all the field options.
-		 *
+		 * @param  mixed   $value   The value which will be saved in the database.
+		 * @param  integer $post_id The post_id of which the value will be saved.
+		 * @param  array   $field   The field array holding all the field options.
 		 * @return mixed $value The modified value.
 		 */
 		public function update_value( $value, $post_id, $field ) {
@@ -412,20 +380,17 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			}
 
 			return $value;
-
 		}
 
 		/**
 		 * This function will save any terms in the save_post_terms array
 		 *
-		 * @date    26/11/2014
 		 * @since   5.0.9
 		 *
-		 * @param int $post_id
-		 *
+		 * @param  mixed $post_id The ACF post ID to save to.
 		 * @return void
 		 */
-		function save_post( $post_id ) {
+		public function save_post( $post_id ) {
 			// Check for saved terms.
 			if ( ! empty( $this->save_post_terms ) ) {
 				/**
@@ -452,21 +417,19 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			}
 		}
 
-		/*
-		*  format_value()
-		*
-		*  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value (mixed) the value which was loaded from the database
-		*  @param   $post_id (mixed) the $post_id from which the value was loaded
-		*  @param   $field (array) the field array holding all the field options
-		*
-		*  @return  $value (mixed) the modified value
-		*/
+		/**
+		 * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value (mixed) the value which was loaded from the database
+		 * @param   $post_id (mixed) the post_id from which the value was loaded
+		 * @param   $field (array) the field array holding all the field options
+		 *
+		 * @return  $value (mixed) the modified value
+		 */
 
 		function format_value( $value, $post_id, $field ) {
 
@@ -483,33 +446,27 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// get posts
 				$value = $this->get_terms( $value, $field['taxonomy'] );
-
 			}
 
 			// convert back from array if neccessary
 			if ( $field['field_type'] == 'select' || $field['field_type'] == 'radio' ) {
-
 				$value = array_shift( $value );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
-		/*
-		*  render_field()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $field - an array holding all the field's data
-		*/
+		/**
+		 * Create the HTML interface for your field
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $field - an array holding all the field's data
+		 */
 
 		function render_field( $field ) {
 
@@ -543,45 +500,34 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 	endif;
 
 			if ( $field['field_type'] == 'select' ) {
-
 				$field['multiple'] = 0;
 
 				$this->render_field_select( $field );
-
 			} elseif ( $field['field_type'] == 'multi_select' ) {
-
 				$field['multiple'] = 1;
 
 				$this->render_field_select( $field );
-
 			} elseif ( $field['field_type'] == 'radio' ) {
-
 				$this->render_field_checkbox( $field );
-
 			} elseif ( $field['field_type'] == 'checkbox' ) {
-
 				$this->render_field_checkbox( $field );
-
 			}
 
 			?>
 </div>
 			<?php
-
 		}
 
 
-		/*
-		*  render_field_select()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $field - an array holding all the field's data
-		*/
+		/**
+		 * Create the HTML interface for your field
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $field - an array holding all the field's data
+		 */
 
 		function render_field_select( $field ) {
 
@@ -599,7 +545,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// set choices
 				if ( ! empty( $terms ) ) {
-
 					foreach ( array_keys( $terms ) as $i ) {
 
 						// vars
@@ -607,23 +552,21 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 						// append to choices
 						$field['choices'][ $term->term_id ] = $this->get_term_title( $term, $field );
-
 					}
 				}
 			}
 
 			// render select
 			acf_render_field( $field );
-
 		}
 
 
 		/**
-		 *  Create the HTML interface for your field
+		 * Create the HTML interface for your field
 		 *
-		 *  @since   3.6
+		 * @since   3.6
 		 *
-		 *  @param array $field an array holding all the field's data.
+		 * @param array $field an array holding all the field's data.
 		 */
 		public function render_field_checkbox( $field ) {
 
@@ -637,9 +580,7 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// checkbox saves an array.
 			if ( $field['field_type'] == 'checkbox' ) {
-
 				$field['name'] .= '[]';
-
 			}
 
 			// taxonomy.
@@ -669,22 +610,19 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 	</ul>
 </div>
 			<?php
-
 		}
 
 
-		/*
-		*  render_field_settings()
-		*
-		*  Create extra options for your field. This is rendered when editing a field.
-		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $field  - an array holding all the field's data
-		*/
+		/**
+		 * Create extra options for your field. This is rendered when editing a field.
+		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $field  - an array holding all the field's data
+		 */
 		function render_field_settings( $field ) {
 			acf_render_field_setting(
 				$field,
@@ -795,18 +733,16 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			acf_render_bidirectional_field_settings( $field );
 		}
 
-		/*
-		*  ajax_add_term
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    17/04/2015
-		*  @since   5.2.3
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    17/04/2015
+		 * @since   5.2.3
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 
 		function ajax_add_term() {
 
@@ -896,7 +832,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'term_parent' => $term->parent,
 					)
 				);
-
 			}
 
 			?>
@@ -912,16 +847,12 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			);
 
 			if ( is_taxonomy_hierarchical( $field['taxonomy'] ) ) {
-
 				$choices  = array();
 				$response = $this->get_ajax_query( $args );
 
 				if ( $response ) {
-
 					foreach ( $response['results'] as $v ) {
-
 						$choices[ $v['id'] ] = $v['text'];
-
 					}
 				}
 
@@ -935,18 +866,16 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'choices'    => $choices,
 					)
 				);
-
 			}
 
 			?>
 		<p class="acf-submit">
-			<button class="acf-submit-button button button-primary" type="submit"><?php _e( 'Add', 'acf' ); ?></button>
+			<button class="acf-submit-button button button-primary" type="submit"><?php esc_html_e( 'Add', 'acf' ); ?></button>
 		</p>
 		</form><?php
 
 		// die
 		die;
-
 		}
 
 		/**
@@ -977,9 +906,9 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 		/**
 		 * @see \acf_field::get_rest_links()
-		 * @param mixed      $value The raw (unformatted) field value.
-		 * @param int|string $post_id
-		 * @param array      $field
+		 * @param mixed          $value   The raw (unformatted) field value.
+		 * @param integer|string $post_id
+		 * @param array          $field
 		 * @return array
 		 */
 		public function get_rest_links( $value, $post_id, array $field ) {
@@ -1010,13 +939,11 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			return $links;
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_taxonomy' );
-
 endif; // class_exists check
 
 ?>
