@@ -30,7 +30,7 @@ export default function (params) {
     name: 'vite:blocks',
 
     config(config) {
-      plugin.assets().forEach(input => {
+      plugin.assets().forEach((input) => {
         config.build.rollupOptions.input.push(input);
       });
     },

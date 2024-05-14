@@ -4,6 +4,6 @@ class Base {
   }
 }
 
-document.querySelectorAll('[data-block="base"]').forEach(block => {
+document.querySelectorAll('[data-block="base"]').forEach((block) => {
   new Base(block); // eslint-disable-line no-new
 });
