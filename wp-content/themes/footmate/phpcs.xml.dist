@@ -6,7 +6,7 @@
 
   <file>app</file>
   <file>inc</file>
-  <file>functions.php</file>
+  <file>resources/functions.php</file>
 
   <rule ref="PSR12" />
 
