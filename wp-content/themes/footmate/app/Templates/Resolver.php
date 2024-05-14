@@ -34,7 +34,7 @@ class Resolver
 
         $templates = array_map(fn($item) => preg_replace('/^[^\/]+\/|(\.blade)?\.php$/', '', $item), $templates);
         $templates = array_map(fn($item) => fm()->config()->get('views.path') . '/' . $item . '.blade.php', $templates);
-        $templates = array_map(fn($item) => str_replace(fm()->config()->get('resources.path') . '/', '', $item), $templates);
+        $templates = array_map(fn($item) => str_replace(fm()->config()->get('resources.path') . '/', '', $item), $templates); // phpcs:ignore Generic.Files.LineLength.TooLong
 
         return $templates;
     }
