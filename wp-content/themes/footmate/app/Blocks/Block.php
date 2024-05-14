@@ -8,6 +8,11 @@ abstract class Block
 
     private array $schema = [];
 
+    public function parse(array $data = []): array
+    {
+        return array_replace_recursive($this->getSchema(), $data);
+    }
+
     final public function render(array $data = []): void
     {
         $this->assets();
@@ -18,11 +23,6 @@ abstract class Block
     {
         $this->assets();
         return fm()->templates()->generate($this->getTemplate(), $this->parse($data));
-    }
-
-    public function parse(array $data = []): array
-    {
-        return array_replace_recursive($this->getSchema(), $data);
     }
 
     final protected function assets(): void
