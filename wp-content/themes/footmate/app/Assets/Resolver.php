@@ -7,7 +7,7 @@ trait Resolver
     private array $manifest = [];
 
     /**
-     * @action wp_enqueue_scripts 1
+     * @action init 1
      */
     public function load(): void
     {
