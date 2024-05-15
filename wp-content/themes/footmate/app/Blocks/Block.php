@@ -73,7 +73,7 @@ abstract class Block
             'scripts' => [
                 [
                     'handle' => "block-{$this->getId()}",
-                    'src' => fm()->assets()->resolve('blocks/base/script.js'),
+                    'src' => fm()->assets()->resolve("blocks/{$this->getId()}/script.js"),
                     'deps' => [],
                     'version' => fm()->config()->get('version'),
                     'args' => true,
@@ -82,7 +82,7 @@ abstract class Block
             'styles' => [
                 [
                     'handle' => "block-{$this->getId()}",
-                    'src' => fm()->assets()->resolve('blocks/base/style.scss'),
+                    'src' => fm()->assets()->resolve("blocks/{$this->getId()}/style.scss"),
                     'deps' => [],
                     'version' => fm()->config()->get('version'),
                     'media' => 'all',
