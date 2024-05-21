@@ -35,12 +35,10 @@ html {
 body {
   max-width: 1024px;
   margin: auto;
-
   font-family: Montserrat, sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-
   background: white url('../images/logo.svg') no-repeat center center;
 
   * {
@@ -65,7 +63,6 @@ ul {
     display: flex;
     flex-basis: 100%;
     align-items: center;
-
     max-width: 100%;
     padding: 1rem 2rem;
 
