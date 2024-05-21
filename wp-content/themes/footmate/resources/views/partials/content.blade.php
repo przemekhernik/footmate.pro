@@ -1,4 +1,3 @@
-<div id="message"></div>
-<main class="app__content" id="count">
+<main class="app__content">
     {!! the_content() !!}
 </main>
