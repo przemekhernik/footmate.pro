@@ -6,8 +6,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "prettier . --check; stylelint resources/**/*.scss; eslint . --ext .js; composer lint;",
-    "format": "prettier . --write; stylelint resources/**/*.scss --fix; eslint . --ext .js --fix; composer format;"
+    "lint": "prettier . --check; stylelint **/*.{css,scss}; eslint . --ext .js; composer lint;",
+    "format": "prettier . --write; stylelint **/*.{css,scss} --fix; eslint . --ext .js --fix; composer format;"
   },
   "browserslist": [
     "last 2 versions",
