@@ -7,7 +7,7 @@ trait Resolver
     private array $manifest = [];
 
     /**
-     * @action init 1
+     * @action init
      */
     public function load(): void
     {
@@ -36,10 +36,44 @@ trait Resolver
     {
         $url = '';
 
-        if (! empty($this->manifest["resources/{$path}"])) {
-            $url = FM_ASSETS_URI . "/{$this->manifest["resources/{$path}"]['file']}";
+        if ($this->has($path)) {
+            $url = FM_ASSETS_URI . "/{$this->find($path)['file']}";
         }
 
         return apply_filters('fm/assets/resolver/url', $url, $path);
+    }
+
+    public function dependencies(string $path): array
+    {
+        $assets = [
+            'scripts' => [],
+            'styles' => [],
+        ];
+
+        if (fm()->config()->get('hmr.active')) {
+            return $assets;
+        }
+
+        if ($this->has($path)) {
+            $assets['scripts'] = collect($this->find($path)['js'] ?? [])
+                ->map(fn($item) => fm()->config()->get('dist.uri') . '/' . $item)
+                ->all();
+
+            $assets['styles'] = collect($this->find($path)['css'] ?? [])
+                ->map(fn($item) => fm()->config()->get('dist.uri') . '/' . $item)
+                ->all();
+        }
+
+        return $assets;
+    }
+
+    private function find(string $path): array
+    {
+        return $this->has($path) ? $this->manifest["resources/{$path}"] : [];
+    }
+
+    private function has(string $path): bool
+    {
+        return ! empty($this->manifest["resources/{$path}"]);
     }
 }

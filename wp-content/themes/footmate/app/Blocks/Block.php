@@ -29,12 +29,12 @@ abstract class Block
     {
         $assets = $this->getAssets();
 
-        foreach ($assets['scripts'] as $script) {
-            wp_enqueue_script($script['handle'], $script['src'], $script['deps'], $script['version'], $script['args']);
+        foreach ($assets['scripts'] as $key => $src) {
+            wp_enqueue_script("block-{$this->getId()}-{$key}", $src, [], fm()->config()->get('version'), true);
         }
 
-        foreach ($assets['styles'] as $style) {
-            wp_enqueue_style($style['handle'], $style['src'], $style['deps'], $style['version'], $style['media']);
+        foreach ($assets['styles'] as $key => $src) {
+            wp_enqueue_style("block-{$this->getId()}-{$key}", $src, [], fm()->config()->get('version'));
         }
     }
 
@@ -69,25 +69,15 @@ abstract class Block
 
     final protected function getAssets(): array
     {
+        $deps = fm()->assets()->dependencies("blocks/{$this->getId()}/script.js");
+
         return [
-            'scripts' => [
-                [
-                    'handle' => "block-{$this->getId()}",
-                    'src' => fm()->assets()->resolve("blocks/{$this->getId()}/script.js"),
-                    'deps' => [],
-                    'version' => fm()->config()->get('version'),
-                    'args' => true,
-                ],
-            ],
-            'styles' => [
-                [
-                    'handle' => "block-{$this->getId()}",
-                    'src' => fm()->assets()->resolve("blocks/{$this->getId()}/style.scss"),
-                    'deps' => [],
-                    'version' => fm()->config()->get('version'),
-                    'media' => 'all',
-                ],
-            ],
+            'scripts' => array_merge([
+                fm()->assets()->resolve("blocks/{$this->getId()}/script.js"),
+            ], $deps['scripts']),
+            'styles' => array_merge([
+                fm()->assets()->resolve("blocks/{$this->getId()}/style.scss"),
+            ], $deps['styles']),
         ];
     }
 }
