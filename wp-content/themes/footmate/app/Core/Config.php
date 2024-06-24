@@ -26,6 +26,10 @@ class Config
             'cache' => [
                 'path' => wp_upload_dir()['basedir'] . '/cache/fm',
             ],
+            'dist' => [
+                'path' => FM_ASSETS_PATH,
+                'uri' => FM_ASSETS_URI,
+            ],
             'resources' => [
                 'path' => FM_PATH . '/resources',
             ],

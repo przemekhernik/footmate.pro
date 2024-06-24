@@ -7,7 +7,7 @@ trait Resolver
     private array $manifest = [];
 
     /**
-     * @action wp_enqueue_scripts 1
+     * @action init
      */
     public function load(): void
     {
@@ -41,5 +41,63 @@ trait Resolver
         }
 
         return apply_filters('fm/assets/resolver/url', $url, $path);
+    }
+
+    public function enqueue(string $path, string $type): void
+    {
+        $version = fm()->config()->get('version');
+
+        switch ($type) {
+            case 'style':
+                wp_enqueue_style($path, $this->resolve($path), $this->dependencies($path), $version);
+                break;
+
+            case 'script':
+                wp_enqueue_script($path, $this->resolve($path), $this->dependencies($path), $version);
+                break;
+        }
+    }
+
+    public function dependencies(string $path): array
+    {
+        if (fm()->config()->get('hmr.active')) {
+            return [];
+        }
+
+        if ($this->has($path)) {
+            $styles = collect($this->find($path)['js'] ?? [])
+                ->map(fn($item, $index) => [
+                    'type' => 'style',
+                    'handle' => $path . '-' . $index,
+                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
+                    'version' => fm()->config()->get('version'),
+                ])
+                ->each(fn($item) => wp_enqueue_script($item['handle'], $item['src'], [], $item['version']))
+                ->map(fn($item) => $item['handle'])
+                ->all();
+
+            $scripts = collect($this->find($path)['css'] ?? [])
+                ->map(fn($item, $index) => [
+                    'type' => 'script',
+                    'handle' => $path . '-' . $index,
+                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
+                    'version' => fm()->config()->get('version'),
+                ])
+                ->each(fn($item) => wp_enqueue_style($item['handle'], $item['src'], [], $item['version']))
+                ->map(fn($item) =>$item['handle'])
+                ->all();
+        }
+
+        return array_merge($scripts, $styles);
+    }
+
+    private function find(string $path): array
+    {
+        return $this->has($path) ? $this->manifest["resources/{$path}"] : [];
+    }
+
+    private function has(string $path): bool
+    {
+        return ! empty($this->manifest["resources/{$path}"]);
     }
 }
