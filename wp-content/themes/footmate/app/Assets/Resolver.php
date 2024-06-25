@@ -36,8 +36,8 @@ trait Resolver
     {
         $url = '';
 
-        if (! empty($this->manifest["resources/{$path}"])) {
-            $url = FM_ASSETS_URI . "/{$this->manifest["resources/{$path}"]['file']}";
+        if ($this->has($path)) {
+            $url = FM_ASSETS_URI . "/{$this->find($path)['file']}";
         }
 
         return apply_filters('fm/assets/resolver/url', $url, $path);
@@ -60,35 +60,51 @@ trait Resolver
 
     public function dependencies(string $path): array
     {
+        $dependencies = [];
+
         if (fm()->config()->get('hmr.active')) {
-            return [];
+            return $dependencies;
         }
 
-        if ($this->has($path)) {
-            $styles = collect($this->find($path)['js'] ?? [])
-                ->map(fn($item, $index) => [
+        $entry = $this->find($path);
+
+        if (! empty($entry['css'])) {
+            foreach ($entry['css'] as $item) {
+                $dependencies[] = [
                     'type' => 'style',
-                    'handle' => $path . '-' . $index,
                     'src' => fm()->config()->get('dist.uri') . '/' . $item,
-                    'version' => fm()->config()->get('version'),
-                ])
-                ->each(fn($item) => wp_enqueue_script($item['handle'], $item['src'], [], $item['version']))
-                ->map(fn($item) => $item['handle'])
-                ->all();
-
-            $scripts = collect($this->find($path)['css'] ?? [])
-                ->map(fn($item, $index) => [
-                    'type' => 'script',
-                    'handle' => $path . '-' . $index,
-                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
-                    'version' => fm()->config()->get('version'),
-                ])
-                ->each(fn($item) => wp_enqueue_style($item['handle'], $item['src'], [], $item['version']))
-                ->map(fn($item) =>$item['handle'])
-                ->all();
+                ];
+            }
         }
 
-        return array_merge($scripts, $styles);
+        if (! empty($entry['js'])) {
+            foreach ($entry['js'] as $item) {
+                $dependencies[] = [
+                    'type' => 'script',
+                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
+                ];
+            }
+        }
+
+        if (! empty($dependencies)) {
+            $version = fm()->config()->get('version');
+
+            foreach ($dependencies as $index => &$item) {
+                $item['handle'] = "{$path}.dep.{$index}";
+
+                switch ($item['type']) {
+                    case 'style':
+                        wp_enqueue_style($item['handle'], $item['src'], [], $version);
+                        break;
+
+                    case 'script':
+                        wp_enqueue_script($item['handle'], $item['src'], [], $version);
+                        break;
+                }
+            }
+        }
+
+        return array_map(fn(array $item) => $item['handle'], $dependencies);
     }
 
     private function find(string $path): array
