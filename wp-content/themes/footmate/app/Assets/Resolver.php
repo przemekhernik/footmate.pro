@@ -4,21 +4,12 @@ namespace FM\Assets;
 
 trait Resolver
 {
+    private const TYPES = [
+        'css' => 'style',
+        'js' => 'script'
+    ];
+
     private array $manifest = [];
-
-    /**
-     * @action init
-     */
-    public function load(): void
-    {
-        $path = fm()->config()->get('manifest.path');
-
-        if (empty($path) || ! file_exists($path)) {
-            wp_die(__('Run <code>npm run build</code> in your application root!', 'fm'));
-        }
-
-        $this->manifest = json_decode(file_get_contents($path), true);
-    }
 
     /**
      * @filter script_loader_tag 1 3
@@ -43,22 +34,7 @@ trait Resolver
         return apply_filters('fm/assets/resolver/url', $url, $path);
     }
 
-    public function enqueue(string $path, string $type): void
-    {
-        $version = fm()->config()->get('version');
-
-        switch ($type) {
-            case 'style':
-                wp_enqueue_style($path, $this->resolve($path), $this->dependencies($path), $version);
-                break;
-
-            case 'script':
-                wp_enqueue_script($path, $this->resolve($path), $this->dependencies($path), $version);
-                break;
-        }
-    }
-
-    public function dependencies(string $path): array
+    private function dependencies(string $path): array
     {
         $dependencies = [];
 
@@ -68,43 +44,72 @@ trait Resolver
 
         $entry = $this->find($path);
 
-        if (! empty($entry['css'])) {
-            foreach ($entry['css'] as $item) {
-                $dependencies[] = [
-                    'type' => 'style',
-                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
-                ];
-            }
-        }
-
-        if (! empty($entry['js'])) {
-            foreach ($entry['js'] as $item) {
-                $dependencies[] = [
-                    'type' => 'script',
-                    'src' => fm()->config()->get('dist.uri') . '/' . $item,
-                ];
+        if (! empty($entry)) {
+            foreach (self::TYPES as $ext => $type) {
+                if (! empty($entry[$ext])) {
+                    foreach ($entry[$ext] as $name) {
+                        $dependencies[] = [
+                            'type' => $type,
+                            'handle' => "{$path}.dep.{$name}",
+                            'src' => fm()->config()->get('dist.uri') . '/' . $name,
+                        ];
+                    }
+                }
             }
         }
 
         if (! empty($dependencies)) {
-            $version = fm()->config()->get('version');
-
-            foreach ($dependencies as $index => &$item) {
-                $item['handle'] = "{$path}.dep.{$index}";
-
+            foreach ($dependencies as $item) {
                 switch ($item['type']) {
                     case 'style':
-                        wp_enqueue_style($item['handle'], $item['src'], [], $version);
+                        $this->style($item['handle'], $item['src'], []);
                         break;
 
                     case 'script':
-                        wp_enqueue_script($item['handle'], $item['src'], [], $version);
+                        $this->script($item['handle'], $item['src'], []);
                         break;
                 }
             }
         }
 
         return array_map(fn(array $item) => $item['handle'], $dependencies);
+    }
+
+    public function enqueue(string $path, string $type): void
+    {
+        switch ($type) {
+            case 'style':
+                $this->style($path, $this->resolve($path), $this->dependencies($path));
+                break;
+
+            case 'script':
+                $this->script($path, $this->resolve($path), $this->dependencies($path));
+                break;
+        }
+    }
+
+    private function style(string $handle, string $src, array $deps = []): void
+    {
+        wp_enqueue_style($handle, $src, $deps, fm()->config()->get('version'));
+    }
+
+    private function script(string $handle, string $src, array $deps = []): void
+    {
+        wp_enqueue_script($handle, $src, $deps, fm()->config()->get('version'));
+    }
+
+    /**
+     * @action init
+     */
+    public function load(): void
+    {
+        $path = fm()->config()->get('manifest.path');
+
+        if (empty($path) || ! file_exists($path)) {
+            wp_die(__('Run <code>npm run build</code> in your application root!', 'fm'));
+        }
+
+        $this->manifest = json_decode(file_get_contents($path), true);
     }
 
     private function find(string $path): array
