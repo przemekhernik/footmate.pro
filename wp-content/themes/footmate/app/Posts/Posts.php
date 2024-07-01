@@ -13,7 +13,9 @@ class Posts
             return $content;
         }
 
-        if (empty($items = fm()->integrations()->espn()->get())) {
+        $items = fm()->integrations()->espn()->get();
+
+        if (empty($items)) {
             return $content;
         }
 

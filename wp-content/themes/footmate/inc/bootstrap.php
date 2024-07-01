@@ -1,7 +1,9 @@
 <?php // phpcs:ignore PSR1.Files.SideEffects.FoundWithSymbols
 
-if (! file_exists($composer = FM_PATH . '/vendor/autoload.php')) {
-    wp_die(__('Error locating autoloader. Please run <code>composer install</code>.', 'fm'));
+$composer = FM_PATH . '/vendor/autoload.php';
+
+if (! file_exists($composer)) {
+    wp_die(wp_kses_post(__('Error locating autoloader. Please run <code>composer install</code>.', 'fm')));
 }
 
 require $composer;

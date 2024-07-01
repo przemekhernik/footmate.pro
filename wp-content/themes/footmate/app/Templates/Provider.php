@@ -20,7 +20,7 @@ class Provider
 
     public function render(string $template, array $data = []): void
     {
-        echo $this->generate($template, $data);
+        echo $this->generate($template, $data); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     public function generate(string $template, array $data = []): string

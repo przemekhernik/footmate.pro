@@ -7,24 +7,24 @@ class Hooks
     private const PATTERN =
         '#\* @(?P<type>filter|action|shortcode)\s+(?P<name>[a-z0-9\-\.\/_]+)(\s+(?P<priority>\d+))?#';
 
-    public static function init(object $object): object
+    public static function init(object $instance): object
     {
-        foreach (self::extract($object) as $config) {
+        foreach (self::extract($instance) as $config) {
             call_user_func($config['hook'], $config['name'], $config['callback'], $config['priority'], $config['args']);
         }
 
-        return $object;
+        return $instance;
     }
 
-    private static function extract(object $object): array
+    private static function extract(object $instance): array
     {
         $handlers = [];
 
-        if (empty($object)) {
+        if (empty($instance)) {
             return $handlers;
         }
 
-        $reflector = new \ReflectionObject($object);
+        $reflector = new \ReflectionObject($instance);
 
         foreach ($reflector->getMethods() as $method) {
             if (preg_match_all(self::PATTERN, $method->getDocComment(), $matches, PREG_SET_ORDER)) {
@@ -32,7 +32,7 @@ class Hooks
                     $handlers[] = [
                         'hook' => sprintf('add_%s', $match['type']),
                         'name' => $match['name'],
-                        'callback' => [$object, $method->getName()],
+                        'callback' => [$instance, $method->getName()],
                         'priority' => $match['priority'] ?? 10,
                         'args' => $method->getNumberOfParameters(),
                     ];

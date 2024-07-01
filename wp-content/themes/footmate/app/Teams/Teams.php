@@ -9,12 +9,15 @@ class Teams
      */
     public function initCPT(): void
     {
-        register_post_type('team', [
-            'labels' => [
-                'name' => __('Teams', 'fm'),
-                'singular_name' => __('Team', 'fm'),
-            ],
-            'public' => true,
-        ]);
+        register_post_type(
+            'team',
+            [
+                'labels' => [
+                    'name' => __('Teams', 'fm'),
+                    'singular_name' => __('Team', 'fm'),
+                ],
+                'public' => true,
+            ]
+        );
     }
 }
