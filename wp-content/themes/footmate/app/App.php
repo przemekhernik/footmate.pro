@@ -40,7 +40,7 @@ class App
         $this->integrations = self::init(new Integrations());
         $this->posts = self::init(new Posts());
         $this->teams = self::init(new Teams());
-        $this->templates = self ::init(new Templates());
+        $this->templates = self::init(new Templates());
         $this->widgets = self::init(new Widgets());
     }
 

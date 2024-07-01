@@ -9,11 +9,12 @@ class Vite
      */
     public function client(): void
     {
-        echo '<script type="module" src="' . fm()->config()->get('hmr.client') . '"></script>';
+        //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
+        printf('<script type="module" src="%s"></script>', esc_attr(fm()->config()->get('hmr.client')));
     }
 
     /**
-     * @filter fm/assets/resolver/url 1 2
+     * @filter fm_assets_resolver_url 1 2
      */
     public function url(string $url, string $path): string
     {

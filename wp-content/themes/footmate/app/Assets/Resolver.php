@@ -14,10 +14,14 @@ trait Resolver
         $path = fm()->config()->get('manifest.path');
 
         if (empty($path) || ! file_exists($path)) {
-            wp_die(__('Run <code>npm run build</code> in your application root!', 'fm'));
+            wp_die(wp_kses_post(__('Run <code>npm run build</code> in your application root!', 'fm')));
         }
 
-        $this->manifest = json_decode(file_get_contents($path), true);
+        $data = fm()->filesystem()->get($path);
+
+        if (! empty($data)) {
+            $this->manifest = json_decode($data, true);
+        }
     }
 
     /**
@@ -40,6 +44,6 @@ trait Resolver
             $url = FM_ASSETS_URI . "/{$this->manifest["resources/{$path}"]['file']}";
         }
 
-        return apply_filters('fm/assets/resolver/url', $url, $path);
+        return apply_filters('fm_assets_resolver_url', $url, $path);
     }
 }

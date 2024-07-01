@@ -9,7 +9,9 @@ class Widgets
      */
     public function addLinks(): void
     {
-        if (empty($items = fm()->integrations()->espn()->get())) {
+        $items = fm()->integrations()->espn()->get();
+
+        if (empty($items)) {
             return;
         }
 
@@ -19,6 +21,6 @@ class Widgets
             $html .= "<div><a href=\"{$item['url']}\">{$item['title']}</a></div>";
         }
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 }

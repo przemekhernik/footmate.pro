@@ -11,11 +11,15 @@ class ESPN
 
     public function get(): array
     {
-        if (empty($data = $this->read())) {
+        $data = $this->read();
+
+        if (empty($data)) {
             return [];
         }
 
-        if (empty($keys = array_rand($data, 5))) {
+        $keys = array_rand($data, 5);
+
+        if (empty($keys)) {
             return [];
         }
 
