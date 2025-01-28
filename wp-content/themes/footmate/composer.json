@@ -15,16 +15,16 @@
   ],
   "require": {
     "php": "^8.2",
-    "illuminate/view": "^10.15",
-    "illuminate/support": "^10.15"
+    "illuminate/view": "^10.48.26",
+    "illuminate/support": "^10.48.26"
   },
   "scripts": {
     "lint": "phpcs",
     "format": "phpcbf"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "*",
-    "wp-coding-standards/wpcs": "^3.0"
+    "squizlabs/php_codesniffer": ">=3.11.3",
+    "wp-coding-standards/wpcs": "^3.1"
   },
   "config": {
     "allow-plugins": {

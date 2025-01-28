@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "prettier . --check; stylelint **/*.{css,scss}; eslint . --ext .js; composer lint;",
     "format": "prettier . --write; stylelint **/*.{css,scss} --fix; eslint . --ext .js --fix; composer format;",
-    "updates": "yarn upgrade-interactive --latest"
+    "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump"
   },
   "browserslist": [
     "last 2 versions",
