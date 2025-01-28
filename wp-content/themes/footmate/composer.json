@@ -15,15 +15,15 @@
   ],
   "require": {
     "php": "^8.2",
-    "illuminate/view": "^10.48.26",
-    "illuminate/support": "^10.48.26"
+    "illuminate/view": "^10.48",
+    "illuminate/support": "^10.48"
   },
   "scripts": {
     "lint": "phpcs",
     "format": "phpcbf"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": ">=3.11.3",
+    "squizlabs/php_codesniffer": "^3.11",
     "wp-coding-standards/wpcs": "^3.1"
   },
   "config": {
