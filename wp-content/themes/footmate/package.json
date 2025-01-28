@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "prettier . --check && stylelint **/*.{css,scss} && eslint . && composer lint;",
-    "format": "prettier . --write && stylelint **/*.{css,scss} --fix && eslint . --fix && composer format;",
+    "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check",
+    "format": "stylelint resources/**/*.{css,scss,vue} --fix && eslint . --fix && composer format && prettier . --write",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump"
   },
   "browserslist": [
@@ -16,6 +16,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "@stylistic/stylelint-config": "^2.0.0",
     "eslint": "^9.19.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.31.0",
@@ -26,7 +27,7 @@
     "postcss": "^8.4.38",
     "prettier": "3.4.2",
     "sass": "^1.68.0",
-    "stylelint": "^16.3.1",
+    "stylelint": "^16.14.1",
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-order": "^6.0.4",
