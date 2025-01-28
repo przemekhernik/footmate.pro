@@ -23,6 +23,12 @@ export default defineConfig({
     },
   },
 
+  server: {
+    cors: {
+      origin: 'https://fm.tentyp.test',
+    },
+  },
+
   plugins: [
     copy({
       targets: [
