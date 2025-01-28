@@ -23,14 +23,6 @@ export default defineConfig({
     },
   },
 
-  css: {
-    preprocessorOptions: {
-      scss: {
-        silenceDeprecations: ['import', 'legacy-js-api'],
-      },
-    },
-  },
-
   plugins: [
     copy({
       targets: [
