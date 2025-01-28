@@ -1,4 +1,13 @@
 {
   "singleQuote": true,
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "plugins": ["prettier-plugin-blade"],
+  "overrides": [
+    {
+      "files": ["*.blade.php"],
+      "options": {
+        "parser": "blade"
+      }
+    }
+  ]
 }
