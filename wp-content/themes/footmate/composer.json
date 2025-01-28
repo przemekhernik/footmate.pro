@@ -14,9 +14,9 @@
     }
   ],
   "require": {
-    "php": "^8.1",
-    "illuminate/view": "^10.15",
-    "illuminate/support": "^10.15"
+    "php": "^8.2",
+    "illuminate/view": "^10.48",
+    "illuminate/support": "^10.48"
   },
   "scripts": {
     "lint": "phpcs",

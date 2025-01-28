@@ -7,13 +7,14 @@ const BASE = __dirname.replace(ROOT, '');
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? `${BASE}/dist/` : BASE,
+
   build: {
     manifest: 'manifest.json',
     assetsDir: '.',
     outDir: `dist`,
     emptyOutDir: true,
     rollupOptions: {
-      input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss', 'resources/scripts/blocks.js'],
+      input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss'],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
@@ -21,6 +22,15 @@ export default defineConfig({
       },
     },
   },
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['import', 'legacy-js-api'],
+      },
+    },
+  },
+
   plugins: [
     copy({
       targets: [

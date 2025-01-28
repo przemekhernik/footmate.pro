@@ -99,10 +99,15 @@ export default function (params) {
       const { build } = config;
       plugin.init({
         dest: build.outDir || 'dist',
-        rename: build.rollupOptions.output.assetFileNames || '[name]-[hash].[ext]',
+        rename:
+          build.rollupOptions.output.assetFileNames || '[name]-[hash].[ext]',
         targets: params.targets || [],
         manifest:
-          typeof build.manifest === 'string' ? build.manifest : build.manifest === true ? '.vite/manifest.json' : '',
+          typeof build.manifest === 'string'
+            ? build.manifest
+            : build.manifest === true
+              ? '.vite/manifest.json'
+              : '',
       });
     },
 

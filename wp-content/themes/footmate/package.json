@@ -4,8 +4,8 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build",
     "dev": "vite",
+    "build": "vite build",
     "lint": "prettier . --check; stylelint **/*.{css,scss}; eslint . --ext .js; composer lint;",
     "format": "prettier . --write; stylelint **/*.{css,scss} --fix; eslint . --ext .js --fix; composer format;"
   },
@@ -13,9 +13,7 @@
     "last 2 versions",
     "> 1%"
   ],
-  "dependencies": {
-    "js-cookie": "^3.0.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^9.1.0",
