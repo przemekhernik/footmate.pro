@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check",
     "format": "stylelint resources/**/*.{css,scss,vue} --fix && eslint . --fix && composer format && prettier . --write",
-    "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump"
+    "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
+    "prepare": "husky"
   },
   "browserslist": [
     "last 2 versions",
@@ -24,6 +25,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "glob": "^11.0.1",
     "globals": "^15.0.0",
+    "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
     "postcss": "^8.4.38",
     "prettier": "3.4.2",
