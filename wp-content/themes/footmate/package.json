@@ -9,7 +9,7 @@
     "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check",
     "format": "stylelint resources/**/*.{css,scss,vue} --fix && eslint . --fix && composer format && prettier . --write",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
-    "prepare": "husky"
+    "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
   },
   "browserslist": [
     "last 2 versions",

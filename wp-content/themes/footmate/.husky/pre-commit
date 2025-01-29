@@ -1,1 +1,2 @@
+cd wp-content/themes/footmate
 yarn lint-staged
