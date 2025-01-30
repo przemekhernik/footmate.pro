@@ -24,7 +24,7 @@ class Config
                 'path' => FM_ASSETS_PATH . '/manifest.json',
             ],
             'cache' => [
-                'path' => wp_upload_dir()['basedir'] . '/cache/fm',
+                'path' => ABSPATH . '/uploads/cache/fm',
             ],
             'resources' => [
                 'path' => FM_PATH . '/resources',
