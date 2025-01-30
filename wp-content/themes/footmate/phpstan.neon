@@ -1,9 +1,9 @@
 parameters:
     level: 5
     paths:
-        - resources/functions.php
         - inc
         - app
-
+    bootstrapFiles:
+        - resources/functions.php
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
