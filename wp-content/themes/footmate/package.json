@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check",
+    "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check && composer analyze",
     "format": "stylelint resources/**/*.{css,scss,vue} --fix && eslint . --fix && composer format && prettier . --write",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
     "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
