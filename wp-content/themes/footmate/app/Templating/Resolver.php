@@ -1,6 +1,6 @@
 <?php
 
-namespace FM\Templates;
+namespace FM\Templating;
 
 class Resolver
 {
@@ -48,7 +48,7 @@ class Resolver
             return $template;
         }
 
-        fm()->templates()->render($template, []);
+        fm()->templating()->render($template, []);
 
         return fm()->config()->get('resources.path') . '/index.php';
     }

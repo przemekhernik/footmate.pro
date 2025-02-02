@@ -1,6 +1,6 @@
 <?php
 
-namespace FM\Templates;
+namespace FM\Templating;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\View\Factory;
@@ -20,7 +20,7 @@ class Provider
 
     public function render(string $template, array $data = []): void
     {
-        echo $this->generate($template, $data); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $this->generate($template, $data); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     public function generate(string $template, array $data = []): string
@@ -38,6 +38,8 @@ class Provider
         $dispatcher = new Dispatcher();
 
         $resolver->register('blade', fn() => new CompilerEngine($compiler));
+        $finder->addNamespace('blocks', fm()->config()->get('blocks.path'));
+        $finder->addNamespace('templates', fm()->config()->get('templates.path'));
 
         $this->factory = new Factory($resolver, $finder, $dispatcher);
     }
