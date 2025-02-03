@@ -36,6 +36,9 @@ class Config
             'views' => [
                 'path' => FM_PATH . '/resources/views',
             ],
+            'blocks' => [
+                'path' => FM_PATH . '/resources/blocks',
+            ],
         ];
     }
 
