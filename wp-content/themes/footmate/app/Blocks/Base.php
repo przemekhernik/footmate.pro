@@ -10,6 +10,10 @@ class Base extends Block
     {
         $this->setId('base');
         $this->setTitle('Base');
-        $this->setData([]);
+        $this->setData(
+            [
+                'title' => 'base',
+            ]
+        );
     }
 }
