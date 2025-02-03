@@ -1,5 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'vite';
+import blocks from './.vite/blocks';
 import copy from './.vite/copy';
 
 const ROOT = path.resolve('../../../');
@@ -30,6 +31,10 @@ export default defineConfig({
   },
 
   plugins: [
+    blocks({
+      path: 'resources/blocks',
+    }),
+
     copy({
       targets: [
         {
@@ -37,6 +42,7 @@ export default defineConfig({
         },
       ],
     }),
+
     {
       name: 'php',
       handleHotUpdate({ file, server }) {
