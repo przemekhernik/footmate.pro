@@ -2,6 +2,7 @@
 
 namespace FM\Integrations;
 
+use FM\Integrations\Console;
 use FM\Integrations\ESPN;
 use FM\Integrations\Vite;
 
@@ -18,6 +19,10 @@ class Integrations
 
         if (fm()->config()->get('hmr.active')) {
             \FM\App::init(new Vite());
+        }
+
+        if (class_exists('WP_CLI')) {
+            \FM\App::init(new Console());
         }
     }
 
