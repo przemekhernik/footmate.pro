@@ -17,7 +17,7 @@ class Base extends Block
         );
         $this->setData(
             [
-                'title' => 'base',
+                'title' => 'Base',
             ]
         );
     }
