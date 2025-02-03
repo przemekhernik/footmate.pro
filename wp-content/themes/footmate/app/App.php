@@ -6,6 +6,7 @@ use FM\Assets\Assets;
 use FM\Blocks\Blocks;
 use FM\Core\Config;
 use FM\Core\Hooks;
+use FM\Core\Validation;
 use FM\Core\Widgets;
 use FM\Integrations\Integrations;
 use FM\Posts\Posts;
@@ -31,6 +32,8 @@ class App
 
     private Templating $templating;
 
+    private Validation $validation;
+
     private Widgets $widgets;
 
     private static ?App $instance = null;
@@ -45,6 +48,7 @@ class App
         $this->posts = self::init(new Posts());
         $this->teams = self::init(new Teams());
         $this->templating = self::init(new Templating());
+        $this->validation = new Validation();
         $this->widgets = self::init(new Widgets());
     }
 
@@ -86,6 +90,11 @@ class App
     public function templating(): Templating
     {
         return $this->templating;
+    }
+
+    public function validation(): Validation
+    {
+        return $this->validation;
     }
 
     public function widgets(): Widgets

@@ -16,7 +16,9 @@
   "require": {
     "php": "^8.2",
     "illuminate/view": "^10.48",
-    "illuminate/support": "^10.48"
+    "illuminate/support": "^10.48",
+    "illuminate/translation": "^10.48",
+    "illuminate/validation": "^10.48"
   },
   "scripts": {
     "lint": "phpcs",
