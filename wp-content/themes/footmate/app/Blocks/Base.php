@@ -10,6 +10,11 @@ class Base extends Block
     {
         $this->setId('base');
         $this->setTitle('Base');
+        $this->setSchema(
+            [
+                'title' => 'required|string|max:60',
+            ]
+        );
         $this->setData(
             [
                 'title' => 'base',

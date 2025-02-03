@@ -10,6 +10,8 @@ abstract class Block
 
     private array $data = [];
 
+    private array $schema = [];
+
     final public function render(array $data = []): void
     {
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -18,16 +20,36 @@ abstract class Block
 
     final public function generate(array $data = []): string
     {
-        $data = array_replace_recursive($this->getData(), $data);
-        $data = apply_filters("fm_blocks_{$this->getId()}_data", $data);
-
         ob_start();
 
         fm()->assets()->enqueue("blocks/{$this->getId()}/script.js");
         fm()->assets()->enqueue("blocks/{$this->getId()}/style.scss");
-        fm()->templating()->render($this->getTemplate(), $data);
+        fm()->templating()->render($this->getTemplate(), $this->parse($data));
 
         return ob_get_clean();
+    }
+
+    final protected function parse(array $data): array
+    {
+        $data = array_replace_recursive($this->getData(), $data);
+        $data = apply_filters("fm_blocks_{$this->getId()}_data", $data);
+
+        if ($this->hasSchema()) {
+            $result = fm()->validation()->validate($data, $this->getSchema());
+
+            if (is_wp_error($result)) {
+                throw new \Exception(
+                    esc_attr(
+                        sprintf(
+                            '%s block data verification failed: %s',
+                            $this->getTitle(),
+                            $result->get_error_message()
+                        )
+                    )
+                );
+            }
+        }
+        return $data;
     }
 
     final protected function getTemplate(): string
@@ -84,5 +106,20 @@ abstract class Block
         }
 
         return ! empty($this->getData());
+    }
+
+    final protected function getSchema(): array
+    {
+        return $this->schema;
+    }
+
+    final protected function setSchema(array $schema): void
+    {
+        $this->schema = $schema;
+    }
+
+    final public function hasSchema(): bool
+    {
+        return ! empty($this->getSchema());
     }
 }
