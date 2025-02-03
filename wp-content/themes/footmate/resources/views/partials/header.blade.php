@@ -1,5 +1,7 @@
 <header class="app__header">
-    <img src="{{ fm()->assets()->resolve('images/logo.svg') }}" />
+    <figure>
+        @svg('logo')
+    </figure>
 
     <h3>
         {{ get_bloginfo('name') }}

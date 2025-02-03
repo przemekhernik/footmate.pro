@@ -70,11 +70,16 @@ ul {
       margin: 0;
     }
 
-    img {
-      max-width: 2.5rem;
-      max-height: 2.5rem;
-      margin-right: 1rem;
-      object-fit: contain;
+    figure {
+      width: 2.5rem;
+      margin: 0 1rem 0 0;
+
+      svg,
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
     }
   }
 
