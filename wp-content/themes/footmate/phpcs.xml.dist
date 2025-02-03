@@ -3,10 +3,11 @@
 <ruleset name="tentypdev">
   <arg name="colors" />
   <arg value="s" />
+  <arg name="extensions" value="php" />
 
   <file>app</file>
   <file>inc</file>
-  <file>resources/functions.php</file>
+  <file>resources</file>
 
   <rule ref="PSR12" />
 
@@ -79,6 +80,9 @@
   </rule>
 
   <!-- Other -->
+  <rule ref="Internal.NoCodeFound">
+    <severity>0</severity>
+  </rule>
   <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
   <rule ref="Generic.Formatting.SpaceAfterNot" />
 </ruleset>
