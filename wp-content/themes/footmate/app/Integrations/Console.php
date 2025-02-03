@@ -20,9 +20,17 @@ class Console
                 'shortdesc' => __('Creates release version of the theme.', 'fm'),
             ]
         );
+
+        WP_CLI::add_command(
+            'fm block',
+            [$this, 'block'],
+            [
+                'shortdesc' => __('Creates a new block of the theme.', 'fm'),
+            ]
+        );
     }
 
-    public function release($args, $assoc): void
+    public function release(array $args = [], array $assoc = []): void
     {
         $paths = [
             'source' => FM_PATH,
@@ -72,5 +80,51 @@ class Console
         }
 
         WP_CLI::success(__('🚀 Release complete.', 'fm'));
+    }
+
+    public function block(array $args = [], array $assoc = []): void
+    {
+        if (empty($assoc['id'])) {
+            WP_CLI::error(__('Block ID is required.', 'fm'));
+        }
+
+        if (empty($assoc['title'])) {
+            WP_CLI::error(__('Block Title is required.', 'fm'));
+        }
+
+        if (!preg_match('/^[a-z\-]+$/', $assoc['id'])) {
+            WP_CLI::error(__('Block ID has incorrect format.', 'fm'));
+        }
+
+        if (!preg_match('/^[a-zA-Z]+$/', $assoc['title'])) {
+            WP_CLI::error(__('Block Title has incorrect format.', 'fm'));
+        }
+
+        if (fm()->filesystem()->exists(FM_PATH . '/app/Blocks/' . $assoc['title'] . '.php')) {
+            WP_CLI::error(__('Block already exists.', 'fm'));
+        }
+
+        if (fm()->filesystem()->exists(FM_PATH . '/resources/blocks/' . $assoc['id'])) {
+            WP_CLI::error(__('Block already exists.', 'fm'));
+        }
+
+        fm()->filesystem()->copy(FM_PATH . '/app/Blocks/Base.php', FM_PATH . '/app/Blocks/' . $assoc['title'] . '.php');
+        fm()->filesystem()->copyDirectory(FM_PATH . '/resources/blocks/base', FM_PATH . '/resources/blocks/' . $assoc['id']);
+
+        $files = [
+            FM_PATH . '/app/Blocks/' . $assoc['title'] . '.php',
+            FM_PATH . '/resources/blocks/' . $assoc['id'] . '/template.blade.php',
+            FM_PATH . '/resources/blocks/' . $assoc['id'] . '/script.js',
+            FM_PATH . '/resources/blocks/' . $assoc['id'] . '/style.scss',
+        ];
+
+        foreach ($files as $file) {
+            $content = fm()->filesystem()->get($file);
+            $content = str_replace('Base', $assoc['title'], $content);
+            $content = str_replace('base', $assoc['id'], $content);
+            fm()->filesystem()->put($file, $content);
+        }
+
+        WP_CLI::success(__('🚀 Block created.', 'fm'));
     }
 }
