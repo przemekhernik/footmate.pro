@@ -3,7 +3,6 @@
 namespace FM\Blocks;
 
 use FM\Blocks\Block;
-use FM\Blocks\Base;
 
 class Blocks
 {
@@ -14,7 +13,14 @@ class Blocks
      */
     public function init(): void
     {
-        $this->blocks['base'] = new Base();
+        $ignores = ['..', '.', 'Block.php', 'Blocks.php'];
+        $classes = array_values(array_diff(scandir(__DIR__), $ignores));
+
+        foreach ($classes as $class) {
+            $class = sprintf('FM\Blocks\%s', str_replace('.php', '', $class));
+            $block = \FM\App::init(new $class());
+            $this->blocks[$block->getId()] = $block;
+        }
     }
 
     public function get(string $key): ?Block
