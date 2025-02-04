@@ -6,8 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "stylelint resources/**/*.{css,scss,vue} && eslint . && composer lint && prettier . --check && composer analyze",
-    "format": "stylelint resources/**/*.{css,scss,vue} --fix && eslint . --fix && composer format && prettier . --write",
+    "lint": "yarn lint:styles && yarn lint:scripts && yarn lint:php && yarn lint:other",
+    "lint:styles": "stylelint resources/**/*.{css,scss,vue}",
+    "lint:scripts": "eslint .",
+    "lint:php": "composer lint && composer analyze",
+    "lint:other": "prettier . --check",
+    "format": "yarn format:styles && yarn format:scripts && yarn format:php && yarn format:other",
+    "format:styles": "stylelint resources/**/*.{css,scss,vue} --fix",
+    "format:scripts": "eslint . --fix",
+    "format:php": "composer format",
+    "format:other": "prettier . --write",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
     "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
   },
