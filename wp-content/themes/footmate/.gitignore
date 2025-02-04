@@ -1,4 +1,4 @@
-.output
 dist
 vendor
 node_modules
+.output

@@ -1,6 +1,7 @@
 dist
 vendor
 node_modules
+.output
 *.lock
 *-lock.json
 *.js

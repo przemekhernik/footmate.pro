@@ -20,6 +20,6 @@ export default [
   },
 
   {
-    ignores: ['dist', 'vendor', 'node_modules'],
+    ignores: ['dist', 'vendor', 'node_modules', '.output'],
   },
 ];
