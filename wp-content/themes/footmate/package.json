@@ -16,6 +16,9 @@
     "format:scripts": "eslint . --fix",
     "format:php": "composer format",
     "format:other": "prettier . --write",
+    "release": "wp fm release",
+    "release:zip": "wp fm release --zip",
+    "block": "wp fm block",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
     "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
   },
