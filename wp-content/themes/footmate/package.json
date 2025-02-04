@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf ../../cache",
     "lint": "yarn lint:styles && yarn lint:scripts && yarn lint:php && yarn lint:other",
     "lint:styles": "stylelint resources/**/*.{css,scss,vue}",
     "lint:scripts": "eslint .",

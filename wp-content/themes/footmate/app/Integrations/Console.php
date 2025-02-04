@@ -28,6 +28,14 @@ class Console
                 'shortdesc' => __('Creates a new block of the theme.', 'fm'),
             ]
         );
+
+        WP_CLI::add_command(
+            'fm rename',
+            [$this, 'rename'],
+            [
+                'shortdesc' => __('Renames theme elements.', 'fm'),
+            ]
+        );
     }
 
     public function release(array $args = [], array $assoc = []): void
@@ -126,5 +134,60 @@ class Console
         }
 
         WP_CLI::success(__('🚀 Block created.', 'fm'));
+    }
+
+    public function rename(array $args = [], array $assoc = []): void
+    {
+        if (empty($assoc['company'])) {
+            WP_CLI::error(__('--company attribute is required', 'fm'));
+        }
+
+        if (empty($assoc['name'])) {
+            WP_CLI::error(__('--name attribute is required', 'fm'));
+        }
+
+        if (empty($assoc['slug'])) {
+            WP_CLI::error(__('--slug attribute is required', 'fm'));
+        }
+
+        if (empty($assoc['namespace'])) {
+            WP_CLI::error(__('--namespce attribute is required', 'fm'));
+        }
+
+        if (empty($assoc['initials'])) {
+            WP_CLI::error(__('--initials attribute is required', 'fm'));
+        }
+
+        if (empty($assoc['domain'])) {
+            WP_CLI::error(__('--domain attribute is required', 'fm'));
+        }
+
+        fm()->filesystem()->delete(FM_PATH . '/composer.lock');
+        fm()->filesystem()->delete(FM_PATH . '/yarn.lock');
+
+        $ignore = ['dist', 'node_modules', 'vendor', '.output', '.DS_Store', 'images', 'fonts', 'screenshot.png', 'yarn.lock', 'composer.lock'];
+
+        $directories = collect(fm()->filesystem()->directories(FM_PATH))->filter(fn($directory) => ! in_array(fm()->filesystem()->basename($directory), $ignore, true));
+        $directories->push(FM_PATH . '/.husky');
+        $directories->push(FM_PATH . '/.vite');
+
+        $files = collect(fm()->filesystem()->files(FM_PATH, true));
+
+        foreach ($directories as $directory) {
+            $files = $files->merge(fm()->filesystem()->allFiles($directory, true));
+        }
+
+        $files = $files
+            ->filter(fn($file) => ! in_array(fm()->filesystem()->basename($file), $ignore, true))
+            ->map(fn($file) => $file->getPathname())
+            ->filter(fn($file) => preg_match('/' . implode('|', array_map('preg_quote', $ignore)) . '/', $file) !== 1);
+
+        $files->push(FM_PATH . '/phpcs.xml.dist');
+
+        foreach ($files as $file) {
+            fm()->filesystem()->put($file, str_replace(['tentypdev', 'FootMATE', 'footmate', 'FM', 'fm', 'fm.tentyp.test'], [$assoc['company'], $assoc['name'], $assoc['slug'], $assoc['namespace'], $assoc['initials'], $assoc['domain']], fm()->filesystem()->get($file)));
+        }
+
+        WP_CLI::success(__('Theme renamed. Run `composer install`, `yarn build`, `composer analyze` to test the results.', 'fm'));
     }
 }

@@ -24,7 +24,7 @@ class Config
                 'path' => FM_DIST_PATH . '/manifest.json',
             ],
             'cache' => [
-                'path' => WP_CONTENT_DIR . '/cache/coditive-blocks',
+                'path' => WP_CONTENT_DIR . '/cache/footmate',
             ],
             'dist' => [
                 'path' => FM_DIST_PATH,
