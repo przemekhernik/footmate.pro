@@ -24,6 +24,17 @@ export default defineConfig({
     },
   },
 
+  /**
+   * @todo https://sass-lang.com/documentation/breaking-changes/import/
+   */
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['global-builtin', 'import', 'legacy-js-api'],
+      },
+    },
+  },
+
   server: {
     cors: {
       origin: 'https://fm.tentyp.test',
