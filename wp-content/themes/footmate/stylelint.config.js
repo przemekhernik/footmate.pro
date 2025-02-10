@@ -7,9 +7,17 @@ export default {
     '@stylistic/stylelint-config',
   ],
   rules: {
-    'at-rule-no-unknown': null,
     'no-empty-source': null,
     'selector-class-pattern': null,
+    'at-rule-no-unknown': null,
+    'at-rule-empty-line-before': [
+      'always',
+      {
+        except: ['blockless-after-blockless', 'first-nested'],
+        ignore: ['after-comment'],
+        ignoreAtRules: ['if', 'else'],
+      },
+    ],
     'order/properties-order': [
       propertyGroups.map(properties => ({
         noEmptyLineBetween: true,
@@ -22,5 +30,11 @@ export default {
       },
     ],
     '@stylistic/string-quotes': 'single',
+    '@stylistic/block-closing-brace-newline-after': [
+      'always',
+      {
+        ignoreAtRules: ['if', 'else'],
+      },
+    ],
   },
 };
