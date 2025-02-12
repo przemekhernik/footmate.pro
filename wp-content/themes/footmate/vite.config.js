@@ -30,6 +30,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        additionalData: '',
         silenceDeprecations: ['global-builtin', 'import', 'legacy-js-api'],
       },
     },
@@ -63,4 +64,12 @@ export default defineConfig({
       },
     },
   ],
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname),
+      '@scripts': path.resolve(__dirname, './resources/scripts'),
+      '@styles': path.resolve(__dirname, './resources/styles'),
+    },
+  },
 });
