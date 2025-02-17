@@ -39,8 +39,16 @@ class ACF
     /**
      * @filter acf/settings/save_json
      */
-    public function json(): string
+    public function save(): string
     {
-        return FM_PATH . '/resources/fields';
+        return MD_PATH . '/resources/fields';
+    }
+
+    /**
+     * @filter acf/settings/load_json
+     */
+    public function load(): array
+    {
+        return [MD_PATH . '/resources/fields'];
     }
 }
