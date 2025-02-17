@@ -12,7 +12,9 @@
     "illuminate/view": "^10.48",
     "illuminate/support": "^10.48",
     "illuminate/translation": "^10.48",
-    "illuminate/validation": "^10.48"
+    "illuminate/validation": "^10.48",
+    "symfony/var-dumper": "^7.2",
+    "rosell-dk/webp-convert": "^2.9"
   },
   "scripts": {
     "lint": "phpcs",
@@ -24,7 +26,8 @@
     "wp-coding-standards/wpcs": "^3.1",
     "phpstan/phpstan": "^2.1",
     "szepeviktor/phpstan-wordpress": "^2.0",
-    "php-stubs/wp-cli-stubs": "^2.11"
+    "php-stubs/wp-cli-stubs": "^2.11",
+    "php-stubs/acf-pro-stubs": "^6.3"
   },
   "config": {
     "allow-plugins": {

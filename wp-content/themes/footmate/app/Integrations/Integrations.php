@@ -2,20 +2,18 @@
 
 namespace FM\Integrations;
 
+use FM\Integrations\ACF;
 use FM\Integrations\Console;
-use FM\Integrations\ESPN;
 use FM\Integrations\Vite;
 
 class Integrations
 {
-    private ESPN $espn;
-
     /**
-     * @action init
+     * @action init 1
      */
     public function init(): void
     {
-        $this->espn = \FM\App::init(new ESPN());
+        $plugins = apply_filters('active_plugins', get_option('active_plugins'));
 
         if (fm()->config()->get('hmr.active')) {
             \FM\App::init(new Vite());
@@ -24,10 +22,9 @@ class Integrations
         if (class_exists('WP_CLI')) {
             \FM\App::init(new Console());
         }
-    }
 
-    public function espn(): ESPN
-    {
-        return $this->espn;
+        if (in_array('advanced-custom-fields-pro/acf.php', $plugins)) {
+            \FM\App::init(new ACF());
+        }
     }
 }

@@ -10,6 +10,7 @@ export default {
     'no-empty-source': null,
     'selector-class-pattern': null,
     'at-rule-no-unknown': null,
+    'no-descending-specificity': null,
     'at-rule-empty-line-before': [
       'always',
       {
@@ -29,6 +30,7 @@ export default {
         unspecified: 'bottomAlphabetical',
       },
     ],
+    '@stylistic/color-hex-case': 'upper',
     '@stylistic/string-quotes': 'single',
     '@stylistic/block-closing-brace-newline-after': [
       'always',

@@ -1,7 +1,11 @@
 @extends('base')
 
-@section('sidebar')
-    <sidebar class="app__sidebar">
-        {!! do_action('get_sidebar') !!}
-    </sidebar>
+@section('content')
+    <main>
+        <h1>
+            {!! the_title() !!}
+        </h1>
+
+        {!! the_content() !!}
+    </main>
 @endsection

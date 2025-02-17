@@ -18,15 +18,7 @@
         {!! do_action('get_header') !!}
 
         <div class="app">
-            @section('header')
-            @include('partials.header')
-            @show
-
-            @section('content')
-            @include('partials.content')
-            @show
-
-            @yield('sidebar')
+            @yield('content')
         </div>
 
         {!! do_action('get_footer') !!}

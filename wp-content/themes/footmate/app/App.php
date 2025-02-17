@@ -7,10 +7,9 @@ use FM\Blocks\Blocks;
 use FM\Core\Config;
 use FM\Core\Hooks;
 use FM\Core\Validation;
-use FM\Core\Widgets;
 use FM\Integrations\Integrations;
-use FM\Posts\Posts;
-use FM\Teams\Teams;
+use FM\Media\Media;
+use FM\Setup;
 use FM\Templating\Templating;
 use Illuminate\Filesystem\Filesystem;
 
@@ -26,15 +25,13 @@ class App
 
     private Integrations $integrations;
 
-    private Posts $posts;
+    private Media $media;
 
-    private Teams $teams;
+    private Setup $setup;
 
     private Templating $templating;
 
     private Validation $validation;
-
-    private Widgets $widgets;
 
     private static ?App $instance = null;
 
@@ -45,11 +42,10 @@ class App
         $this->config = self::init(new Config());
         $this->filesystem = new Filesystem();
         $this->integrations = self::init(new Integrations());
-        $this->posts = self::init(new Posts());
-        $this->teams = self::init(new Teams());
+        $this->media = self::init(new Media());
+        $this->setup = self::init(new Setup());
         $this->templating = self::init(new Templating());
         $this->validation = new Validation();
-        $this->widgets = self::init(new Widgets());
     }
 
     public function assets(): Assets
@@ -77,14 +73,14 @@ class App
         return $this->integrations;
     }
 
-    public function posts(): Posts
+    public function media(): Media
     {
-        return $this->posts;
+        return $this->media;
     }
 
-    public function teams(): Teams
+    public function setup(): Setup
     {
-        return $this->teams;
+        return $this->setup;
     }
 
     public function templating(): Templating
@@ -95,11 +91,6 @@ class App
     public function validation(): Validation
     {
         return $this->validation;
-    }
-
-    public function widgets(): Widgets
-    {
-        return $this->widgets;
     }
 
     private function __clone()

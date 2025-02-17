@@ -27,4 +27,9 @@ class Blocks
     {
         return ! empty($this->blocks[$key]) ? $this->blocks[$key] : null;
     }
+
+    public function all(): array
+    {
+        return $this->blocks;
+    }
 }

@@ -14,6 +14,7 @@ abstract class Block
 
     final public function render(array $data = []): void
     {
+        $this->enqueue();
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo $this->generate($data);
     }
@@ -22,8 +23,6 @@ abstract class Block
     {
         ob_start();
 
-        fm()->assets()->enqueue("blocks/{$this->getId()}/script.js");
-        fm()->assets()->enqueue("blocks/{$this->getId()}/style.scss");
         fm()->templating()->render($this->getTemplate(), $this->parse($data));
 
         return ob_get_clean();
@@ -49,7 +48,14 @@ abstract class Block
                 );
             }
         }
+
         return $data;
+    }
+
+    final public function enqueue(): void
+    {
+        fm()->assets()->enqueue("blocks/{$this->getId()}/script.js");
+        fm()->assets()->enqueue("blocks/{$this->getId()}/style.scss");
     }
 
     final protected function getTemplate(): string
