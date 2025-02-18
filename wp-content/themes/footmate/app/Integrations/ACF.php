@@ -41,7 +41,7 @@ class ACF
      */
     public function save(): string
     {
-        return MD_PATH . '/resources/fields';
+        return FM_PATH . '/resources/fields';
     }
 
     /**
@@ -49,6 +49,6 @@ class ACF
      */
     public function load(): array
     {
-        return [MD_PATH . '/resources/fields'];
+        return [FM_PATH . '/resources/fields'];
     }
 }

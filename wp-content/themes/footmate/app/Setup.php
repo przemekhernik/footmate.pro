@@ -19,7 +19,7 @@ class Setup
     {
         register_nav_menus(
             [
-                'primary_navigation' => __('Primary Navigation', 'md'),
+                'primary_navigation' => __('Primary Navigation', 'fm'),
             ]
         );
     }
