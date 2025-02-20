@@ -5,5 +5,5 @@
   "*.css": ["stylelint --fix", "stylelint"],
   "*.scss": ["stylelint --fix", "stylelint"],
   "*blade.php": ["prettier --write", "prettier --check"],
-  "*.php": ["phpcs"]
+  "*.php": ["vendor/bin/phpcs"]
 }
