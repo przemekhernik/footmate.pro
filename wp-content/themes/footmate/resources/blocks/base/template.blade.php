@@ -1,6 +1,6 @@
-<div
-    class="base"
+<section
+    class="block-base"
     data-block="base"
 >
     {{ $title }}
-</div>
+</section>

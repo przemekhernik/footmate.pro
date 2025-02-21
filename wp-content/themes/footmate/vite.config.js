@@ -30,7 +30,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '',
+        additionalData: `
+          @import "@styles/abstracts/_breakpoints.scss";
+          @import "@styles/abstracts/_mixins.scss";
+        `,
         silenceDeprecations: ['global-builtin', 'import', 'legacy-js-api'],
       },
     },
@@ -72,4 +75,6 @@ export default defineConfig({
       '@styles': path.resolve(__dirname, './resources/styles'),
     },
   },
+
+  logLevel: 'warn',
 });

@@ -17,8 +17,14 @@
         {!! do_action('wp_body_open') !!}
         {!! do_action('get_header') !!}
 
-        <div class="app">
+        <div>
+            @section('header')
+            @show
+
             @yield('content')
+
+            @section('footer')
+            @show
         </div>
 
         {!! do_action('get_footer') !!}
