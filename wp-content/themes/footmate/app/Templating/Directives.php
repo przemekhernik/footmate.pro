@@ -71,7 +71,7 @@ class Directives
             throw new \Exception(esc_html("{$path} file not found."));
         }
 
-        if (! in_array(fm()->filesystem()->guessExtension($path), ['png', 'jpg', 'jpeg'])) {
+        if (! in_array(fm()->filesystem()->guessExtension($path), ['png', 'jpg', 'jpeg', 'webp', 'avif'])) {
             throw new \Exception(esc_html("{$path} file extension is not allowed."));
         }
 

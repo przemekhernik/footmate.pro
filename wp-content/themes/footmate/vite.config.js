@@ -53,7 +53,7 @@ export default defineConfig({
     copy({
       targets: [
         {
-          src: 'resources/images/**/*.{png,jpg,jpeg,svg,webp}',
+          src: 'resources/images/**/*.{png,jpg,jpeg,svg,webp,avif}',
         },
       ],
     }),
