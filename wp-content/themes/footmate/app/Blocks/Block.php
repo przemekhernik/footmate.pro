@@ -12,6 +12,8 @@ abstract class Block
 
     private array $schema = [];
 
+    private bool $primary = false;
+
     final public function render(array $data = []): void
     {
         $this->enqueue();
@@ -127,5 +129,25 @@ abstract class Block
     final public function hasSchema(): bool
     {
         return ! empty($this->getSchema());
+    }
+
+    public function isPrimary(): bool
+    {
+        return ! empty($this->primary);
+    }
+
+    final public function setPrimary(bool $primary = true): void
+    {
+        $this->primary = $primary;
+    }
+
+    /**
+     * @action wp_enqueue_scripts
+     */
+    final public function enqueuePrimary(): void
+    {
+        if ($this->isPrimary()) {
+            $this->enqueue();
+        }
     }
 }
