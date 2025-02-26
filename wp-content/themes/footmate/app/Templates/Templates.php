@@ -9,12 +9,10 @@ class Templates
 {
     private Provider $provider;
 
-    private Resolver $resolver;
-
     public function __construct()
     {
+        \FM\App::init(new Resolver());
         $this->provider = \FM\App::init(new Provider());
-        $this->resolver = \FM\App::init(new Resolver());
     }
 
     public function render(string $template, array $data = []): void

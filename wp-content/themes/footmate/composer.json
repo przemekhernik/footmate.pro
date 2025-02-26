@@ -20,11 +20,16 @@
   },
   "scripts": {
     "lint": "phpcs",
-    "format": "phpcbf"
+    "format": "phpcbf",
+    "analyze": "phpstan analyse --memory-limit=2048M"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
-    "wp-coding-standards/wpcs": "^3.0"
+    "wp-coding-standards/wpcs": "^3.0",
+    "phpstan/phpstan": "^2.1",
+    "szepeviktor/phpstan-wordpress": "^2.0",
+    "php-stubs/acf-pro-stubs": "^6.3",
+    "php-stubs/wp-cli-stubs": "^2.11"
   },
   "config": {
     "allow-plugins": {
