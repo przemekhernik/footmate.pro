@@ -26,7 +26,8 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
     "wp-coding-standards/wpcs": "^3.0",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "szepeviktor/phpstan-wordpress": "^2.0"
   },
   "config": {
     "allow-plugins": {

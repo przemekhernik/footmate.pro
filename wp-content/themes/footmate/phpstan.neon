@@ -3,3 +3,5 @@ parameters:
     paths:
         - inc
         - app
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
