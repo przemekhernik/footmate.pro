@@ -20,7 +20,8 @@
   },
   "scripts": {
     "lint": "phpcs",
-    "format": "phpcbf"
+    "format": "phpcbf",
+    "analyze": "phpstan analyse --memory-limit=2048M"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
