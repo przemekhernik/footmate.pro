@@ -3,18 +3,21 @@
 namespace FM;
 
 use FM\Assets\Assets;
+use FM\Blocks\Blocks;
 use FM\Core\Config;
 use FM\Core\Hooks;
-use FM\Core\Widgets;
+use FM\Core\Validation;
 use FM\Integrations\Integrations;
-use FM\Posts\Posts;
-use FM\Teams\Teams;
-use FM\Templates\Templates;
+use FM\Media\Media;
+use FM\Setup;
+use FM\Templating\Templating;
 use Illuminate\Filesystem\Filesystem;
 
 class App
 {
     private Assets $assets;
+
+    private Blocks $blocks;
 
     private Config $config;
 
@@ -22,31 +25,37 @@ class App
 
     private Integrations $integrations;
 
-    private Posts $posts;
+    private Media $media;
 
-    private Teams $teams;
+    private Setup $setup;
 
-    private Templates $templates;
+    private Templating $templating;
 
-    private Widgets $widgets;
+    private Validation $validation;
 
     private static ?App $instance = null;
 
     private function __construct()
     {
         $this->assets = self::init(new Assets());
+        $this->blocks = self::init(new Blocks());
         $this->config = self::init(new Config());
         $this->filesystem = new Filesystem();
         $this->integrations = self::init(new Integrations());
-        $this->posts = self::init(new Posts());
-        $this->teams = self::init(new Teams());
-        $this->templates = self::init(new Templates());
-        $this->widgets = self::init(new Widgets());
+        $this->media = self::init(new Media());
+        $this->setup = self::init(new Setup());
+        $this->templating = self::init(new Templating());
+        $this->validation = new Validation();
     }
 
     public function assets(): Assets
     {
         return $this->assets;
+    }
+
+    public function blocks(): Blocks
+    {
+        return $this->blocks;
     }
 
     public function config(): Config
@@ -64,24 +73,24 @@ class App
         return $this->integrations;
     }
 
-    public function posts(): Posts
+    public function media(): Media
     {
-        return $this->posts;
+        return $this->media;
     }
 
-    public function teams(): Teams
+    public function setup(): Setup
     {
-        return $this->teams;
+        return $this->setup;
     }
 
-    public function templates(): Templates
+    public function templating(): Templating
     {
-        return $this->templates;
+        return $this->templating;
     }
 
-    public function widgets(): Widgets
+    public function validation(): Validation
     {
-        return $this->widgets;
+        return $this->validation;
     }
 
     private function __clone()

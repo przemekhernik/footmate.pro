@@ -1,20 +1,18 @@
 <?php
 
-namespace FM\Templates;
+namespace FM\Templating;
 
-use FM\Templates\Provider;
-use FM\Templates\Resolver;
+use FM\Templating\Provider;
+use FM\Templating\Resolver;
 
-class Templates
+class Templating
 {
     private Provider $provider;
 
-    private Resolver $resolver;
-
     public function __construct()
     {
+        \FM\App::init(new Resolver());
         $this->provider = \FM\App::init(new Provider());
-        $this->resolver = \FM\App::init(new Resolver());
     }
 
     public function render(string $template, array $data = []): void

@@ -6,6 +6,8 @@
 db.sql.gz
 db.sql
 
+wp-config-db.php
+
 wp-content/*
 !wp-content
 !wp-content/mu-plugins/

@@ -20,10 +20,6 @@ class Hooks
     {
         $handlers = [];
 
-        if (empty($instance)) {
-            return $handlers;
-        }
-
         $reflector = new \ReflectionObject($instance);
 
         foreach ($reflector->getMethods() as $method) {

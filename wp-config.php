@@ -19,7 +19,7 @@
  * @package WordPress
  */
 
-require_once 'wp-config-db.php';
+require_once __DIR__ . '/wp-config-db.php';
 
 /**#@+
  * Authentication unique keys and salts.

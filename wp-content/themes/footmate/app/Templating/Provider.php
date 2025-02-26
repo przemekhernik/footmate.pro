@@ -1,7 +1,8 @@
 <?php
 
-namespace FM\Templates;
+namespace FM\Templating;
 
+use FM\Templating\Directives;
 use Illuminate\Events\Dispatcher;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
@@ -20,7 +21,7 @@ class Provider
 
     public function render(string $template, array $data = []): void
     {
-        echo $this->generate($template, $data); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $this->generate($template, $data); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     public function generate(string $template, array $data = []): string
@@ -36,8 +37,12 @@ class Provider
         $resolver = new EngineResolver();
         $finder = new FileViewFinder(fm()->filesystem(), [fm()->config()->get('views.path')]);
         $dispatcher = new Dispatcher();
+        $directives = new Directives();
 
+        $directives->register($compiler);
         $resolver->register('blade', fn() => new CompilerEngine($compiler));
+        $finder->addNamespace('blocks', fm()->config()->get('blocks.path'));
+        $finder->addNamespace('templates', fm()->config()->get('templates.path'));
 
         $this->factory = new Factory($resolver, $finder, $dispatcher);
     }

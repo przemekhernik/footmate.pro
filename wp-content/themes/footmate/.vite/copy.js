@@ -1,6 +1,6 @@
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 import { globSync } from 'glob';
 
 class Plugin {
@@ -23,7 +23,7 @@ class Plugin {
 
     if (config.targets) {
       this.targets = config.targets
-        .filter((item) => item.src)
+        .filter(item => item.src)
         .map((item) => {
           return {
             src: item.src,
@@ -57,14 +57,13 @@ class Plugin {
     for (const target of this.targets) {
       for (const file of target.files) {
         try {
-          fs.copyFile(file.src, file.dest, () => {
-            if (target.manifest) {
-              this.entries.push({
-                source: file.src,
-                file: file.name,
-              });
-            }
-          });
+          fs.copyFileSync(file.src, file.dest);
+          if (target.manifest) {
+            this.entries.push({
+              source: file.src,
+              file: file.name,
+            });
+          }
         } catch (error) {
           console.error(error);
         }
@@ -89,7 +88,7 @@ class Plugin {
   }
 }
 
-export default function (params) {
+export default function(params) {
   const plugin = new Plugin();
 
   return {
@@ -99,10 +98,15 @@ export default function (params) {
       const { build } = config;
       plugin.init({
         dest: build.outDir || 'dist',
-        rename: build.rollupOptions.output.assetFileNames || '[name]-[hash].[ext]',
+        rename:
+          build.rollupOptions.output.assetFileNames || '[name]-[hash].[ext]',
         targets: params.targets || [],
         manifest:
-          typeof build.manifest === 'string' ? build.manifest : build.manifest === true ? '.vite/manifest.json' : '',
+          typeof build.manifest === 'string'
+            ? build.manifest
+            : build.manifest === true
+              ? '.vite/manifest.json'
+              : '',
       });
     },
 
