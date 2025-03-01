@@ -7,13 +7,24 @@ on:
       - '**'
 
 jobs:
-  test:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     container:
       image: pragmatedev/vitewp-docker
     steps:
-      - uses: actions/checkout@v3
-      - run: php --version
-      - run: node --version
-      - run: composer --version
-      - run: yarn --version
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: wp-content/themes/footmate/vendor
+          key: composer-${{ hashFiles('**/composer.lock') }}
+      - uses: actions/cache@v4
+        with:
+          path: wp-content/themes/footmate/node_modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+      - run: composer install
+      - run: yarn install
+      - run: yarn lint
+    defaults:
+      run:
+        working-directory: wp-content/themes/footmate
