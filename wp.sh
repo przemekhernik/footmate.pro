@@ -52,6 +52,10 @@ function db:import:staging() {
   wp search-replace $DOMAIN_STAGING $DOMAIN_LOCAL --all-tables
 }
 
+function wp:config() {
+  curl https://raw.githubusercontent.com/przemekhernik/templates/main/wordpress/wp-config-db.php -o wp-config-db.php
+}
+
 function wp:env() {
   curl https://raw.githubusercontent.com/przemekhernik/templates/main/bash/.env -o .env
 }
@@ -83,7 +87,6 @@ function wp:init() {
     wp plugin delete hello akismet
     wp theme activate twentytwentyone
     wp theme delete twentytwentytwo twentytwentythree
-    wp plugin install wordpress-seo
     wp comment delete 1 --force
     wp menu create "Primary"
     wp menu create "Secondary"
@@ -129,6 +132,10 @@ case $1 in
 
   "db:import:staging")
     db:import:staging
+    ;;
+
+  "wp:config")
+    wp:config
     ;;
 
   "wp:env")

@@ -8,6 +8,9 @@
 .wp-block[data-align=left]>.wp-block-file,.wp-block[data-align=right]>.wp-block-file{
   height:auto;
 }
+.wp-block[data-align=center]>.wp-block-file{
+  text-align:center;
+}
 .wp-block-file .components-resizable-box__container{
   margin-bottom:1em;
 }
@@ -28,6 +31,9 @@
 }
 .wp-block-file a{
   min-width:1em;
+}
+.wp-block-file a:not(.wp-block-file__button){
+  display:inline-block;
 }
 .wp-block-file .wp-block-file__button-richtext-wrapper{
   display:inline-block;

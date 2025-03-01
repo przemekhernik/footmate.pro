@@ -1,0 +1,44 @@
+{
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "prettier . --check; stylelint **/*.{css,scss}; eslint . --ext .js; composer lint;",
+    "format": "prettier . --write; stylelint **/*.{css,scss} --fix; eslint . --ext .js --fix; composer format;"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%"
+  ],
+  "dependencies": {
+    "js-cookie": "^3.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "glob": "^10.3.12",
+    "globals": "^15.0.0",
+    "postcss": "^8.4.38",
+    "prettier": "3.2.5",
+    "sass": "^1.68.0",
+    "stylelint": "^16.3.1",
+    "stylelint-config-clean-order": "^5.4.2",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^6.0.4",
+    "vite": "^5.0.11"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ]
+}

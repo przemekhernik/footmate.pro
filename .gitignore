@@ -6,11 +6,14 @@
 db.sql.gz
 db.sql
 
-!wp-content
 wp-content/*
+!wp-content
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
 !wp-content/index.php
+
+wp-content/themes/themewp
+wp-content/plugins/advanced-custom-fields-pro
 
 node_modules
