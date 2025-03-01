@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: pragmatedev/vitewp-docker
+    steps:
+      - uses: actions/checkout@v3
+      - run: php --version
+      - run: node --version
+      - run: composer --version
+      - run: yarn --version
