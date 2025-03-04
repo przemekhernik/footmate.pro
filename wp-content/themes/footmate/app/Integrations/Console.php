@@ -185,7 +185,7 @@ class Console
         $files->push(FM_PATH . '/phpcs.xml.dist');
 
         foreach ($files as $file) {
-            fm()->filesystem()->put($file, str_replace(['tentypdev', 'FootMATE', 'footmate', 'FM', 'fm', 'fm.tentyp.test'], [$assoc['company'], $assoc['name'], $assoc['slug'], $assoc['namespace'], $assoc['initials'], $assoc['domain']], fm()->filesystem()->get($file)));
+            fm()->filesystem()->put($file, str_replace(['fm.tentyp.test', 'tentypdev', 'FootMATE', 'footmate', 'FM', 'fm'], [$assoc['domain'], $assoc['company'], $assoc['name'], $assoc['slug'], $assoc['namespace'], $assoc['initials']], fm()->filesystem()->get($file)));
         }
 
         WP_CLI::success(__('Theme renamed. Run `composer install`, `yarn build`, `composer analyze` to test the results.', 'fm'));
