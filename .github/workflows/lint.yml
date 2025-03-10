@@ -1,11 +1,5 @@
 name: Lint
 
-on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - '**'
-
 jobs:
   lint:
     name: Lint
@@ -28,3 +22,9 @@ jobs:
     defaults:
       run:
         working-directory: wp-content/themes/footmate
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - '**'
