@@ -6,8 +6,16 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "prettier . --check && stylelint **/*.{css,scss} && eslint . && composer lint;",
-    "format": "prettier . --write && stylelint **/*.{css,scss} --fix && eslint . --fix && composer format;"
+    "lint": "yarn lint:styles && yarn lint:scripts && yarn lint:php && yarn lint:other",
+    "lint:styles": "stylelint **/*.{css,scss,vue} --quiet-deprecation-warnings",
+    "lint:scripts": "eslint .",
+    "lint:php": "composer lint && composer analyze",
+    "lint:other": "prettier . --check",
+    "format": "yarn format:styles && yarn format:scripts && yarn format:php && yarn format:other",
+    "format:styles": "stylelint **/*.{css,scss,vue} --fix --quiet-deprecation-warnings",
+    "format:scripts": "eslint . --fix",
+    "format:php": "composer format",
+    "format:other": "prettier . --write"
   },
   "browserslist": [
     "last 2 versions",
