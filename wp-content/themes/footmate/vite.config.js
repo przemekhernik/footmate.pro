@@ -15,7 +15,10 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
-      input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss'],
+      input: [
+        'resources/scripts/scripts.js',
+        'resources/styles/styles.scss',
+      ],
       output: {
         entryFileNames: '[hash].js',
         assetFileNames: '[hash].[ext]',
