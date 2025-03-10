@@ -89,7 +89,7 @@ class Plugin {
   }
 }
 
-export default function (params) {
+export default function(params) {
   const plugin = new Plugin();
 
   return {

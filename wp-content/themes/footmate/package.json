@@ -6,8 +6,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "prettier . --check && stylelint **/*.{css,scss} && eslint . --ext .js && composer lint;",
-    "format": "prettier . --write && stylelint **/*.{css,scss} --fix && eslint . --ext .js --fix && composer format;"
+    "lint": "prettier . --check && stylelint **/*.{css,scss} && eslint . && composer lint;",
+    "format": "prettier . --write && stylelint **/*.{css,scss} --fix && eslint . --fix && composer format;"
   },
   "browserslist": [
     "last 2 versions",
@@ -17,13 +17,11 @@
     "js-cookie": "^3.0.5"
   },
   "devDependencies": {
-    "eslint": "^8.13.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-semistandard": "^17.0.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint": "^9.20.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^17.15.1",
+    "eslint-plugin-promise": "^7.2.1",
     "glob": "^10.3.12",
     "globals": "^15.0.0",
     "postcss": "^8.4.38",

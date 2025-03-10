@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     manifest: 'manifest.json',
     assetsDir: '.',
-    outDir: `dist`,
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: ['resources/scripts/scripts.js', 'resources/styles/styles.scss', 'resources/scripts/blocks.js'],
@@ -25,7 +25,7 @@ export default defineConfig({
     copy({
       targets: [
         {
-          src: `resources/images/**/*.{png,jpg,jpeg,svg,webp}`,
+          src: 'resources/images/**/*.{png,jpg,jpeg,svg,webp}',
         },
       ],
     }),
