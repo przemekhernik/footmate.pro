@@ -15,7 +15,8 @@
     "format:styles": "stylelint **/*.{css,scss,vue} --fix --quiet-deprecation-warnings",
     "format:scripts": "eslint . --fix",
     "format:php": "composer format",
-    "format:other": "prettier . --write"
+    "format:other": "prettier . --write",
+    "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
   },
   "browserslist": [
     "last 2 versions",
@@ -31,6 +32,8 @@
     "eslint-plugin-promise": "^7.2.1",
     "glob": "^10.3.12",
     "globals": "^15.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "postcss": "^8.4.38",
     "prettier": "3.5.0",
     "prettier-plugin-blade": "^2.1.19",
