@@ -1,6 +1,6 @@
 <?php // phpcs:ignore PSR1.Files.SideEffects.FoundWithSymbols
 
-define('FM_VERSION', '0.1.1');
+define('FM_VERSION', '0.1.2');
 define('FM_ROOT', str_replace(ABSPATH, '/', dirname(__DIR__, 1)));
 define('FM_PATH', dirname(__DIR__, 1));
 define('FM_URI', home_url(FM_ROOT));
