@@ -6,6 +6,8 @@
 db.sql.gz
 db.sql
 
+wp-config-db.php
+
 wp-content/*
 !wp-content
 !wp-content/mu-plugins/
@@ -13,7 +15,6 @@ wp-content/*
 !wp-content/themes/
 !wp-content/index.php
 
-wp-content/themes/themewp
 wp-content/plugins/advanced-custom-fields-pro
 
 node_modules

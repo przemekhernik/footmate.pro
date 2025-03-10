@@ -15,8 +15,8 @@ RewriteEngine On
 
 # BASIC | Redirect images for local env
 <IfModule mod_rewrite.c>
-    RewriteCond %{HTTP_HOST} ^schlup.test
-    RewriteRule ^(.*)\/uploads\/(.*)$ https://schlup.swiss/$1/uploads/$2 [L,R=301,NC]
+    RewriteCond %{HTTP_HOST} ^project.test
+    RewriteRule ^(.*)\/uploads\/(.*)$ https://project.prod/$1/uploads/$2 [L,R=301,NC]
 </IfModule>
 
 # SECURITY | BasicAuth

@@ -1,6 +1,7 @@
 {
   "name": "tentypdev/footmate",
-  "description": "FootMATE Theme",
+  "description": "FootMATE",
+  "version": "0.1.2",
   "license": "GPLv3",
   "autoload": {
     "psr-4": {
