@@ -84,6 +84,7 @@ trait Resolver
         switch ($config['type']) {
             case 'script':
                 wp_enqueue_script($config['handle'], $config['src'], $config['deps'], $config['version'], true);
+                wp_set_script_translations($config['handle'], 'fm');
                 break;
 
             case 'style':

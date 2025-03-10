@@ -18,6 +18,9 @@
     "format:other": "prettier . --write",
     "release": "wp fm release",
     "release:zip": "wp fm release --zip",
+    "translate": "yarn build && yarn translate:build",
+    "translate:build": "wp i18n make-pot . resources/lang.pot --include=\"app,dist,inc,resources/*.php\" --skip-audit",
+    "translate:json": "wp i18n make-json ../../languages/themes --pretty-print --no-purge --quiet",
     "block": "wp fm block",
     "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
     "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
