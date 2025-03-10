@@ -8,14 +8,8 @@
       "FM\\": "app/"
     }
   },
-  "authors": [
-    {
-      "name": "tentypdev",
-      "email": "tentypdev@gmail.com"
-    }
-  ],
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "illuminate/view": "^10.15",
     "illuminate/support": "^10.15"
   },

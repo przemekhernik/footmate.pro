@@ -8,6 +8,7 @@ use FM\Core\Hooks;
 use FM\Core\Widgets;
 use FM\Integrations\Integrations;
 use FM\Posts\Posts;
+use FM\Setup;
 use FM\Teams\Teams;
 use FM\Templates\Templates;
 use Illuminate\Filesystem\Filesystem;
@@ -24,6 +25,8 @@ class App
 
     private Posts $posts;
 
+    private Setup $setup;
+
     private Teams $teams;
 
     private Templates $templates;
@@ -39,6 +42,7 @@ class App
         $this->filesystem = new Filesystem();
         $this->integrations = self::init(new Integrations());
         $this->posts = self::init(new Posts());
+        $this->setup = self::init(new Setup());
         $this->teams = self::init(new Teams());
         $this->templates = self::init(new Templates());
         $this->widgets = self::init(new Widgets());
@@ -67,6 +71,11 @@ class App
     public function posts(): Posts
     {
         return $this->posts;
+    }
+
+    public function setup(): Setup
+    {
+        return $this->setup;
     }
 
     public function teams(): Teams
