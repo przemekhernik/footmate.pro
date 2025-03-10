@@ -5,7 +5,7 @@ namespace FM;
 class Setup
 {
     /**
-     * @action init
+     * @action after_setup_theme
      */
     public function supports(): void
     {
@@ -13,7 +13,7 @@ class Setup
     }
 
     /**
-     * @action init
+     * @action after_setup_theme
      */
     public function menus(): void
     {

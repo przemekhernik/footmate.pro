@@ -68,7 +68,7 @@ abstract class Block
     final public function getId(): string
     {
         if (empty($this->id)) {
-            throw new \Exception(esc_attr__('Block ID is missing.', 'fm'));
+            throw new \Exception('Block ID is missing.', 'fm');
         }
 
         return $this->id;
@@ -82,7 +82,7 @@ abstract class Block
     final public function getTitle(): string
     {
         if (empty($this->id)) {
-            throw new \Exception(esc_attr__('Block Title is missing.', 'fm'));
+            throw new \Exception('Block Title is missing.', 'fm');
         }
 
         return $this->title;

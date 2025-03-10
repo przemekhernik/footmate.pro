@@ -14,7 +14,7 @@ trait Resolver
         $path = fm()->config()->get('manifest.path');
 
         if (empty($path) || ! file_exists($path)) {
-            wp_die(esc_attr__('Run <code>npm run build</code> in your application root!', 'fm'));
+            wp_die('Run <code>yarn build</code> in your application root!', 'fm');
         }
 
         $data = fm()->filesystem()->get($path);

@@ -17,7 +17,7 @@ class Console
             'fm release',
             [$this, 'release'],
             [
-                'shortdesc' => __('Creates release version of the theme.', 'fm'),
+                'shortdesc' => 'Creates release version of the theme.',
             ]
         );
 
@@ -25,7 +25,7 @@ class Console
             'fm block',
             [$this, 'block'],
             [
-                'shortdesc' => __('Creates a new block of the theme.', 'fm'),
+                'shortdesc' => 'Creates a new block of the theme.',
             ]
         );
 
@@ -33,7 +33,7 @@ class Console
             'fm rename',
             [$this, 'rename'],
             [
-                'shortdesc' => __('Renames theme elements.', 'fm'),
+                'shortdesc' => 'Renames theme elements.',
             ]
         );
     }
@@ -87,33 +87,33 @@ class Console
             fm()->filesystem()->deleteDirectory(FM_PATH . '/footmate');
         }
 
-        WP_CLI::success(__('🚀 Release complete.', 'fm'));
+        WP_CLI::success('🚀 Release complete.');
     }
 
     public function block(array $args = [], array $assoc = []): void
     {
         if (empty($assoc['id'])) {
-            WP_CLI::error(__('Block ID is required.', 'fm'));
+            WP_CLI::error('Block ID is required.');
         }
 
         if (empty($assoc['title'])) {
-            WP_CLI::error(__('Block Title is required.', 'fm'));
+            WP_CLI::error('Block Title is required.');
         }
 
         if (!preg_match('/^[a-z\-]+$/', $assoc['id'])) {
-            WP_CLI::error(__('Block ID has incorrect format.', 'fm'));
+            WP_CLI::error('Block ID has incorrect format.');
         }
 
         if (!preg_match('/^[a-zA-Z]+$/', $assoc['title'])) {
-            WP_CLI::error(__('Block Title has incorrect format.', 'fm'));
+            WP_CLI::error('Block Title has incorrect format.');
         }
 
         if (fm()->filesystem()->exists(FM_PATH . '/app/Blocks/' . $assoc['title'] . '.php')) {
-            WP_CLI::error(__('Block already exists.', 'fm'));
+            WP_CLI::error('Block already exists.');
         }
 
         if (fm()->filesystem()->exists(FM_PATH . '/resources/blocks/' . $assoc['id'])) {
-            WP_CLI::error(__('Block already exists.', 'fm'));
+            WP_CLI::error('Block already exists.');
         }
 
         fm()->filesystem()->copy(FM_PATH . '/app/Blocks/Base.php', FM_PATH . '/app/Blocks/' . $assoc['title'] . '.php');
@@ -133,33 +133,33 @@ class Console
             fm()->filesystem()->put($file, $content);
         }
 
-        WP_CLI::success(__('🚀 Block created.', 'fm'));
+        WP_CLI::success('🚀 Block created.');
     }
 
     public function rename(array $args = [], array $assoc = []): void
     {
         if (empty($assoc['company'])) {
-            WP_CLI::error(__('--company attribute is required', 'fm'));
+            WP_CLI::error('--company attribute is required');
         }
 
         if (empty($assoc['name'])) {
-            WP_CLI::error(__('--name attribute is required', 'fm'));
+            WP_CLI::error('--name attribute is required');
         }
 
         if (empty($assoc['slug'])) {
-            WP_CLI::error(__('--slug attribute is required', 'fm'));
+            WP_CLI::error('--slug attribute is required');
         }
 
         if (empty($assoc['namespace'])) {
-            WP_CLI::error(__('--namespce attribute is required', 'fm'));
+            WP_CLI::error('--namespace attribute is required');
         }
 
         if (empty($assoc['initials'])) {
-            WP_CLI::error(__('--initials attribute is required', 'fm'));
+            WP_CLI::error('--initials attribute is required');
         }
 
         if (empty($assoc['domain'])) {
-            WP_CLI::error(__('--domain attribute is required', 'fm'));
+            WP_CLI::error('--domain attribute is required');
         }
 
         fm()->filesystem()->delete(FM_PATH . '/composer.lock');
@@ -188,6 +188,6 @@ class Console
             fm()->filesystem()->put($file, str_replace(['fm.tentyp.test', 'tentypdev', 'FootMATE', 'footmate', 'FM', 'fm'], [$assoc['domain'], $assoc['company'], $assoc['name'], $assoc['slug'], $assoc['namespace'], $assoc['initials']], fm()->filesystem()->get($file)));
         }
 
-        WP_CLI::success(__('Theme renamed. Run `composer install`, `yarn build`, `composer analyze` to test the results.', 'fm'));
+        WP_CLI::success('Theme renamed. Run `composer install`, `yarn build`, `composer analyze` to test the results.');
     }
 }
