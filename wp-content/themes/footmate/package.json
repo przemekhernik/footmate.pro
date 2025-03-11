@@ -33,7 +33,6 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@stylistic/stylelint-config": "^2.0.0",
     "eslint": "^9.20.0",
     "glob": "^11.0.1",
     "globals": "^15.0.0",
@@ -50,6 +49,7 @@
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-order": "^6.0.4",
+    "@stylistic/stylelint-config": "^2.0.0",
     "typescript": "^5.8.2",
     "vite": "^6.1.0"
   },
