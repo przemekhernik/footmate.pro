@@ -1,21 +1,18 @@
-import { FlatCompat } from '@eslint/eslintrc';
-
-const compat = new FlatCompat();
+import neostandard from 'neostandard';
 
 export default [
-  ...compat.extends('eslint-config-standard'),
+  ...neostandard(),
 
   {
     rules: {
-      'space-before-function-paren': ['error', 'never'],
-      curly: ['error', 'all'],
-      'comma-dangle': ['error', 'always-multiline'],
-      'padding-line-between-statements': ['error', {
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/semi': ['error', 'always'],
+      '@stylistic/space-before-function-paren': ['error', 'never'],
+      '@stylistic/padding-line-between-statements': ['error', {
         blankLine: 'always',
         prev: '*',
         next: 'return',
       }],
-      semi: ['error', 'always'],
     },
   },
 
