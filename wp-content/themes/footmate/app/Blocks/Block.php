@@ -56,8 +56,8 @@ abstract class Block
 
     final public function enqueue(): void
     {
-        fm()->assets()->enqueue("blocks/{$this->getId()}/script.js");
-        fm()->assets()->enqueue("blocks/{$this->getId()}/style.scss");
+        fm()->assets()->enqueue("blocks/{$this->getId()}/script.js", ['handle' => "block-{$this->getId()}-script"]);
+        fm()->assets()->enqueue("blocks/{$this->getId()}/style.scss", ['handle' => "block-{$this->getId()}-style"]);
     }
 
     final protected function getTemplate(): string
