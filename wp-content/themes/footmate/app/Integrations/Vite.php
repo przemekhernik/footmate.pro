@@ -14,10 +14,18 @@ class Vite
     }
 
     /**
-     * @filter fm_assets_resolver_url 1 2
+     * @filter fm_assets_resolver_resolve_url 1 2
      */
-    public function url(string $url, string $path): string
+    public function url(string $current, string $path): string
     {
-        return fm()->config()->get('hmr.sources') . "/{$path}";
+        return fm()->config()->get('hmr.resources') . "/{$path}";
+    }
+
+    /**
+     * @filter fm_assets_resolver_resolve_path 1 2
+     */
+    public function path(string $current, string $path): string
+    {
+        return fm()->config()->get('resources.path') . "/{$path}";
     }
 }

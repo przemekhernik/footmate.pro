@@ -17,14 +17,18 @@ class Config
             'hmr' => [
                 'uri' => FM_HMR_HOST,
                 'client' => FM_HMR_URI . '/@vite/client',
-                'sources' => FM_HMR_URI . '/resources',
+                'resources' => FM_HMR_URI . '/resources',
                 'active' => wp_get_environment_type() === 'development' && ! is_wp_error(wp_remote_get(FM_HMR_URI)),
             ],
             'manifest' => [
-                'path' => FM_ASSETS_PATH . '/manifest.json',
+                'path' => FM_DIST_PATH . '/manifest.json',
             ],
             'cache' => [
                 'path' => WP_CONTENT_DIR . '/cache/footmate',
+            ],
+            'dist' => [
+                'path' => FM_DIST_PATH,
+                'uri' => FM_DIST_URI,
             ],
             'resources' => [
                 'path' => FM_PATH . '/resources',
@@ -32,22 +36,15 @@ class Config
             'views' => [
                 'path' => FM_PATH . '/resources/views',
             ],
+            'blocks' => [
+                'path' => FM_PATH . '/resources/blocks',
+            ],
         ];
     }
 
     public function get(string $key): mixed
     {
-        $value = $this->config;
-
-        foreach (explode('.', $key) as $key) {
-            if (isset($value[$key])) {
-                $value = $value[$key];
-            } else {
-                return null;
-            }
-        }
-
-        return $value;
+        return data_get($this->config, $key);
     }
 
     public function isTheme(): bool

@@ -16,6 +16,15 @@
     "format:scripts": "eslint . --fix",
     "format:other": "prettier . --write",
     "format:php": "composer format",
+    "release": "wp fm release",
+    "release:zip": "wp fm release --zip",
+    "report": "yarn report:lighthouse",
+    "report:lighthouse": "node .vite/lighthouse.js",
+    "translate": "yarn build && yarn translate:build",
+    "translate:build": "wp i18n make-pot . resources/lang.pot --include=\"app,dist,inc,resources/*.php\" --skip-audit",
+    "translate:json": "wp i18n make-json ../../languages/themes --pretty-print --no-purge --quiet",
+    "block": "wp fm block",
+    "updates": "yarn upgrade-interactive --latest && composer upgrade --lock && composer bump",
     "prepare": "cd ../../.. && husky wp-content/themes/footmate/.husky"
   },
   "browserslist": [
@@ -25,22 +34,24 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^9.20.0",
-    "glob": "^10.3.12",
+    "glob": "^11.0.1",
     "globals": "^15.0.0",
     "husky": "^9.1.7",
+    "lighthouse": "^12.3.0",
     "lint-staged": "^15.4.3",
     "neostandard": "^0.12.1",
     "postcss": "^8.4.38",
     "prettier": "3.5.0",
     "prettier-plugin-blade": "^2.1.19",
-    "sass": "^1.68.0",
+    "puppeteer": "^24.2.1",
+    "sass": "^1.84.0",
     "stylelint": "^16.14.1",
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-order": "^6.0.4",
     "@stylistic/stylelint-config": "^2.0.0",
     "typescript": "^5.8.2",
-    "vite": "^5.0.11"
+    "vite": "^6.1.0"
   },
   "licenses": [
     {

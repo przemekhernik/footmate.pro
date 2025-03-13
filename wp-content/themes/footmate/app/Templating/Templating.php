@@ -1,11 +1,11 @@
 <?php
 
-namespace FM\Templates;
+namespace FM\Templating;
 
-use FM\Templates\Provider;
-use FM\Templates\Resolver;
+use FM\Templating\Provider;
+use FM\Templating\Resolver;
 
-class Templates
+class Templating
 {
     private Provider $provider;
 

@@ -17,16 +17,14 @@
         {!! do_action('wp_body_open') !!}
         {!! do_action('get_header') !!}
 
-        <div class="app">
+        <div>
             @section('header')
-            @include('partials.header')
             @show
 
-            @section('content')
-            @include('partials.content')
-            @show
+            @yield('content')
 
-            @yield('sidebar')
+            @section('footer')
+            @show
         </div>
 
         {!! do_action('get_footer') !!}

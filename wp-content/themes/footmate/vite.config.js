@@ -1,5 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'vite';
+import blocks from './.vite/blocks';
 import copy from './.vite/copy';
 
 const ROOT = path.resolve('../../../');
@@ -32,12 +33,26 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        additionalData: `
+          @import "@styles/abstracts/_breakpoints.scss";
+          @import "@styles/abstracts/_mixins.scss";
+        `,
         silenceDeprecations: ['global-builtin', 'import', 'legacy-js-api'],
       },
     },
   },
 
+  server: {
+    cors: {
+      origin: 'https://fm.tentyp.test',
+    },
+  },
+
   plugins: [
+    blocks({
+      path: 'resources/blocks',
+    }),
+
     copy({
       targets: [
         {
@@ -45,6 +60,7 @@ export default defineConfig({
         },
       ],
     }),
+
     {
       name: 'php',
       handleHotUpdate({ file, server }) {

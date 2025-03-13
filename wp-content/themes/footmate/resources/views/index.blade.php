@@ -1,7 +1,9 @@
 @extends('base')
 
-@section('sidebar')
-    <sidebar class="app__sidebar">
-        {!! do_action('get_sidebar') !!}
-    </sidebar>
+@section('content')
+    <main class="-wrapper">
+        @if (have_posts())
+            {{ the_title() }}
+        @endif
+    </main>
 @endsection
